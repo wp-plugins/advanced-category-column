@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_i
 Tags: column, sidebar, widget, category, newspaper, image, multi widget
 Requires at least: 2.7
 Tested up to: 3.2
-Stable tag: 1.1
+Stable tag: 1.2
 
 The Advanced Category Column is a very customizable multiwidget for your sidebar.
 
@@ -26,6 +26,10 @@ The ACC was tested up to WP 3.2. It should work with versions down to 2.7 but wa
 4. Customize your links in the settings
 
 == Frequently Asked Questions ==
+
+= I just updated o version 1.1 and my links are not styled anymore =
+
+Due to the updating via WordPress, the stylesheet is now empty. I didn' have that in mind, when writing the plugin. That bug is now fixed in version 1.2 and another update is strongly recommended.
 
 = I styled the widget container myself and it looks bad. What do I do? =
 
@@ -76,6 +80,10 @@ Since the stylesheet of the theme will have highest priority, you will have to m
 
 == Changelog ==
 
+= 1.2 =
+
+* Bug with empty stylesheet on update fixed
+
 = 1.1 =
 
 * Bugfix concerning title slugs; settings accessible from plugin page now
@@ -101,3 +109,7 @@ Stable and clean version
 = 1.1 =
 
 Bugfix concerning title slugs; settings accessible from plugin page now
+
+= 1.2 =
+
+Bug with empty stylesheet on update fixed

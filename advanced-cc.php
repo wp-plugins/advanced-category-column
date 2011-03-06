@@ -3,7 +3,7 @@
 Plugin Name: Advanced Category Column
 Plugin URI: http://wasistlos.waldemarstoffel.com/plugins-fur-wordpress/advanced-category-column-plugin
 Description: The Advanced Category Column does, what my Category Column Plugin does; it creates a widget, which you can drag to your sidebar and it will show excerpts of the posts of other categories than showed in the center-column. It just has more options than the the Category Column Plugin. It is tested with WP up to version 3.2. and it might work with versions down to 2.7, but that will never be explicitly supported. The 'Advanced' means, that you have a couple of more options than in the 'Category Column Plugin'. 
-Version: 1.1
+Version: 1.2
 Author: Waldemar Stoffel
 Author URI: http://www.waldemarstoffel.com
 License: GPL3
@@ -328,7 +328,18 @@ $i=1;
 
 $acc_options = get_option('acc_options');
 
-if (count ($acc_options)!=0 && !empty ($acc_options)) $acc_class=" class=\"acclink\"";
+if (count ($acc_options)!=0 && !empty ($acc_options)) {
+	
+	$acc_class=" class=\"acclink\"";
+		
+	$acc_stylesheet = WP_PLUGIN_DIR . '/advanced-category-column/advanced-cc.css';	
+	$acc_css_content = file_get_contents($acc_stylesheet);
+	
+	if (empty($acc_css_content)) {
+		
+		acc_write_stylesheet($acc_options); }
+	
+}
 
 $acc_setup="numberposts=".$instance['postcount'];
 
@@ -487,6 +498,22 @@ if (is_single()) {
  
 }
 
+	
+function acc_write_stylesheet($acc_styles) {
+	
+	$acc_link=str_replace(array("\r\n", "\n", "\r"), '', $acc_styles['link']);
+	$acc_hover=str_replace(array("\r\n", "\n", "\r"), '', $acc_styles['hover']);
+	
+	$acc_stylesheet = WP_PLUGIN_DIR . '/advanced-category-column/advanced-cc.css';
+	
+	$acc_link_style=".acclink {".$acc_link."}\r\n.acclink:hover {".$acc_hover."}";
+	
+	$fp = fopen( $acc_stylesheet, "w" );
+	fwrite ($fp, $acc_link_style);
+	fclose ($fp);
+	
+}
+
 add_action('widgets_init', create_function('', 'return register_widget("Advanced_Category_Column_Widget");'));
 
 
@@ -588,18 +615,7 @@ function acc_validate($input) {
 	$newinput['link']=trim($input['link']);
 	$newinput['hover']=trim($input['hover']);
 	
-	$acc_link=str_replace(array("\r\n", "\n", "\r"), '', $newinput['link']);
-	$acc_hover=str_replace(array("\r\n", "\n", "\r"), '', $newinput['hover']);
-
-
-	
-	$acc_stylesheet = WP_PLUGIN_DIR . '/advanced-category-column/advanced-cc.css';
-	
-	$acc_link_style=".acclink {".$acc_link."}\r\n.acclink:hover {".$acc_hover."}";
-	
-	$fp = fopen( $acc_stylesheet, "w" );
-	fwrite ($fp, $acc_link_style);
-	fclose ($fp);
+	acc_write_stylesheet($newinput);
 	
 	return $newinput;
 
