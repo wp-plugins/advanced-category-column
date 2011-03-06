@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_i
 Tags: column, sidebar, widget, category, newspaper, image, multi widget
 Requires at least: 2.7
 Tested up to: 3.2
-Stable tag: 1.0
+Stable tag: 1.1
 
 The Advanced Category Column is a very customizable multiwidget for your sidebar.
 
@@ -66,7 +66,7 @@ Most of the time you will have to use the styles like that:
 'font-weight: bold !important;
 color: #0000dd !important;'
 
-Since the stylesheet of the theme will have highest priority, you will have to make your styles even more important in the hirarchy.
+Since the stylesheet of the theme will have highest priority, you will have to make your styles even more important in the hierarchy.
 
 == Screenshots ==
 
@@ -76,16 +76,28 @@ Since the stylesheet of the theme will have highest priority, you will have to m
 
 == Changelog ==
 
+= 1.1 =
+
+* Bugfix concerning title slugs; settings accessible from plugin page now
+
 = 1.0 =
+
 * Stable version with Dutch and German language files
 
 = 0.5 =
+
 * Public Beta and initial release
 
 = 0.3 =
+
 * Open Beta
 
 == Upgrade Notice ==
 
 = 1.0 =
+
 Stable and clean version
+
+= 1.1 =
+
+Bugfix concerning title slugs; settings accessible from plugin page now

@@ -12,105 +12,117 @@ msgstr ""
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 
-#: advanced-cc.php:41
+#: advanced-cc.php:43
+msgid "Settings"
+msgstr ""
+
+#: advanced-cc.php:44
+msgid "FAQ"
+msgstr ""
+
+#: advanced-cc.php:45
+msgid "Donate"
+msgstr ""
+
+#: advanced-cc.php:59
 msgid ""
 "Configure the output and looks of the widget. Then display thumbnails and excerpts of posts in your sidebars and define, on what kind of pages they will show."
 msgstr ""
 
-#: advanced-cc.php:83
+#: advanced-cc.php:102
 msgid "Title:"
 msgstr ""
 
-#: advanced-cc.php:90
+#: advanced-cc.php:108
 msgid ""
 "To exclude certain categories or to show just a special category, simply "
 "write their ID&#39;s separated by comma (e.g. <strong>-5,2,4</strong> will "
 "show categories 2 and 4 and will exclude category 5):"
 msgstr ""
 
-#: advanced-cc.php:96
+#: advanced-cc.php:114
 msgid "How many posts will be displayed in the sidebar:"
 msgstr ""
 
-#: advanced-cc.php:102
+#: advanced-cc.php:120
 msgid "Offset (how many posts are spared out in the beginning):"
 msgstr ""
 
-#: advanced-cc.php:108
+#: advanced-cc.php:128
 msgid "Check to have the offset only on your homepage:"
 msgstr ""
 
-#: advanced-cc.php:113
+#: advanced-cc.php:133
 msgid "In case there is no excerpt defined, how many sentences are displayed:"
 msgstr ""
 
-#: advanced-cc.php:119
+#: advanced-cc.php:140
 msgid "Check to display words instead of sentences:"
 msgstr ""
 
-#: advanced-cc.php:124
+#: advanced-cc.php:146
 msgid ""
 "If you want a line between the posts, this is the height in px (if not "
 "wanting a line, leave emtpy):"
 msgstr ""
 
-#: advanced-cc.php:130
+#: advanced-cc.php:152
 msgid "The color of the line (e.g. #cccccc):"
 msgstr ""
 
-#: advanced-cc.php:135
+#: advanced-cc.php:157
 msgid "Check, where you want to show the widget. By default, it is showing on the homepage and the category pages:"
 msgstr ""
 
-#: advanced-cc.php:139
+#: advanced-cc.php:163
 msgid "Homepage"
 msgstr ""
 
-#: advanced-cc.php:142
+#: advanced-cc.php:169
 msgid "Frontpage (e.g. a static page as homepage)"
 msgstr ""
 
-#: advanced-cc.php:145
+#: advanced-cc.php:175
 msgid "&#34;Page&#34; pages"
 msgstr ""
 
-#: advanced-cc.php:148
+#: advanced-cc.php:181
 msgid "Category pages"
 msgstr ""
 
-#: advanced-cc.php:151
+#: advanced-cc.php:187
 msgid "Single post pages"
 msgstr ""
 
-#: advanced-cc.php:154
+#: advanced-cc.php:193
 msgid "Archive pages"
 msgstr ""
 
-#: advanced-cc.php:157
+#: advanced-cc.php:199
 msgid "Tag pages"
 msgstr ""
 
-#: advanced-cc.php:160
+#: advanced-cc.php:205
 msgid "Attachments"
 msgstr ""
 
-#: advanced-cc.php:163
+#: advanced-cc.php:211
 msgid "Custom Taxonomy pages (only available, if having a plugin)"
 msgstr ""
 
-#: advanced-cc.php:166
+#: advanced-cc.php:217
 msgid "Author pages"
 msgstr ""
 
-#: advanced-cc.php:169
+#: advanced-cc.php:223
 msgid "Search Results"
 msgstr ""
 
-#: advanced-cc.php:172
+#: advanced-cc.php:229
 msgid "&#34;Not found&#34;"
 msgstr ""
 
-#: advanced-cc.php:176
+#: advanced-cc.php:235
 msgid ""
 "Here you can finally style the widget. Simply type something like<br /"
 "><strong>border-left: 1px dashed;<br />border-color: #000000;</strong><br /"
@@ -118,34 +130,42 @@ msgid ""
 "empty, your theme will style the widget."
 msgstr ""
 
-#: advanced-cc.php:443
+#: advanced-cc.php:505
 msgid "Styling of the links"
 msgstr ""
 
-#: advanced-cc.php:445
+#: advanced-cc.php:507
 msgid "Link style:"
 msgstr ""
 
-#: advanced-cc.php:447
+#: advanced-cc.php:509
 msgid "Hover style:"
 msgstr ""
 
-#: advanced-cc.php:451
+#: advanced-cc.php:515
 msgid "Just put some css code here."
 msgstr ""
 
-#: advanced-cc.php:502
+#: advanced-cc.php:551
+msgid "Advanced CC Settings"
+msgstr ""
+
+#: advanced-cc.php:551, 561
+msgid "Advanced Category Column Settings"
+msgstr ""
+
+#: advanced-cc.php:562
 msgid "Style the links of the widget. If you leave this empty, your theme will style the hyperlinks."
 msgstr ""
 
-#: advanced-cc.php:503
+#: advanced-cc.php:564
 msgid "Just input something like,"
 msgstr ""
 
-#: advanced-cc.php:508
+#: advanced-cc.php:568
 msgid "to get fat, blue, underlined links."
 msgstr ""
 
-#: advanced-cc.php:509
+#: advanced-cc.php:571
 msgid "You most probably have to use &#34;!important&#34; at the end of each line, to make it work."
 msgstr ""
