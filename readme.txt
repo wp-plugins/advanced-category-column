@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_i
 Tags: column, sidebar, widget, category, newspaper, image, multi widget
 Requires at least: 2.7
 Tested up to: 3.2
-Stable tag: 1.2
+Stable tag: 1.5
 
 The Advanced Category Column is a very customizable multiwidget for your sidebar.
 
@@ -80,6 +80,10 @@ Since the stylesheet of the theme will have highest priority, you will have to m
 
 == Changelog ==
 
+= 1.5 =
+
+* The textarea is now resizable and the input fields got smaller
+
 = 1.2 =
 
 * Bug with empty stylesheet on update fixed
@@ -113,3 +117,7 @@ Bugfix concerning title slugs; settings accessible from plugin page now
 = 1.2 =
 
 Bug with empty stylesheet on update fixed
+
+= 1.5 =
+
+The textarea is now resizable and the input fields got smaller
