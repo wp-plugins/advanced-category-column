@@ -122,6 +122,10 @@ msgstr ""
 msgid "&#34;Not found&#34;"
 msgstr ""
 
+#: advanced-cc.php:231
+msgid "Check all"
+msgstr ""
+
 #: advanced-cc.php:235
 msgid ""
 "Here you can finally style the widget. Simply type something like<br /"

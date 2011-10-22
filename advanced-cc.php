@@ -2,8 +2,8 @@
 /*
 Plugin Name: Advanced Category Column
 Plugin URI: http://wasistlos.waldemarstoffel.com/plugins-fur-wordpress/advanced-category-column-plugin
-Description: The Advanced Category Column does, what my Category Column Plugin does; it creates a widget, which you can drag to your sidebar and it will show excerpts of the posts of other categories than showed in the center-column. It just has more options than the the Category Column Plugin. It is tested with WP up to version 3.2. and it might work with versions down to 2.7, but that will never be explicitly supported. The 'Advanced' means, that you have a couple of more options than in the 'Category Column Plugin'. 
-Version: 1.5
+Description: The Advanced Category Column does, what my Category Column Plugin does; it creates a widget, which you can drag to your sidebar and it will show excerpts of the posts of other categories than showed in the center-column. It just has more options than the the Category Column Plugin. It is tested with WP up to version 3.3 and it might work with versions down to 2.7, but that will never be explicitly supported for those. The 'Advanced' means, that you have a couple of more options than in the 'Category Column Plugin'. 
+Version: 2.0
 Author: Waldemar Stoffel
 Author URI: http://www.waldemarstoffel.com
 License: GPL3
@@ -31,13 +31,12 @@ License: GPL3
 
 if(preg_match('#' . basename(__FILE__) . '#', $_SERVER['PHP_SELF'])) { die("Sorry, you don't have direct access to this page."); }
 
-/* attach JavaScript file for textarea reszing */
-
-$acc_path = WP_CONTENT_URL.'/plugins/'.plugin_basename(dirname(__FILE__)).'/';
+/* attach JavaScript file for textarea resizing */
 
 function acc_js_sheet() {
-   global $acc_path;
-   wp_enqueue_script('ta-resize-script', $acc_path.'ta-expander.js', false, false, true);
+	
+	wp_enqueue_script('ta-expander-script', plugins_url('ta-expander.js', __FILE__), array('jquery'), '2.0', true);
+
 }
 
 add_action('admin_print_scripts-widgets.php', 'acc_js_sheet');
@@ -58,6 +57,25 @@ function acc_register_links($links, $file) {
 	return $links;
 
 }
+
+/**
+ *
+ * Adds Settings to the adminbar
+ *
+ */
+function acc_admin_bar_menu() {
+	global $wp_admin_bar;
+	
+	if ( !is_super_admin() || !is_admin_bar_showing() ) {
+	return; 
+	
+	}
+	
+	$wp_admin_bar->add_menu( array( 'parent' => 'menu-settings', 'id' => 'acc', 'title' => 'Advanced Category Column', 'href' => admin_url( 'options-general.php?page=advanced-cc-settings' ) ) );
+	
+	
+}
+add_action( 'wp_before_admin_bar_render', 'acc_admin_bar_menu');
 		
 		
 // extending the widget class
@@ -102,77 +120,65 @@ function form($instance) {
 	$author=esc_attr($instance['author']);
 	$search=esc_attr($instance['search']);
 	$not_found=esc_attr($instance['not_found']);
-		
-	if (empty($style)) {
-		
-		$style_height=25;
-	
-	}
-	
-	else {
-		
-		$acc_elements=str_replace(array("\r\n", "\n", "\r"), '|', $style);
-		$style_height=count(explode('|', $acc_elements))*23;
-		
-	}
  
  ?>
 
 <p>
  <label for="<?php echo $this->get_field_id('title'); ?>">
- <?php _e('Title:', 'category_column'); ?>
+ <?php _e('Title:', 'advanced-cc'); ?>
  <input class="widefat" id="<?php echo $this->get_field_id('title'); ?>" name="<?php echo $this->get_field_name('title'); ?>" type="text" value="<?php echo $title; ?>" />
  </label>
 </p>
 <p>
  <label for="<?php echo $this->get_field_id('list'); ?>">
- <?php _e('To exclude certain categories or to show just a special category, simply write their ID&#39;s separated by comma (e.g. <strong>-5,2,4</strong> will show categories 2 and 4 and will exclude category 5):', 'category_column'); ?>
+ <?php _e('To exclude certain categories or to show just a special category, simply write their ID&#39;s separated by comma (e.g. <strong>-5,2,4</strong> will show categories 2 and 4 and will exclude category 5):', 'advanced-cc'); ?>
  <input size="20" id="<?php echo $this->get_field_id('list'); ?>" name="<?php echo $this->get_field_name('list'); ?>" type="text" value="<?php echo $list; ?>" />
  </label>
 </p>
 <p>
  <label for="<?php echo $this->get_field_id('postcount'); ?>">
- <?php _e('How many posts will be displayed in the sidebar:', 'category_column'); ?>
+ <?php _e('How many posts will be displayed in the sidebar:', 'advanced-cc'); ?>
  <input size="4" id="<?php echo $this->get_field_id('postcount'); ?>" name="<?php echo $this->get_field_name('postcount'); ?>" type="text" value="<?php echo $postcount; ?>" />
  </label>
 </p>
 <p>
  <label for="<?php echo $this->get_field_id('offset'); ?>">
- <?php _e('Offset (how many posts are spared out in the beginning):', 'category_column'); ?>
+ <?php _e('Offset (how many posts are spared out in the beginning):', 'advanced-cc'); ?>
  <input size="4" id="<?php echo $this->get_field_id('offset'); ?>" name="<?php echo $this->get_field_name('offset'); ?>" type="text" value="<?php echo $offset; ?>" />
  </label>
 </p>
 <p>
  <label for="<?php echo $this->get_field_id('home'); ?>">
- <input id="<?php echo $this->get_field_id('home'); ?>" name="<?php echo $this->get_field_name('home'); ?>" <?php if(!empty($home)) {echo "checked=\"checked\""; } ?> type="checkbox" />&nbsp;<?php _e('Check to have the offset only on your homepage:', 'category_column'); ?>
+ <input id="<?php echo $this->get_field_id('home'); ?>" name="<?php echo $this->get_field_name('home'); ?>" <?php if(!empty($home)) {echo "checked=\"checked\""; } ?> type="checkbox" />&nbsp;<?php _e('Check to have the offset only on your homepage:', 'advanced-cc'); ?>
  </label>
 </p>
 <p>
  <label for="<?php echo $this->get_field_id('wordcount'); ?>">
- <?php _e('In case there is no excerpt defined, how many sentences are displayed:', 'category_column'); ?>
+ <?php _e('In case there is no excerpt defined, how many sentences are displayed:', 'advanced-cc'); ?>
  <input size="4" id="<?php echo $this->get_field_id('wordcount'); ?>" name="<?php echo $this->get_field_name('wordcount'); ?>" type="text" value="<?php echo $wordcount; ?>" />
  </label>
 </p>
 <p>
  <label for="<?php echo $this->get_field_id('words'); ?>">
- <input id="<?php echo $this->get_field_id('words'); ?>" name="<?php echo $this->get_field_name('words'); ?>" <?php if(!empty($words)) {echo "checked=\"checked\""; } ?> type="checkbox" />&nbsp;<?php _e('Check to display words instead of sentences:', 'category_column'); ?>
+ <input id="<?php echo $this->get_field_id('words'); ?>" name="<?php echo $this->get_field_name('words'); ?>" <?php if(!empty($words)) {echo "checked=\"checked\""; } ?> type="checkbox" />&nbsp;<?php _e('Check to display words instead of sentences:', 'advanced-cc'); ?>
  </label>
 </p>
 <p>
  <label for="<?php echo $this->get_field_id('line'); ?>">
- <?php _e('If you want a line between the posts, this is the height in px (if not wanting a line, leave emtpy):', 'category_column'); ?>
+ <?php _e('If you want a line between the posts, this is the height in px (if not wanting a line, leave emtpy):', 'advanced-cc'); ?>
  <input size="4" id="<?php echo $this->get_field_id('line'); ?>" name="<?php echo $this->get_field_name('line'); ?>" type="text" value="<?php echo $line; ?>" />
  </label>
 </p>
 <p>
  <label for="<?php echo $this->get_field_id('line_color'); ?>">
- <?php _e('The color of the line (e.g. #cccccc):', 'category_column'); ?>
+ <?php _e('The color of the line (e.g. #cccccc):', 'advanced-cc'); ?>
  <input size="13" id="<?php echo $this->get_field_id('line_color'); ?>" name="<?php echo $this->get_field_name('line_color'); ?>" type="text" value="<?php echo $line_color; ?>" />
  </label>
 </p>
 <p>
   <?php _e('Check, where you want to show the widget. By default, it is showing on the homepage and the category pages:', 'advanced-cc'); ?>
 </p>
+<fieldset>
 <p>
   <label for="<?php echo $this->get_field_id('homepage'); ?>">
     <input id="<?php echo $this->get_field_id('homepage'); ?>" name="<?php echo $this->get_field_name('homepage'); ?>" <?php if(!empty($homepage)) {echo "checked=\"checked\""; } ?> type="checkbox" />
@@ -248,11 +254,24 @@ function form($instance) {
   <br />
 </p>
 <p>
+  <label for="checkall">
+    <input id="checkall" name="checkall" type="checkbox" />
+    &nbsp;
+    <?php _e('Check all', 'advanced-cc'); ?>
+  </label>
+</p>    
+</fieldset>
+<p>
  <label for="<?php echo $this->get_field_id('style'); ?>">
- <?php _e('Here you can finally style the widget. Simply type something like<br /><strong>border-left: 1px dashed;<br />border-color: #000000;</strong><br />to get just a dashed black line on the left. If you leave that section empty, your theme will style the widget.', 'category_column'); ?>
+ <?php _e('Here you can finally style the widget. Simply type something like<br /><strong>border-left: 1px dashed;<br />border-color: #000000;</strong><br />to get just a dashed black line on the left. If you leave that section empty, your theme will style the widget.', 'advanced-cc'); ?>
  <textarea class="widefat expand<?php echo $style_height; ?>-1000" id="<?php echo $this->get_field_id('style'); ?>" name="<?php echo $this->get_field_name('style'); ?>"><?php echo $style; ?></textarea>
  </label>
 </p>
+<script type="text/javascript"><!--
+jQuery(document).ready(function() {
+	jQuery("#<?php echo $this->get_field_id('style'); ?>").autoResize();
+});
+--></script>
 <?php
  }
  
@@ -468,7 +487,7 @@ if (is_single()) {
 	   
 	else {
 	
-		$acc_image_title=$post->get_the_title;
+		$acc_image_title=$post->post_title;
 		$acc_size=getimagesize($acc_thumb);
 		
 		if (($acc_size[0]/$acc_size[1])>1) {
@@ -591,7 +610,9 @@ add_action('admin_menu', 'acc_admin_menu');
 
 function acc_admin_menu() {
 	
-	add_options_page(__('Advanced CC Settings', 'advanced-cc'), 'Advanced Category Column', 'administrator', 'advanced-cc-settings', 'advanced_cc_options_page');
+	$pages=add_options_page(__('Advanced CC Settings', 'advanced-cc'), 'Advanced Category Column', 'administrator', 'advanced-cc-settings', 'advanced_cc_options_page');
+	
+	add_action('admin_print_scripts-'.$pages, 'acc_js_sheet');
 	
 }
 
@@ -623,6 +644,11 @@ function advanced_cc_options_page() {
     <input name="Submit" type="submit" value="<?php esc_attr_e('Save Changes'); ?>" />
   </form>
 </div>
+<script type="text/javascript"><!--
+jQuery(document).ready(function() {
+	jQuery("textarea").autoResize();
+});
+--></script>
 <?php
 }
 
