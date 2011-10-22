@@ -3,8 +3,8 @@ Contributors: tepelstreel
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=BC9QUKBEZFZFY
 Tags: column, sidebar, widget, category, newspaper, image, multi widget
 Requires at least: 2.7
-Tested up to: 3.2
-Stable tag: 1.5
+Tested up to: 3.3
+Stable tag: 2.1
 
 The Advanced Category Column is a very customizable multiwidget for your sidebar.
 
@@ -16,7 +16,7 @@ If there is a post thumbnail, it will be displayed above the headline of the pos
 
 So far that is the same as my Category Column Plugin does also. Not every theme has the possibility to hide certain sidebars on different pages. That's where the advanced of our plugin comes in. In the ACC you can determine, where excactly the widget is showing and in the settings you can customize the links of your widget(s).
 
-The ACC was tested up to WP 3.2. It should work with versions down to 2.7 but was never tested on those.
+The ACC was tested up to WP 3.3. It should work with versions down to 2.7 but was never tested on those.
 
 == Installation ==
 
@@ -27,7 +27,7 @@ The ACC was tested up to WP 3.2. It should work with versions down to 2.7 but wa
 
 == Frequently Asked Questions ==
 
-= I just updated o version 1.1 and my links are not styled anymore =
+= I just updated to version 1.1 and my links are not styled anymore =
 
 Due to the updating via WordPress, the stylesheet is now empty. I didn' have that in mind, when writing the plugin. That bug is now fixed in version 1.2 and another update is strongly recommended.
 
@@ -80,9 +80,17 @@ Since the stylesheet of the theme will have highest priority, you will have to m
 
 == Changelog ==
 
+= 2.1 =
+
+* Bugfix
+
+= 2.0 =
+
+* Minor bugfixes, check all function added
+
 = 1.5 =
 
-* The textarea is now resizable and the input fields got smaller
+* The textareas are now resizable and the input fields got smaller
 
 = 1.2 =
 
@@ -120,4 +128,12 @@ Bug with empty stylesheet on update fixed
 
 = 1.5 =
 
-The textarea is now resizable and the input fields got smaller
+The textareas are now resizable and the input fields got smaller
+
+= 2.0 =
+
+Minor bugfixes, check all function added
+
+= 2.1 =
+
+* Bugfix
