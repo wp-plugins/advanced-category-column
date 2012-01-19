@@ -80,6 +80,12 @@ Since the stylesheet of the theme will have highest priority, you will have to m
 
 == Changelog ==
 
+= 2.2 =
+
+* Added ability to get thumbnails also if using galleries
+* Uses now dss instead of writing a new css file, when saving the styles
+* More accurate auto excerpt
+
 = 2.1 =
 
 * Bugfix
@@ -136,4 +142,10 @@ Minor bugfixes, check all function added
 
 = 2.1 =
 
-* Bugfix
+Bugfix
+
+= 2.2 =
+
+Added ability to get thumbnails also if using galleries
+Uses now dss instead of writing a new css file, when saving the styles
+More accurate auto excerpt

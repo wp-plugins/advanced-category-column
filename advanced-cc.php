@@ -2,8 +2,8 @@
 /*
 Plugin Name: Advanced Category Column
 Plugin URI: http://wasistlos.waldemarstoffel.com/plugins-fur-wordpress/advanced-category-column-plugin
-Description: The Advanced Category Column does, what my Category Column Plugin does; it creates a widget, which you can drag to your sidebar and it will show excerpts of the posts of other categories than showed in the center-column. It just has more options than the the Category Column Plugin. It is tested with WP up to version 3.3 and it might work with versions down to 2.7, but that will never be explicitly supported for those. The 'Advanced' means, that you have a couple of more options than in the 'Category Column Plugin'. 
-Version: 2.1
+Description: The Advanced Category Column does, what my Category Column Plugin does; it creates a widget, which you can drag to your sidebar and it will show excerpts of the posts of other categories than showed in the center-column. It just has more options than the the Category Column Plugin. It is tested with WP up to version 3.4 and it might work with versions down to 2.7, but that will never be explicitly supported for those. The 'Advanced' means, that you have a couple of more options than in the 'Category Column Plugin'. 
+Version: 2.2
 Author: Waldemar Stoffel
 Author URI: http://www.waldemarstoffel.com
 License: GPL3
@@ -181,83 +181,45 @@ function form($instance) {
 <fieldset>
 <p>
   <label for="<?php echo $this->get_field_id('homepage'); ?>">
-    <input id="<?php echo $this->get_field_id('homepage'); ?>" name="<?php echo $this->get_field_name('homepage'); ?>" <?php if(!empty($homepage)) echo 'checked="checked"'; ?> type="checkbox" />
-    &nbsp;
-    <?php _e('Homepage', 'advanced-cc'); ?>
-  </label>
-  <br />
+    <input id="<?php echo $this->get_field_id('homepage'); ?>" name="<?php echo $this->get_field_name('homepage'); ?>" <?php if(!empty($homepage)) echo 'checked="checked"'; ?> type="checkbox" />&nbsp;<?php _e('Homepage', 'advanced-cc'); ?>
+  </label><br />
   <label for="<?php echo $this->get_field_id('frontpage'); ?>">
-    <input id="<?php echo $this->get_field_id('frontpage'); ?>" name="<?php echo $this->get_field_name('frontpage'); ?>" <?php if(!empty($frontpage)) echo 'checked="checked"'; ?> type="checkbox" />
-    &nbsp;
-    <?php _e('Frontpage (e.g. a static page as homepage)', 'advanced-cc'); ?>
-  </label>
-  <br />
+    <input id="<?php echo $this->get_field_id('frontpage'); ?>" name="<?php echo $this->get_field_name('frontpage'); ?>" <?php if(!empty($frontpage)) echo 'checked="checked"'; ?> type="checkbox" />&nbsp;<?php _e('Frontpage (e.g. a static page as homepage)', 'advanced-cc'); ?>
+  </label><br />
   <label for="<?php echo $this->get_field_id('page'); ?>">
-    <input id="<?php echo $this->get_field_id('page'); ?>" name="<?php echo $this->get_field_name('page'); ?>" <?php if(!empty($page)) echo 'checked="checked"'; ?> type="checkbox" />
-    &nbsp;
-    <?php _e('&#34;Page&#34; pages', 'advanced-cc'); ?>
-  </label>
-  <br />
+    <input id="<?php echo $this->get_field_id('page'); ?>" name="<?php echo $this->get_field_name('page'); ?>" <?php if(!empty($page)) echo 'checked="checked"'; ?> type="checkbox" />&nbsp;<?php _e('&#34;Page&#34; pages', 'advanced-cc'); ?>
+  </label><br />
   <label for="<?php echo $this->get_field_id('category'); ?>">
-    <input id="<?php echo $this->get_field_id('category'); ?>" name="<?php echo $this->get_field_name('category'); ?>" <?php if(!empty($category)) echo 'checked="checked"'; ?> type="checkbox" />
-    &nbsp;
-    <?php _e('Category pages', 'advanced-cc'); ?>
-  </label>
-  <br />
+    <input id="<?php echo $this->get_field_id('category'); ?>" name="<?php echo $this->get_field_name('category'); ?>" <?php if(!empty($category)) echo 'checked="checked"'; ?> type="checkbox" />&nbsp;<?php _e('Category pages', 'advanced-cc'); ?>
+  </label><br />
   <label for="<?php echo $this->get_field_id('single'); ?>">
-    <input id="<?php echo $this->get_field_id('single'); ?>" name="<?php echo $this->get_field_name('single'); ?>" <?php if(!empty($single)) echo 'checked="checked"'; ?> type="checkbox" />
-    &nbsp;
-    <?php _e('Single post pages', 'advanced-cc'); ?>
-  </label>
-  <br />
+    <input id="<?php echo $this->get_field_id('single'); ?>" name="<?php echo $this->get_field_name('single'); ?>" <?php if(!empty($single)) echo 'checked="checked"'; ?> type="checkbox" />&nbsp;<?php _e('Single post pages', 'advanced-cc'); ?>
+  </label><br />
   <label for="<?php echo $this->get_field_id('date'); ?>">
-    <input id="<?php echo $this->get_field_id('date'); ?>" name="<?php echo $this->get_field_name('date'); ?>" <?php if(!empty($date)) echo 'checked="checked"'; ?> type="checkbox" />
-    &nbsp;
-    <?php _e('Archive pages', 'advanced-cc'); ?>
-  </label>
-  <br />
+    <input id="<?php echo $this->get_field_id('date'); ?>" name="<?php echo $this->get_field_name('date'); ?>" <?php if(!empty($date)) echo 'checked="checked"'; ?> type="checkbox" />&nbsp;<?php _e('Archive pages', 'advanced-cc'); ?>
+  </label><br />
   <label for="<?php echo $this->get_field_id('tag'); ?>">
-    <input id="<?php echo $this->get_field_id('tag'); ?>" name="<?php echo $this->get_field_name('tag'); ?>" <?php if(!empty($tag)) echo 'checked="checked"'; ?> type="checkbox" />
-    &nbsp;
-    <?php _e('Tag pages', 'advanced-cc'); ?>
-  </label>
-  <br />
+    <input id="<?php echo $this->get_field_id('tag'); ?>" name="<?php echo $this->get_field_name('tag'); ?>" <?php if(!empty($tag)) echo 'checked="checked"'; ?> type="checkbox" />&nbsp;<?php _e('Tag pages', 'advanced-cc'); ?>
+  </label><br />
   <label for="<?php echo $this->get_field_id('attachment'); ?>">
-    <input id="<?php echo $this->get_field_id('attachment'); ?>" name="<?php echo $this->get_field_name('attachment'); ?>" <?php if(!empty($attachment)) echo 'checked="checked"'; ?> type="checkbox" />
-    &nbsp;
-    <?php _e('Attachments', 'advanced-cc'); ?>
-  </label>
-  <br />
+    <input id="<?php echo $this->get_field_id('attachment'); ?>" name="<?php echo $this->get_field_name('attachment'); ?>" <?php if(!empty($attachment)) echo 'checked="checked"'; ?> type="checkbox" />&nbsp;<?php _e('Attachments', 'advanced-cc'); ?>
+  </label><br />
   <label for="<?php echo $this->get_field_id('taxonomy'); ?>">
-    <input id="<?php echo $this->get_field_id('taxonomy'); ?>" name="<?php echo $this->get_field_name('taxonomy'); ?>" <?php if(!empty($taxonomy)) echo 'checked="checked"'; ?> type="checkbox" />
-    &nbsp;
-    <?php _e('Custom Taxonomy pages (only available, if having a plugin)', 'advanced-cc'); ?>
-  </label>
-  <br />
+    <input id="<?php echo $this->get_field_id('taxonomy'); ?>" name="<?php echo $this->get_field_name('taxonomy'); ?>" <?php if(!empty($taxonomy)) echo 'checked="checked"'; ?> type="checkbox" />&nbsp;<?php _e('Custom Taxonomy pages (only available, if having a plugin)', 'advanced-cc'); ?>
+  </label><br />
   <label for="<?php echo $this->get_field_id('author'); ?>">
-    <input id="<?php echo $this->get_field_id('author'); ?>" name="<?php echo $this->get_field_name('author'); ?>" <?php if(!empty($author)) echo 'checked="checked"'; ?> type="checkbox" />
-    &nbsp;
-    <?php _e('Author pages', 'advanced-cc'); ?>
-  </label>
-  <br />
+    <input id="<?php echo $this->get_field_id('author'); ?>" name="<?php echo $this->get_field_name('author'); ?>" <?php if(!empty($author)) echo 'checked="checked"'; ?> type="checkbox" />&nbsp;<?php _e('Author pages', 'advanced-cc'); ?>
+  </label><br />
   <label for="<?php echo $this->get_field_id('search'); ?>">
-    <input id="<?php echo $this->get_field_id('search'); ?>" name="<?php echo $this->get_field_name('search'); ?>" <?php if(!empty($search)) echo 'checked="checked"'; ?> type="checkbox" />
-    &nbsp;
-    <?php _e('Search Results', 'advanced-cc'); ?>
-  </label>
-  <br />
+    <input id="<?php echo $this->get_field_id('search'); ?>" name="<?php echo $this->get_field_name('search'); ?>" <?php if(!empty($search)) echo 'checked="checked"'; ?> type="checkbox" />&nbsp;<?php _e('Search Results', 'advanced-cc'); ?>
+  </label><br />
   <label for="<?php echo $this->get_field_id('not_found'); ?>">
-    <input id="<?php echo $this->get_field_id('not_found'); ?>" name="<?php echo $this->get_field_name('not_found'); ?>" <?php if(!empty($not_found)) echo 'checked="checked"'; ?> type="checkbox" />
-    &nbsp;
-    <?php _e('&#34;Not Found&#34;', 'advanced-cc'); ?>
+    <input id="<?php echo $this->get_field_id('not_found'); ?>" name="<?php echo $this->get_field_name('not_found'); ?>" <?php if(!empty($not_found)) echo 'checked="checked"'; ?> type="checkbox" />&nbsp;<?php _e('&#34;Not Found&#34;', 'advanced-cc'); ?>
   </label>
-  <br />
 </p>
 <p>
-  <label for="checkall">
-    <input id="checkall" name="checkall" type="checkbox" />
-    &nbsp;
-    <?php _e('Check all', 'advanced-cc'); ?>
+  <label for="<?php echo $this->get_field_id('checkall'); ?>">
+    <input id="<?php echo $this->get_field_id('checkall'); ?>" name="checkall" type="checkbox" />&nbsp;<?php _e('Check all', 'advanced-cc'); ?>
   </label>
 </p>    
 </fieldset>
@@ -364,18 +326,7 @@ $i=1;
 
 $acc_options = get_option('acc_options');
 
-if (count ($acc_options)!=0 && !empty ($acc_options)) {
-	
-	$acc_class=' class="acclink"';
-		
-	$acc_stylesheet = plugins_url('advanced-cc.css', __FILE__);	
-	$acc_css_content = file_get_contents($acc_stylesheet);
-	
-	if (empty($acc_css_content)) {
-		
-		acc_write_stylesheet($acc_options); }
-	
-}
+if (count ($acc_options)!=0 && !empty ($acc_options)) $acc_class=' class="acclink"';
 
 $acc_setup='numberposts='.$instance['postcount'];
 
@@ -415,6 +366,23 @@ if (is_single()) {
  
    setup_postdata($post);
    
+   $acc_args = array(
+		'post_type' => 'attachment',
+		'numberposts' => 1,
+		'post_status' => null,
+		'post_parent' => $post->ID
+	   );
+	   
+	   $acc_attachments = get_posts( $acc_args );
+	   
+	   if ( $acc_attachments ) {
+        foreach ( $acc_attachments as $attachment )
+		  $acc_image_alt = trim(strip_tags( get_post_meta( $attachment->ID, '_wp_attachment_image_alt', true) ));
+		  $acc_image_title = trim(strip_tags( $attachment->post_title ));
+        }
+		
+	$acc_title_tag = __('Permalink to', 'advanced-cc').' '.$post->post_title;
+   
    if (function_exists('has_post_thumbnail') && has_post_thumbnail()) {
 	   
 /* If there is a thumbnail, show thumbnail and headline */
@@ -422,8 +390,8 @@ if (is_single()) {
 	   ?>
 <a href="<?php the_permalink(); ?>">
 <?php the_post_thumbnail(); ?>
-</a>
-<p><a href="<?php the_permalink(); ?>"<?php echo $acc_class; ?>>
+</a><br />
+<p><a href="<?php the_permalink(); ?>"<?php echo $acc_class; ?> title="<?php echo $acc_title_tag ?>">
   <?php the_title(); ?>
   </a></p>
 <?php 
@@ -435,7 +403,7 @@ if (is_single()) {
 	   
 	   $acc_thumb = '';
 	   
-	   $acc_image = preg_match_all('/<img.+src=[\'"]([^\'"]+)[\'"].*>/i', $post->post_content, $matches);
+	   $acc_image = preg_match_all('/<img.+src=[\'"]([^\'"]+)[\'"].*>/i', do_shortcode($post->post_content), $matches);
 	   $acc_thumb = $matches [1] [0];
 	   
 	    if (empty($acc_thumb)) {	   
@@ -445,7 +413,7 @@ if (is_single()) {
 		   
 	
 	?>
-<p><a href="<?php the_permalink(); ?>"<?php echo $acc_class; ?>>
+<p><a href="<?php the_permalink(); ?>"<?php echo $acc_class; ?> title="<?php echo $acc_title_tag ?>">
   <?php the_title(); ?>
   </a></p>
 <?php
@@ -457,13 +425,13 @@ if (is_single()) {
 	
 	if (empty($acc_excerpt)) {
 		
-		$acc_text=preg_replace('/\[caption(.*?)\[\/caption\]/', '', get_the_content());
+		$acc_text=trim(preg_replace('/\s\s+/', ' ', str_replace(array("\r\n", "\n", "\r", "&nbsp;"), ' ', strip_tags(preg_replace('/\[caption(.*?)\[\/caption\]/', '', strip_shortcodes(get_the_content()))))));
 		
 		if ($instance['words']) {
 			
 			$acc_short=array_slice(explode(' ', $acc_text), 0, $instance['wordcount']);
 			
-			$acc_excerpt=implode(' ', $acc_short).' [...]';
+			$acc_excerpt=implode(' ', $acc_short).' [&#8230;]';
 			
 		}
 		
@@ -483,7 +451,10 @@ if (is_single()) {
 	   
 	else {
 	
-		$acc_image_title=$post->post_title;
+		if (empty($acc_image_title)) $acc_image_title=$post->post_title;
+		
+		if (empty($acc_image_alt)) $acc_image_alt=$post->post_title;
+		
 		$acc_size=getimagesize($acc_thumb);
 		
 		if (($acc_size[0]/$acc_size[1])>1) {
@@ -502,10 +473,8 @@ if (is_single()) {
 		
 		
 	   ?>
-<a href="<?php the_permalink(); ?>"> <?php echo '<img title='.$acc_image_title.'" src="'.$acc_thumb.'" alt="'.$acc_image_title.'" width="'.$acc_x.'" height="'.$acc_y.'" />'; ?> </a>
-<p><a href="<?php the_permalink(); ?>"<?php echo $acc_class; ?>>
-  <?php the_title(); ?>
-  </a></p>
+<a href="<?php the_permalink(); ?>"> <?php echo '<img title='.$acc_image_title.'" src="'.$acc_thumb.'" alt="'.$acc_image_alt.'" width="'.$acc_x.'" height="'.$acc_y.'" />'; ?></a><br />
+<p><a href="<?php the_permalink(); ?>"<?php echo $acc_class; ?> title="<?php echo $acc_title_tag ?>"><?php the_title(); ?></a></p>
 <?php
 	   
 	}}
@@ -526,27 +495,6 @@ if (is_single()) {
  
  }}
  
-}
-
-$acc_options = get_option('acc_options');
-
-if (!empty($acc_options) && !file_exists(plugins_url('advanced-cc.css', __FILE__))) acc_write_stylesheet($acc_options);
-
-// writing css to file
-	
-function acc_write_stylesheet($acc_styles) {
-	
-	$acc_link=str_replace(array("\r\n", "\n", "\r"), ' ', $acc_styles['link']);
-	$acc_hover=str_replace(array("\r\n", "\n", "\r"), ' ', $acc_styles['hover']);
-	
-	$acc_stylesheet = WP_PLUGIN_DIR . '/advanced-category-column/advanced-cc.css';
-	
-	$acc_link_style=".acclink { ".$acc_link." }\r\n.acclink:hover {" .$acc_hover." }";
-	
-	$fp = fopen( $acc_stylesheet, 'w' );
-	fwrite ($fp, $acc_link_style);
-	fclose ($fp);
-	
 }
 
 add_action('widgets_init', create_function('', 'return register_widget("Advanced_Category_Column_Widget");'));
@@ -657,29 +605,57 @@ function acc_validate($input) {
 	$newinput['link']=trim($input['link']);
 	$newinput['hover']=trim($input['hover']);
 	
-	acc_write_stylesheet($newinput);
-	
 	return $newinput;
 
 }
 
-add_action ('wp_print_styles', 'acc_css');
+add_action('init','acc_add_rewrite');
+function acc_add_rewrite() {
+       global $wp;
+       $wp->add_query_var('accfile');
+}
 
+add_action('template_redirect','acc_css_template');
+function acc_css_template() {
+       if (get_query_var('accfile') == 'css') {
+               
+			   header('Content-type: text/css');
+			   echo acc_write_css();
+			   
+               exit;
+       }
+}
+
+add_action ('wp_print_styles', 'acc_css');
 function acc_css () {
 	
 	$acc_options = get_option('acc_options');
 	
 	if (count ($acc_options)!=0 && !empty ($acc_options)) {
 		
-        $acc_css_Url = plugins_url('advanced-cc.css', __FILE__);
-        $acc_css_File = WP_PLUGIN_DIR . '/advanced-category-column/advanced-cc.css';
-        if ( file_exists($acc_css_File) ) {
-            wp_register_style('advanced-cc', $acc_css_Url);
-            wp_enqueue_style( 'advanced-cc');
-			
-		}
+		$acc_css_file=get_bloginfo('url')."/?accfile=css";
 		
+		wp_register_style('advanced-cc', $acc_css_file, false, '2.2', 'all');
+		wp_enqueue_style( 'advanced-cc');
+			
 	}
+	
+}
+
+// writing css file
+	
+function acc_write_css() {
+	
+	$acc_styles=get_option('acc_options');
+	
+	$acc_link=str_replace(array("\r\n", "\n", "\r"), ' ', $acc_styles['link']);
+	$acc_hover=str_replace(array("\r\n", "\n", "\r"), ' ', $acc_styles['hover']);
+	
+	$css_text="@charset \"UTF-8\";\r\n/* CSS Document */\r\n\r\n";
+	
+	$css_text.=".acclink {".$acc_link."}\r\n.acclink:hover {".$acc_hover."}";
+	
+	return $css_text;
 	
 }
 
