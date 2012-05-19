@@ -8,7 +8,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"PO-Revision-Date: 2012-05-18 17:03+0200\n"
+"PO-Revision-Date: 2012-05-19 21:47+0200\n"
 "Last-Translator: Waldemar Stoffel <stoffel@atelier-fuenf.de>\n"
 "Language-Team: Waldemar Stoffel <stoffel@atelier-fuenf.de>\n"
 "X-Poedit-Language: German\n"
@@ -126,6 +126,10 @@ msgstr "Die Farbe der Trennlinie (z.B. #cccccc):"
 #: class-lib/ACC_WidgetClass.php:119
 msgid "Check, where you want to show the widget. By default, it is showing on the homepage and the category pages:"
 msgstr "Klicke an, wo das Widget gezeigt werden soll. Standardmäßig erscheint es auf der Homepage und in den Kategorien."
+
+#: class-lib/ACC_WidgetClass.php:124
+msgid "Check if you want to invert the Google AdSense Tags that are defined with the Ads Easy Plugin. E.g. when they are turned off for the sidebar, they will appear in the widget."
+msgstr "Anklicken, wenn du die Google Adsense Tags umkehren willst, die im Ads Easy Plugin definiert wurden. Z.b. wenn sie für die Sidebar deaktiviert wurden, werden sie im Widget aktiv."
 
 #: class-lib/ACC_WidgetClass.php:124
 msgid "Homepage"

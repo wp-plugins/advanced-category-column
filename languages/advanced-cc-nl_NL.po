@@ -8,7 +8,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"PO-Revision-Date: 2012-05-18 17:37+0200\n"
+"PO-Revision-Date: 2012-05-19 21:42+0200\n"
 "Last-Translator: Waldemar Stoffel <stoffel@atelier-fuenf.de>\n"
 "Language-Team: Waldemar Stoffel <stoffel@atelier-fuenf.de>\n"
 "X-Poedit-Language: Dutch\n"
@@ -102,6 +102,10 @@ msgstr "Offset (hoeveel posts zullen in het begin niet te zien zijn):"
 #: class-lib/ACC_WidgetClass.php:87
 msgid "Check to have the offset only on your homepage."
 msgstr "Klik hier, om de offset alleen maar op de startpagina te hebben."
+
+#: class-lib/ACC_WidgetClass.php:124
+msgid "Check if you want to invert the Google AdSense Tags that are defined with the Ads Easy Plugin. E.g. when they are turned off for the sidebar, they will appear in the widget."
+msgstr "Klik, als de Google AdSense Tags wilt omkeren, die je in de Ads Easy Plugin gedefinieerd hebt. B.v. als ze voor de sidebar inactief zijn, zullen ze in de widget verschijnen."
 
 #: class-lib/ACC_WidgetClass.php:92
 msgid "In case there is no excerpt defined, how many sentences are displayed:"
