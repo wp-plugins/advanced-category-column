@@ -3,7 +3,7 @@
 Plugin Name: Advanced Category Column
 Plugin URI: http://wasistlos.waldemarstoffel.com/plugins-fur-wordpress/advanced-category-column-plugin
 Description: The Advanced Category Column does, what my Category Column Plugin does; it creates a widget, which you can drag to your sidebar and it will show excerpts of the posts of other categories than showed in the center-column. It just has more options than the the Category Column Plugin. It is tested with WP up to version 3.4 and it might work with versions down to 2.7, but that will never be explicitly supported for those. The 'Advanced' means, that you have a couple of more options than in the 'Category Column Plugin'. 
-Version: 2.2
+Version: 2.3
 Author: Waldemar Stoffel
 Author URI: http://www.waldemarstoffel.com
 License: GPL3
@@ -82,7 +82,7 @@ if (!class_exists('Advanced_Category_Column_Widget')) require_once ACC_PATH.'cla
 
 $acc_language_file = 'advanced-cc';
 
-load_plugin_textdomain($acc_language_file, false , basename(dirname(__FILE__)).'/languages');
+load_plugin_textdomain('advanced-cc', false , basename(dirname(__FILE__)).'/languages');
 
 // init
 

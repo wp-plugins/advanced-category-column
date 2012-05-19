@@ -137,7 +137,7 @@ class A5_Thumbnail {
 		
 		if (empty($imgsize)) :
 		
-			require_once ABSPATH.'/wp-admin/includes/file.php';
+			if ( ! function_exists( 'download_url' ) ) require_once ABSPATH.'/wp-admin/includes/file.php';
 		
 			$tmp_image = download_url($image);
 			

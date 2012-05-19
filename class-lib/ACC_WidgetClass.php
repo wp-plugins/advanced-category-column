@@ -40,6 +40,7 @@ function form($instance) {
 	$wordcount = esc_attr($instance['wordcount']);
 	$linespace = esc_attr($instance['linespace']);
 	$words = esc_attr($instance['words']);
+	$adsense = esc_attr($instance['adsense']);
 	$line=esc_attr($instance['line']);
 	$line_color=esc_attr($instance['line_color']);
 	$style=esc_attr($instance['style']);
@@ -55,7 +56,7 @@ function form($instance) {
 	$author=esc_attr($instance['author']);
 	$search=esc_attr($instance['search']);
 	$not_found=esc_attr($instance['not_found']);
- 
+
  ?>
 
 <p>
@@ -84,7 +85,7 @@ function form($instance) {
 </p>
 <p>
  <label for="<?php echo $this->get_field_id('home'); ?>">
- <input id="<?php echo $this->get_field_id('home'); ?>" name="<?php echo $this->get_field_name('home'); ?>" <?php if(!empty($home)) echo 'checked="checked"'; ?> type="checkbox" />&nbsp;<?php _e('Check to have the offset only on your homepage.', $acc_language_file); ?>
+ <input id="<?php echo $this->get_field_id('home'); ?>" name="<?php echo $this->get_field_name('home'); ?>" <?php if($home) echo 'checked="checked"'; ?> type="checkbox" />&nbsp;<?php _e('Check to have the offset only on your homepage.', $acc_language_file); ?>
  </label>
 </p>
 <p>
@@ -95,12 +96,12 @@ function form($instance) {
 </p>
 <p>
  <label for="<?php echo $this->get_field_id('linespace'); ?>">
- <input id="<?php echo $this->get_field_id('linespace'); ?>" name="<?php echo $this->get_field_name('linespace'); ?>" <?php if(!empty($linespace)) echo 'checked="checked"'; ?> type="checkbox" />&nbsp;<?php _e('Check to have each sentense in a new line.', $acc_language_file); ?>
+ <input id="<?php echo $this->get_field_id('linespace'); ?>" name="<?php echo $this->get_field_name('linespace'); ?>" <?php if($linespace) echo 'checked="checked"'; ?> type="checkbox" />&nbsp;<?php _e('Check to have each sentense in a new line.', $acc_language_file); ?>
  </label>
 </p>
 <p>
  <label for="<?php echo $this->get_field_id('words'); ?>">
- <input id="<?php echo $this->get_field_id('words'); ?>" name="<?php echo $this->get_field_name('words'); ?>" <?php if(!empty($words)) echo 'checked="checked"'; ?> type="checkbox" />&nbsp;<?php _e('Check to display words instead of sentenses.', $acc_language_file); ?>
+ <input id="<?php echo $this->get_field_id('words'); ?>" name="<?php echo $this->get_field_name('words'); ?>" <?php if($words) echo 'checked="checked"'; ?> type="checkbox" />&nbsp;<?php _e('Check to display words instead of sentenses.', $acc_language_file); ?>
  </label>
 </p>
 <p>
@@ -115,46 +116,57 @@ function form($instance) {
  <input size="13" id="<?php echo $this->get_field_id('line_color'); ?>" name="<?php echo $this->get_field_name('line_color'); ?>" type="text" value="<?php echo $line_color; ?>" />
  </label>
 </p>
+<?php
+if (defined('AE_AD_TAGS') && AE_AD_TAGS==1) :
+?>
+<p>
+ <label for="<?php echo $this->get_field_id('adsense'); ?>">
+ <input id="<?php echo $this->get_field_id('adsense'); ?>" name="<?php echo $this->get_field_name('adsense'); ?>" <?php if($adsense) echo 'checked="checked"'; ?> type="checkbox" />&nbsp;<?php _e('Check if you want to invert the Google AdSense Tags that are defined with the Ads Easy Plugin. E.g. when they are turned off for the sidebar, they will appear in the widget.', $acc_language_file); ?>
+ </label>
+</p>
+<?php
+endif;
+?>
 <p>
   <?php _e('Check, where you want to show the widget. By default, it is showing on the homepage and the category pages:', $acc_language_file); ?>
 </p>
 <fieldset>
 <p>
   <label for="<?php echo $this->get_field_id('homepage'); ?>">
-    <input id="<?php echo $this->get_field_id('homepage'); ?>" name="<?php echo $this->get_field_name('homepage'); ?>" <?php if(!empty($homepage)) echo 'checked="checked"'; ?> type="checkbox" />&nbsp;<?php _e('Homepage', $acc_language_file); ?>
+    <input id="<?php echo $this->get_field_id('homepage'); ?>" name="<?php echo $this->get_field_name('homepage'); ?>" <?php if($homepage) echo 'checked="checked"'; ?> type="checkbox" />&nbsp;<?php _e('Homepage', $acc_language_file); ?>
   </label><br />
   <label for="<?php echo $this->get_field_id('frontpage'); ?>">
-    <input id="<?php echo $this->get_field_id('frontpage'); ?>" name="<?php echo $this->get_field_name('frontpage'); ?>" <?php if(!empty($frontpage)) echo 'checked="checked"'; ?> type="checkbox" />&nbsp;<?php _e('Frontpage (e.g. a static page as homepage)', $acc_language_file); ?>
+    <input id="<?php echo $this->get_field_id('frontpage'); ?>" name="<?php echo $this->get_field_name('frontpage'); ?>" <?php if($frontpage) echo 'checked="checked"'; ?> type="checkbox" />&nbsp;<?php _e('Frontpage (e.g. a static page as homepage)', $acc_language_file); ?>
   </label><br />
   <label for="<?php echo $this->get_field_id('page'); ?>">
-    <input id="<?php echo $this->get_field_id('page'); ?>" name="<?php echo $this->get_field_name('page'); ?>" <?php if(!empty($page)) echo 'checked="checked"'; ?> type="checkbox" />&nbsp;<?php _e('&#34;Page&#34; pages', $acc_language_file); ?>
+    <input id="<?php echo $this->get_field_id('page'); ?>" name="<?php echo $this->get_field_name('page'); ?>" <?php if($page) echo 'checked="checked"'; ?> type="checkbox" />&nbsp;<?php _e('&#34;Page&#34; pages', $acc_language_file); ?>
   </label><br />
   <label for="<?php echo $this->get_field_id('category'); ?>">
-    <input id="<?php echo $this->get_field_id('category'); ?>" name="<?php echo $this->get_field_name('category'); ?>" <?php if(!empty($category)) echo 'checked="checked"'; ?> type="checkbox" />&nbsp;<?php _e('Category pages', $acc_language_file); ?>
+    <input id="<?php echo $this->get_field_id('category'); ?>" name="<?php echo $this->get_field_name('category'); ?>" <?php if($category) echo 'checked="checked"'; ?> type="checkbox" />&nbsp;<?php _e('Category pages', $acc_language_file); ?>
   </label><br />
   <label for="<?php echo $this->get_field_id('single'); ?>">
-    <input id="<?php echo $this->get_field_id('single'); ?>" name="<?php echo $this->get_field_name('single'); ?>" <?php if(!empty($single)) echo 'checked="checked"'; ?> type="checkbox" />&nbsp;<?php _e('Single post pages', $acc_language_file); ?>
+    <input id="<?php echo $this->get_field_id('single'); ?>" name="<?php echo $this->get_field_name('single'); ?>" <?php if($single) echo 'checked="checked"'; ?> type="checkbox" />&nbsp;<?php _e('Single post pages', $acc_language_file); ?>
   </label><br />
   <label for="<?php echo $this->get_field_id('date'); ?>">
-    <input id="<?php echo $this->get_field_id('date'); ?>" name="<?php echo $this->get_field_name('date'); ?>" <?php if(!empty($date)) echo 'checked="checked"'; ?> type="checkbox" />&nbsp;<?php _e('Archive pages', $acc_language_file); ?>
+    <input id="<?php echo $this->get_field_id('date'); ?>" name="<?php echo $this->get_field_name('date'); ?>" <?php if($date) echo 'checked="checked"'; ?> type="checkbox" />&nbsp;<?php _e('Archive pages', $acc_language_file); ?>
   </label><br />
   <label for="<?php echo $this->get_field_id('tag'); ?>">
-    <input id="<?php echo $this->get_field_id('tag'); ?>" name="<?php echo $this->get_field_name('tag'); ?>" <?php if(!empty($tag)) echo 'checked="checked"'; ?> type="checkbox" />&nbsp;<?php _e('Tag pages', $acc_language_file); ?>
+    <input id="<?php echo $this->get_field_id('tag'); ?>" name="<?php echo $this->get_field_name('tag'); ?>" <?php if($tag) echo 'checked="checked"'; ?> type="checkbox" />&nbsp;<?php _e('Tag pages', $acc_language_file); ?>
   </label><br />
   <label for="<?php echo $this->get_field_id('attachment'); ?>">
-    <input id="<?php echo $this->get_field_id('attachment'); ?>" name="<?php echo $this->get_field_name('attachment'); ?>" <?php if(!empty($attachment)) echo 'checked="checked"'; ?> type="checkbox" />&nbsp;<?php _e('Attachments', $acc_language_file); ?>
+    <input id="<?php echo $this->get_field_id('attachment'); ?>" name="<?php echo $this->get_field_name('attachment'); ?>" <?php if($attachment) echo 'checked="checked"'; ?> type="checkbox" />&nbsp;<?php _e('Attachments', $acc_language_file); ?>
   </label><br />
   <label for="<?php echo $this->get_field_id('taxonomy'); ?>">
-    <input id="<?php echo $this->get_field_id('taxonomy'); ?>" name="<?php echo $this->get_field_name('taxonomy'); ?>" <?php if(!empty($taxonomy)) echo 'checked="checked"'; ?> type="checkbox" />&nbsp;<?php _e('Custom Taxonomy pages (only available, if having a plugin)', $acc_language_file); ?>
+    <input id="<?php echo $this->get_field_id('taxonomy'); ?>" name="<?php echo $this->get_field_name('taxonomy'); ?>" <?php if($taxonomy) echo 'checked="checked"'; ?> type="checkbox" />&nbsp;<?php _e('Custom Taxonomy pages (only available, if having a plugin)', $acc_language_file); ?>
   </label><br />
   <label for="<?php echo $this->get_field_id('author'); ?>">
-    <input id="<?php echo $this->get_field_id('author'); ?>" name="<?php echo $this->get_field_name('author'); ?>" <?php if(!empty($author)) echo 'checked="checked"'; ?> type="checkbox" />&nbsp;<?php _e('Author pages', $acc_language_file); ?>
+    <input id="<?php echo $this->get_field_id('author'); ?>" name="<?php echo $this->get_field_name('author'); ?>" <?php if($author) echo 'checked="checked"'; ?> type="checkbox" />&nbsp;<?php _e('Author pages', $acc_language_file); ?>
   </label><br />
   <label for="<?php echo $this->get_field_id('search'); ?>">
-    <input id="<?php echo $this->get_field_id('search'); ?>" name="<?php echo $this->get_field_name('search'); ?>" <?php if(!empty($search)) echo 'checked="checked"'; ?> type="checkbox" />&nbsp;<?php _e('Search Results', $acc_language_file); ?>
+    <input id="<?php echo $this->get_field_id('search'); ?>" name="<?php echo $this->get_field_name('search'); ?>" <?php if($search) echo 'checked="checked"'; ?> type="checkbox" />&nbsp;<?php _e('Search Results', $acc_language_file); ?>
   </label><br />
   <label for="<?php echo $this->get_field_id('not_found'); ?>">
-    <input id="<?php echo $this->get_field_id('not_found'); ?>" name="<?php echo $this->get_field_name('not_found'); ?>" <?php if(!empty($not_found)) echo 'checked="checked"'; ?> type="checkbox" />&nbsp;<?php _e('&#34;Not Found&#34;', $acc_language_file); ?>
+    <input id="<?php echo $this->get_field_id('not_found'); ?>" name="<?php echo $this->get_field_name('not_found'); ?>" <?php if($not_found) echo 'checked="checked"'; ?> type="checkbox" />&nbsp;<?php _e('&#34;Not Found&#34;', $acc_language_file); ?>
   </label>
 </p>
 <p>
@@ -189,6 +201,7 @@ function update($new_instance, $old_instance) {
 	 $instance['list'] = strip_tags($new_instance['list']); 
 	 $instance['wordcount'] = strip_tags($new_instance['wordcount']);
 	 $instance['words'] = strip_tags($new_instance['words']);
+	 $instance['adsense'] = strip_tags($new_instance['adsense']);
 	 $instance['linespace'] = strip_tags($new_instance['linespace']);
 	 $instance['line'] = strip_tags($new_instance['line']);
 	 $instance['line_color'] = strip_tags($new_instance['line_color']);
@@ -250,6 +263,18 @@ if ($instance[$acc_pagetype]) :
 		
 		$acc_before_widget='<div id="'.$widget_id.'" style="'.$acc_style.'">';
 		$acc_after_widget='</div>';
+		
+	endif;
+	
+	if (AE_AD_TAGS == 1 && $instance['adsense']) :
+		
+		$ae_options = get_option('ae_options');
+		
+		do_action('google_end_tag');
+		
+		if ($ae_options['ae_sidebar']==1) do_action('google_ignore_tag');
+	
+		else do_action('google_start_tag');
 		
 	endif;
 	
@@ -392,8 +417,17 @@ foreach($acc_posts as $post) :
 	
 endforeach;
 
- 
 echo $acc_after_widget;
+
+	if (AE_AD_TAGS == 1 && $instance['adsense']) :
+		
+		do_action('google_end_tag');
+		
+		if ($ae_options['ae_sidebar']==1) do_action('google_start_tag');
+	
+		else do_action('google_ignore_tag');
+		
+	endif;
  
 endif;
 

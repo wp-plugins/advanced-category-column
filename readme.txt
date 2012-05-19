@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_i
 Tags: column, sidebar, widget, category, newspaper, image, multi widget
 Requires at least: 2.7
 Tested up to: 3.4
-Stable tag: 2.2
+Stable tag: 2.3
 
 The Advanced Category Column is a very customizable multiwidget for your sidebar.
 
