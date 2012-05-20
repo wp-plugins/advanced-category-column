@@ -1,175 +1,206 @@
-# Copyright (C) 2011 
+# Copyright (C) 2012 
 # This file is distributed under the same license as the  package.
 msgid ""
 msgstr ""
 "Project-Id-Version:  \n"
 "Report-Msgid-Bugs-To: http://wordpress.org/tag/advanced-category-column\n"
-"POT-Creation-Date: 2011-03-02 00:01:08+00:00\n"
+"POT-Creation-Date: 2012-05-19 18:33:43+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"PO-Revision-Date: 2011-MO-DA HO:MI+ZONE\n"
+"PO-Revision-Date: 2012-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 
-#: advanced-cc.php:43
-msgid "Settings"
+#: advanced-cc.php:33
+msgid "Sorry, you don&#39;t have direct access to this page."
 msgstr ""
 
-#: advanced-cc.php:44
+#: advanced-cc.php:53
 msgid "FAQ"
 msgstr ""
 
-#: advanced-cc.php:45
+#: advanced-cc.php:54
 msgid "Donate"
 msgstr ""
 
-#: advanced-cc.php:59
-msgid ""
-"Configure the output and looks of the widget. Then display thumbnails and excerpts of posts in your sidebars and define, on what kind of pages they will show."
+#: advanced-cc.php:67
+msgid "Settings"
 msgstr ""
 
-#: advanced-cc.php:102
+#: advanced-cc.php:95
+msgid "Styling of the links"
+msgstr ""
+
+#: advanced-cc.php:97
+msgid "Link style:"
+msgstr ""
+
+#: advanced-cc.php:99
+msgid "Hover style:"
+msgstr ""
+
+#: advanced-cc.php:105
+msgid "Just put some css code here."
+msgstr ""
+
+#: advanced-cc.php:141
+msgid "Advanced CC Settings"
+msgstr ""
+
+#: advanced-cc.php:153
+msgid "Advanced Category Column Settings"
+msgstr ""
+
+#: advanced-cc.php:154
+msgid ""
+"Style the links of the widget. If you leave this empty, your theme will "
+"style the hyperlinks."
+msgstr ""
+
+#: advanced-cc.php:156
+msgid "Just input something like,"
+msgstr ""
+
+#: advanced-cc.php:160
+msgid "to get fat, blue, underlined links."
+msgstr ""
+
+#: advanced-cc.php:163
+msgid ""
+"You most probably have to use &#34;!important&#34; at the end of each line, "
+"to make it work."
+msgstr ""
+
+#: advanced-cc.php:172
+msgid "Save Changes"
+msgstr ""
+
+#: class-lib/A5_ImageClasses.php:40
+msgid "Permalink to"
+msgstr ""
+
+#: class-lib/ACC_WidgetClass.php:18
+msgid ""
+"Configure the output and looks of the widget. Then display thumbnails and "
+"excerpts of posts in your sidebars and define, on what kind of pages they "
+"will show."
+msgstr ""
+
+#: class-lib/ACC_WidgetClass.php:64
 msgid "Title:"
 msgstr ""
 
-#: advanced-cc.php:108
+#: class-lib/ACC_WidgetClass.php:70
 msgid ""
 "To exclude certain categories or to show just a special category, simply "
 "write their ID&#39;s separated by comma (e.g. <strong>-5,2,4</strong> will "
 "show categories 2 and 4 and will exclude category 5):"
 msgstr ""
 
-#: advanced-cc.php:114
+#: class-lib/ACC_WidgetClass.php:76
 msgid "How many posts will be displayed in the sidebar:"
 msgstr ""
 
-#: advanced-cc.php:120
+#: class-lib/ACC_WidgetClass.php:82
 msgid "Offset (how many posts are spared out in the beginning):"
 msgstr ""
 
-#: advanced-cc.php:128
-msgid "Check to have the offset only on your homepage:"
+#: class-lib/ACC_WidgetClass.php:88
+msgid "Check to have the offset only on your homepage."
 msgstr ""
 
-#: advanced-cc.php:133
+#: class-lib/ACC_WidgetClass.php:93
 msgid "In case there is no excerpt defined, how many sentences are displayed:"
 msgstr ""
 
-#: advanced-cc.php:140
-msgid "Check to display words instead of sentences:"
+#: class-lib/ACC_WidgetClass.php:99
+msgid "Check to have each sentense in a new line."
 msgstr ""
 
-#: advanced-cc.php:146
+#: class-lib/ACC_WidgetClass.php:104
+msgid "Check to display words instead of sentenses."
+msgstr ""
+
+#: class-lib/ACC_WidgetClass.php:109
 msgid ""
 "If you want a line between the posts, this is the height in px (if not "
 "wanting a line, leave emtpy):"
 msgstr ""
 
-#: advanced-cc.php:152
+#: class-lib/ACC_WidgetClass.php:115
 msgid "The color of the line (e.g. #cccccc):"
 msgstr ""
 
-#: advanced-cc.php:157
-msgid "Check, where you want to show the widget. By default, it is showing on the homepage and the category pages:"
+#: class-lib/ACC_WidgetClass.php:124
+msgid ""
+"Check if you want to invert the Google AdSense Tags that are defined with "
+"the Ads Easy Plugin. E.g. when they are turned off for the sidebar, they "
+"will appear in the widget."
 msgstr ""
 
-#: advanced-cc.php:163
+#: class-lib/ACC_WidgetClass.php:131
+msgid ""
+"Check, where you want to show the widget. By default, it is showing on the "
+"homepage and the category pages:"
+msgstr ""
+
+#: class-lib/ACC_WidgetClass.php:136
 msgid "Homepage"
 msgstr ""
 
-#: advanced-cc.php:169
+#: class-lib/ACC_WidgetClass.php:139
 msgid "Frontpage (e.g. a static page as homepage)"
 msgstr ""
 
-#: advanced-cc.php:175
+#: class-lib/ACC_WidgetClass.php:142
 msgid "&#34;Page&#34; pages"
 msgstr ""
 
-#: advanced-cc.php:181
+#: class-lib/ACC_WidgetClass.php:145
 msgid "Category pages"
 msgstr ""
 
-#: advanced-cc.php:187
+#: class-lib/ACC_WidgetClass.php:148
 msgid "Single post pages"
 msgstr ""
 
-#: advanced-cc.php:193
+#: class-lib/ACC_WidgetClass.php:151
 msgid "Archive pages"
 msgstr ""
 
-#: advanced-cc.php:199
+#: class-lib/ACC_WidgetClass.php:154
 msgid "Tag pages"
 msgstr ""
 
-#: advanced-cc.php:205
+#: class-lib/ACC_WidgetClass.php:157
 msgid "Attachments"
 msgstr ""
 
-#: advanced-cc.php:211
+#: class-lib/ACC_WidgetClass.php:160
 msgid "Custom Taxonomy pages (only available, if having a plugin)"
 msgstr ""
 
-#: advanced-cc.php:217
+#: class-lib/ACC_WidgetClass.php:163
 msgid "Author pages"
 msgstr ""
 
-#: advanced-cc.php:223
+#: class-lib/ACC_WidgetClass.php:166
 msgid "Search Results"
 msgstr ""
 
-#: advanced-cc.php:229
-msgid "&#34;Not found&#34;"
+#: class-lib/ACC_WidgetClass.php:169
+msgid "&#34;Not Found&#34;"
 msgstr ""
 
-#: advanced-cc.php:231
+#: class-lib/ACC_WidgetClass.php:174
 msgid "Check all"
 msgstr ""
 
-#: advanced-cc.php:235
+#: class-lib/ACC_WidgetClass.php:180
 msgid ""
 "Here you can finally style the widget. Simply type something like<br /"
 "><strong>border-left: 1px dashed;<br />border-color: #000000;</strong><br /"
 ">to get just a dashed black line on the left. If you leave that section "
 "empty, your theme will style the widget."
-msgstr ""
-
-#: advanced-cc.php:505
-msgid "Styling of the links"
-msgstr ""
-
-#: advanced-cc.php:507
-msgid "Link style:"
-msgstr ""
-
-#: advanced-cc.php:509
-msgid "Hover style:"
-msgstr ""
-
-#: advanced-cc.php:515
-msgid "Just put some css code here."
-msgstr ""
-
-#: advanced-cc.php:551
-msgid "Advanced CC Settings"
-msgstr ""
-
-#: advanced-cc.php:551, 561
-msgid "Advanced Category Column Settings"
-msgstr ""
-
-#: advanced-cc.php:562
-msgid "Style the links of the widget. If you leave this empty, your theme will style the hyperlinks."
-msgstr ""
-
-#: advanced-cc.php:564
-msgid "Just input something like,"
-msgstr ""
-
-#: advanced-cc.php:568
-msgid "to get fat, blue, underlined links."
-msgstr ""
-
-#: advanced-cc.php:571
-msgid "You most probably have to use &#34;!important&#34; at the end of each line, to make it work."
 msgstr ""
