@@ -2,8 +2,8 @@
 /*
 Plugin Name: Advanced Category Column
 Plugin URI: http://wasistlos.waldemarstoffel.com/plugins-fur-wordpress/advanced-category-column-plugin
-Description: The Advanced Category Column does, what my Category Column Plugin does; it creates a widget, which you can drag to your sidebar and it will show excerpts of the posts of other categories than showed in the center-column. It just has more options than the the Category Column Plugin. It is tested with WP up to version 3.4 and it might work with versions down to 2.7, but that will never be explicitly supported for those. The 'Advanced' means, that you have a couple of more options than in the 'Category Column Plugin'. 
-Version: 2.3
+Description: The Advanced Category Column does, what my Category Column Plugin does; it creates a widget, which you can drag to your sidebar and it will show excerpts of the posts of other categories than showed in the center-column. It just has more options than the the Category Column Plugin. It is tested with WP up to version 3.4 and it might work with versions down to 2.7, but that will never be explicitly supported for those. The 'Advanced' means, that you have a couple of more options than in the 'Category Column Plugin'.
+Version: 2.4
 Author: Waldemar Stoffel
 Author URI: http://www.waldemarstoffel.com
 License: GPL3
@@ -82,13 +82,15 @@ if (!class_exists('Advanced_Category_Column_Widget')) require_once ACC_PATH.'cla
 
 $acc_language_file = 'advanced-cc';
 
-load_plugin_textdomain('advanced-cc', false , basename(dirname(__FILE__)).'/languages');
+load_plugin_textdomain($acc_language_file, false , basename(dirname(__FILE__)).'/languages');
 
 // init
 
 add_action('admin_init', 'acc_init');
 
 function acc_init() {
+	
+	global $acc_language_file;
 	
 	register_setting( 'acc_options', 'acc_options', 'acc_validate' );
 	
@@ -102,11 +104,15 @@ function acc_init() {
 
 function acc_display_section() {
 	
+	global $acc_language_file;
+	
 	echo '<p>'.__('Just put some css code here.', $acc_language_file).'</p>';
 
 }
 
 function acc_link_field() {
+	
+	global $acc_language_file;
 	
 	$acc_options = get_option('acc_options');
 	
@@ -115,6 +121,8 @@ function acc_link_field() {
 }
 
 function acc_hover_field() {
+	
+	global $acc_language_file;
 	
 	$acc_options = get_option('acc_options');
 	
@@ -138,6 +146,8 @@ add_action('admin_menu', 'acc_admin_menu');
 
 function acc_admin_menu() {
 	
+	global $acc_language_file;
+	
 	$pages=add_options_page(__('Advanced CC Settings', $acc_language_file), 'Advanced Category Column', 'administrator', 'advanced-cc-settings', 'advanced_cc_options_page');
 	
 	add_action('admin_print_scripts-'.$pages, 'acc_js_sheet');
@@ -147,6 +157,8 @@ function acc_admin_menu() {
 // Calling the options page
 
 function advanced_cc_options_page() {
+	
+	global $acc_language_file;
 	
 	?>
 <div>

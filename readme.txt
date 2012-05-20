@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_i
 Tags: column, sidebar, widget, category, newspaper, image, multi widget
 Requires at least: 2.7
 Tested up to: 3.4
-Stable tag: 2.3
+Stable tag: 2.4
 
 The Advanced Category Column is a very customizable multiwidget for your sidebar.
 
@@ -80,6 +80,10 @@ Since the stylesheet of the theme will have highest priority, you will have to m
 
 == Changelog ==
 
+= 2.4 =
+
+* Adjusting the classes to be more like alrounders
+
 = 2.3 =
 
 * Complete overhaul of the code; it should be cleaner, some typos should have disappeared
@@ -154,7 +158,10 @@ Added ability to get thumbnails also if using galleries
 Uses now dss instead of writing a new css file, when saving the styles
 More accurate auto excerpt
 
-
 = 2.3 =
 
 Complete overhaul of the code; it should be cleaner, some typos should have disappeared
+
+= 2.4 =
+
+Adjusting the classes to be more like alrounders

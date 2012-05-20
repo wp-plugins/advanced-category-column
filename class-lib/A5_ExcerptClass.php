@@ -18,49 +18,45 @@ class A5_Excerpt {
 		
 		extract($args);
 		
-		if ($excerpt) :
+		if ($usertext) :
 		
-			$this->output = $excerpt;
-			
-		else :
+			$this->output = $usertext;
 		
-			$text = trim(preg_replace('/\s\s+/', ' ', str_replace(array("\r\n", "\n", "\r", "&nbsp;"), ' ', strip_tags(strip_shortcodes($content)))));
+		else: 
+		
+			if ($excerpt) :
 			
-			$length = (!empty($count)) ? $count : 3;
-			
-			$style = (!empty($type)) ? $type : 'sentenses';
-			
-			$implode = (!empty($linespace)) ? '<br /><br />' : '';
-			
-			if ($style == 'words') :
-				
-				$short=array_slice(explode(' ', $text), 0, $length);
-				
-				$this->output=trim(implode(' ', $short));
+				$this->output = $excerpt;
 				
 			else :
 			
-				if ($style == 'sentenses') :
+				$excerpt_base = ($shortcode) ? strip_tags(preg_replace('/\[caption(.*?)\[\/caption\]/', '', $content)) : strip_tags(strip_shortcodes($content));
+			
+				$text = trim(preg_replace('/\s\s+/', ' ', str_replace(array("\r\n", "\n", "\r", "&nbsp;"), ' ', $excerpt_base)));
 				
-					$short=array_slice(preg_split("/([\t.!?]+)/", $text, -1, PREG_SPLIT_DELIM_CAPTURE), 0, $length*2);
+				$length = (!empty($count)) ? $count : 3;
+				
+				$style = (!empty($type)) ? $type : 'sentenses';
+				
+				if ($style == 'words') :
 					
-					foreach ($short as $key => $val) :
+					$short=array_slice(explode(' ', $text), 0, $length);
 					
-						if (($key+1)/2 != intval(($key+1)/2)) :
-												  
-							$key2 = $key+1;
-												  
-							$tmpex[] = implode(array($short[$key], $short[$key2]));
-							
-						endif;
-						
-					endforeach;
-					
-					$this->output=trim(implode($implode, $tmpex));
+					$this->output=trim(implode(' ', $short));
 					
 				else :
+				
+					if ($style == 'sentenses') :
 					
-					$this->output=substr($text, 0, $length+1);
+						$short=array_slice(preg_split("/([\t.!?]+)/", $text, -1, PREG_SPLIT_DELIM_CAPTURE), 0, $length*2);
+						
+						$this->output=trim(implode($short));
+						
+					else :
+						
+						$this->output=substr($text, 0, $length+1);
+						
+					endif;
 					
 				endif;
 				
@@ -68,12 +64,32 @@ class A5_Excerpt {
 			
 		endif;
 		
+		if ($linespace) :
+		
+			$short=preg_split("/([\t.!?]+)/", $this->output, -1, PREG_SPLIT_DELIM_CAPTURE);
+			
+			foreach ($short as $key => $pieces) :
+			
+				if (!($key % 2)) :
+				
+					$key2 = $key+1;
+												  
+					$tmpex[] = implode(array($short[$key], $short[$key2]));
+					
+				endif;
+			
+			endforeach;
+			
+			$this->output=trim(implode('<br /><br />', $tmpex));
+		
+		endif;
+		
 		if ($readmore) $this->output.=' <a href="'.$link.'" title="'.$title.'">'.$rmtext.'</a>';
 		
 		return $this->output;
 		
 	
-	} // __construct
+	} // get_excerpt
 	
 } // A5_Excerpt
 

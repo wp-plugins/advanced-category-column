@@ -25,6 +25,8 @@ class A5_ImageTags {
 		'post_parent' => $post->ID
 		);
 		
+		$title_tag = __('Permalink to', $language_file).' '.esc_attr($post->post_title);
+		
 		$attachments = get_posts( $args );
 		
 		if ( $attachments ) :
@@ -32,14 +34,13 @@ class A5_ImageTags {
 			$attachment = $attachments[0];
 			  
 			$image_alt = trim(strip_tags( get_post_meta( $attachment->ID, '_wp_attachment_image_alt', true) ));
-			$image_alt = (empty($image_alt)) ? esc_attr($post->post_title) : esc_attr($image_alt);
 			
 			$image_title = trim(strip_tags( $attachment->post_title ));
-			$image_title = (empty($image_title)) ? esc_attr($post->post_title) : esc_attr($image_title);
-		
-			$title_tag = __('Permalink to', $language_file).' '.esc_attr($post->post_title);
 		
 		endif;
+		
+		$image_alt = (empty($image_alt)) ? esc_attr($post->post_title) : esc_attr($image_alt);
+		$image_title = (empty($image_title)) ? esc_attr($post->post_title) : esc_attr($image_title);
 		
 		$this->tags = array(
 		'image_alt' => $image_alt,
@@ -56,7 +57,7 @@ class A5_ImageTags {
 
 /**
  *
- * Class A5 Thumnail
+ * Class A5 Thumbnail
  *
  * @ A5 Plugin Framework
  *
@@ -93,11 +94,11 @@ class A5_Thumbnail {
 			
 			$thumb_height = $size['height'];
 			
+			$ratio = $thumb_width/$thumb_height;
+			
 		endif;
 		
-		if ($thumb_width):
-		
-		$ratio = $thumb_width/$thumb_height;
+		if ($thumb_width && $height) :
 		
 			if ($ratio > 1) :
 					
@@ -112,6 +113,14 @@ class A5_Thumbnail {
 				$thumb_height = $height;
 				
 			endif;
+			
+		else :
+		
+			$ratio = $thumb_width/$thumb_height;
+		
+			$thumb_width = $width;
+			
+			$thumb_height = intval($thumb_width/$ratio);
 	
 		endif;
 	

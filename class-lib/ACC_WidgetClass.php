@@ -266,6 +266,8 @@ if ($instance[$acc_pagetype]) :
 		
 	endif;
 	
+	// hooking into ads easy for the google tags
+	
 	if (AE_AD_TAGS == 1 && $instance['adsense']) :
 		
 		$ae_options = get_option('ae_options');
@@ -282,7 +284,7 @@ if ($instance[$acc_pagetype]) :
 	
 	if ( $title ) echo $before_title . $title . $after_title;
  
-/* This is the actual function of the plugin, it fills the sidebar with the customized excerpts */
+/* This is the actual function of the widget, it fills the sidebar with the customized posts */
 
 $i=1;
 
@@ -332,18 +334,14 @@ foreach($acc_posts as $post) :
 	$acc_image_title = $acc_tags['image_title'];
 	$acc_title_tag = $acc_tags['title_tag'];
 	
+	$eol = "\r\n";
+	$acc_headline = '<p>'.$eol.'<a href="'.get_permalink().'"'.$acc_class.' title="'.$acc_title_tag.'">'.get_the_title().'</a>'.$eol.'</p>';
+	
 	if (function_exists('has_post_thumbnail') && has_post_thumbnail()) :
 	   
 	/* If there is a thumbnail, show thumbnail and headline */
 	   
-	?>
-	<a href="<?php the_permalink(); ?>">
-	<?php the_post_thumbnail(); ?>
-	</a><br />
-	<p><a href="<?php the_permalink(); ?>"<?php echo $acc_class; ?> title="<?php echo $acc_title_tag ?>">
-	<?php the_title(); ?>
-	</a></p>
-	<?php
+	echo '<a href="'.get_permalink().'">'.get_the_post_thumbnail().'</a>'.$eol.'<div style="clear: both;"></div>'.$eol.$acc_headline;
 
 	else :
 	
@@ -357,7 +355,7 @@ foreach($acc_posts as $post) :
 	
 	   	$acc_image_info = $acc_image->get_thumbnail($args);
 		
-		$acc_thumb = esc_attr($acc_image_info['thumb']);
+		$acc_thumb = $acc_image_info['thumb'];
 		
 		$acc_width = $acc_image_info['thumb_width'];
 
@@ -367,7 +365,7 @@ foreach($acc_posts as $post) :
 		
 			if ($acc_width) $acc_img = '<img title="'.$acc_image_title.'" src="'.$acc_thumb.'" alt="'.$acc_image_alt.'" width="'.$acc_width.'" height="'.$acc_height.'" />';
 				
-			else $acc_img = '<img title="'.$acc_image_title.'" src="'.$acc_thumb.'" alt="'.$acc_image_alt.'" style="maxwidth: '.get_option('thumbnail_size_w').'; maxheight: '.get_option('thumbnail_size_h').';" />'
+			else $acc_img = '<img title="'.$acc_image_title.'" src="'.$acc_thumb.'" alt="'.$acc_image_alt.'" style="maxwidth: '.get_option('thumbnail_size_w').'; maxheight: '.get_option('thumbnail_size_h').';" />';
 			
 			?>
 			<a href="<?php the_permalink(); ?>"> <?php echo $acc_img; ?></a>
@@ -379,11 +377,7 @@ foreach($acc_posts as $post) :
 			
 			/* If there is no picture, show headline and excerpt of the post */
 			
-			?>
-			<p><a href="<?php the_permalink(); ?>"<?php echo $acc_class; ?> title="<?php echo $acc_title_tag ?>">
-			<?php the_title(); ?>
-			</a></p>
-			<?php
+			echo $acc_headline;
 			
 			/* in case the excerpt is not definded by theme or anything else, the first x sentences of the content are given */
 			
@@ -419,6 +413,8 @@ endforeach;
 
 echo $acc_after_widget;
 
+	// hooking into ads easy for the google tags
+	
 	if (AE_AD_TAGS == 1 && $instance['adsense']) :
 		
 		do_action('google_end_tag');
