@@ -3,20 +3,20 @@ Contributors: tepelstreel
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=BC9QUKBEZFZFY
 Tags: column, sidebar, widget, category, newspaper, image, multi widget
 Requires at least: 2.7
-Tested up to: 3.4
-Stable tag: 2.4
+Tested up to: 3.5
+Stable tag: 2.5
 
 The Advanced Category Column is a very customizable multiwidget for your sidebar.
 
 == Description ==
 
-The Advanced Category Column is mainly designed to give your blog a bit more of a newspaper behaviour. E.g. The plugin shows the latest posts from all categories with an offset of three posts on your homepage.
+The Advanced Category Column is mainly designed to give your blog a bit more of a newspaper behavior. E.g. The plugin shows the latest posts from all categories with an offset of three posts on your homepage.
 
 If there is a post thumbnail, it will be displayed above the headline of the post. No further text will appear. If there is no thumbnail, only the headline and the excerpt of the post will be shown. When the plugin can detect neither the thumbnail nor the excerpt of a post, it will display just the first couple of sentences (or words) of a post.
 
-So far that is the same as my Category Column Plugin does also. Not every theme has the possibility to hide certain sidebars on different pages. That's where the advanced of our plugin comes in. In the ACC you can determine, where excactly the widget is showing and in the settings you can customize the links of your widget(s).
+So far that is the same as my Category Column Plugin does also. Not every theme has the possibility to hide certain sidebars on different pages. That's where the advanced of our plugin comes in. In the ACC you can determine, where exactly the widget is showing and in the settings you can customize the links of your widget(s).
 
-The ACC was tested up to WP 3.4. It should work with versions down to 2.7 but was never tested on those.
+The ACC was tested up to WP 3.5. It should work with versions down to 2.7 but was never tested on those.
 
 == Installation ==
 
@@ -79,6 +79,10 @@ Since the stylesheet of the theme will have highest priority, you will have to m
 3. The plugin's settings section
 
 == Changelog ==
+
+= 2.5 =
+
+* Great reduction of the payload by adding a cache to the plugin
 
 = 2.4 =
 
@@ -165,3 +169,7 @@ Complete overhaul of the code; it should be cleaner, some typos should have disa
 = 2.4 =
 
 Adjusting the classes to be more like alrounders
+
+= 2.5 =
+
+Great reduction of the payload by adding a cache to the plugin

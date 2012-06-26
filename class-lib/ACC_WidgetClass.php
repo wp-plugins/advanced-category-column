@@ -10,12 +10,12 @@
  *
  */
 class Advanced_Category_Column_Widget extends WP_Widget {
+	
+	static $language_file = 'advanced-cc';
  
 function Advanced_Category_Column_Widget() {
 
-	global $acc_language_file;
-	
-	$widget_opts = array( 'description' => __('Configure the output and looks of the widget. Then display thumbnails and excerpts of posts in your sidebars and define, on what kind of pages they will show.', $acc_language_file) );
+	$widget_opts = array( 'description' => __('Configure the output and looks of the widget. Then display thumbnails and excerpts of posts in your sidebars and define, on what kind of pages they will show.', self::$language_file) );
 	$control_opts = array( 'width' => 400 );
 	
 	parent::WP_Widget(false, $name = 'Advanced Category Column', $widget_opts, $control_opts);
@@ -24,11 +24,9 @@ function Advanced_Category_Column_Widget() {
  
 function form($instance) {
 	
-	global $acc_language_file;
-	
 	// setup some default settings
     
-	$defaults = array( 'postcount' => 5, 'offset' => 3, 'home' => true, 'wordcount' => 3, 'line' => 1, 'line_color' => '#dddddd', 'homepage' => true, 'category' => true );
+	$defaults = array( 'postcount' => 5, 'offset' => 3, 'home' => 1, 'wordcount' => 3, 'line' => 1, 'line_color' => '#dddddd', 'homepage' => 1, 'category' => 1 );
     
 	$instance = wp_parse_args( (array) $instance, $defaults );
 	
@@ -56,175 +54,72 @@ function form($instance) {
 	$author=esc_attr($instance['author']);
 	$search=esc_attr($instance['search']);
 	$not_found=esc_attr($instance['not_found']);
+	
+	$base_id = 'widget-'.$this->id_base.'-'.$this->number.'-';
+	$base_name = 'widget-'.$this->id_base.'['.$this->number.']';
+	
+	$options = array (array('homepage', $homepage, __('Homepage', self::$language_file)), array('frontpage', $frontpage, __('Frontpage (e.g. a static page as homepage)', self::$language_file)), array('page', $page, __('&#34;Page&#34; pages', self::$language_file)), array('category', $category, __('Category pages', self::$language_file)), array('single', $single, __('Single post pages', self::$language_file)), array('date', $date, __('Archive pages', self::$language_file)), array('tag', $tag, __('Tag pages', self::$language_file)), array('attachment', $attachment, __('Attachments', self::$language_file)), array('taxonomy', $taxonomy, __('Custom Taxonomy pages (only available, if having a plugin)', self::$language_file)), array('author', $author, __('Author pages', self::$language_file)), array('search', $search, __('Search Results', self::$language_file)), array('not_found', $not_found, __('&#34;Not Found&#34;', self::$language_file)));	
+	
+	$field[] = array ('type' => 'text', 'id_base' => $base_id, 'name_base' => $base_name, 'field_name' => 'title', 'label' => __('Title:', self::$language_file), 'value' => $title, 'class' => 'widefat', 'space' => 1);
+	$field[] = array ('type' => 'text', 'id_base' => $base_id, 'name_base' => $base_name, 'field_name' => 'list', 'label' => sprintf(__('To exclude certain categories or to show just a special category, simply write their ID&#39;s separated by comma (e.g. %s-5, 2, 4%s will show categories 2 and 4 and will exclude category 5):', self::$language_file), '<strong>', '</strong>'), 'value' => $list, 'space' => 1);
+	$field[] = array ('type' => 'number', 'id_base' => $base_id, 'name_base' => $base_name, 'field_name' => 'postcount', 'label' => __('How many posts will be displayed in the sidebar:', self::$language_file), 'value' => $postcount, 'size' => 4, 'step' => 1, 'space' => 1);
+	$field[] = array ('type' => 'number', 'id_base' => $base_id, 'name_base' => $base_name, 'field_name' => 'offset', 'label' => __('Offset (how many posts are spared out in the beginning):', self::$language_file), 'value' => $offset, 'size' => 4, 'step' => 1, 'space' => 1);
+	$field[] = array ('type' => 'checkbox', 'id_base' => $base_id, 'name_base' => $base_name, 'field_name' => 'home', 'label' => __('Check to have the offset only on your homepage.', self::$language_file), 'value' => $home, 'space' => 1);	
+	$field[] = array ('type' => 'number', 'id_base' => $base_id, 'name_base' => $base_name, 'field_name' => 'wordcount', 'label' => __('In case there is no excerpt defined, how many sentences are displayed:', self::$language_file), 'value' => $wordcount, 'size' => 4, 'step' => 1, 'space' => 1);
+	$field[] = array ('type' => 'checkbox', 'id_base' => $base_id, 'name_base' => $base_name, 'field_name' => 'linespace', 'label' => __('Check to have each sentence in a new line.', self::$language_file), 'value' => $linespace, 'space' => 1);	
+	$field[] = array ('type' => 'checkbox', 'id_base' => $base_id, 'name_base' => $base_name, 'field_name' => 'words', 'label' => __('Check to display words instead of sentences.', self::$language_file), 'value' => $words, 'space' => 1);	
+	$field[] = array ('type' => 'number', 'id_base' => $base_id, 'name_base' => $base_name, 'field_name' => 'line', 'label' => __('If you want a line between the posts, this is the height in px (if not wanting a line, leave emtpy):', self::$language_file), 'value' => $line, 'size' => 4, 'step' => 1, 'space' => 1);
+	$field[] = array ('type' => 'color', 'id_base' => $base_id, 'name_base' => $base_name, 'field_name' => 'line_color', 'label' => __('The color of the line (e.g. #cccccc):', self::$language_file), 'value' => $line_color, 'size' => 13, 'space' => 1);	
 
- ?>
+	if (defined('AE_AD_TAGS') && AE_AD_TAGS==1) :
+	
+	$field[] = array ('type' => 'checkbox', 'id_base' => $base_id, 'name_base' => $base_name, 'field_name' => 'adsense', 'label' => __('Check if you want to invert the Google AdSense Tags that are defined with the Ads Easy Plugin. E.g. when they are turned off for the sidebar, they will appear in the widget.', self::$language_file), 'value' => $adsense, 'space' => 1);
+	
+	endif;
+	
+	$field[] = array ('type' => 'checkgroup', 'id_base' => $base_id, 'name_base' => $base_name, 'label' => __('Check, where you want to show the widget. By default, it is showing on the homepage and the category pages:', self::$language_file), 'options' => $options, 'checkall' => __('Check all', self::$language_file));	
+	$field[] = array ('type' => 'textarea', 'id_base' => $base_id, 'name_base' => $base_name, 'field_name' => 'style', 'class' => 'widefat', 'label' => sprintf(__('Here you can finally style the widget. Simply type something like%1$s%2$sborder-left: 1px dashed;%2$sborder-color: #000000;%3$s%2$sto get just a dashed black line on the left. If you leave that section empty, your theme will style the widget.', self::$language_file), '<strong>', '<br />', '</strong>'), 'value' => $style, 'space' => 1);
+	$field[] = array ('type' => 'resize', 'id_base' => $base_id, 'field_name' => array('style'));
 
-<p>
- <label for="<?php echo $this->get_field_id('title'); ?>">
- <?php _e('Title:', $acc_language_file); ?>
- <input class="widefat" id="<?php echo $this->get_field_id('title'); ?>" name="<?php echo $this->get_field_name('title'); ?>" type="text" value="<?php echo $title; ?>" />
- </label>
-</p>
-<p>
- <label for="<?php echo $this->get_field_id('list'); ?>">
- <?php _e('To exclude certain categories or to show just a special category, simply write their ID&#39;s separated by comma (e.g. <strong>-5,2,4</strong> will show categories 2 and 4 and will exclude category 5):', 'advanced-cc'); ?>
- <input size="20" id="<?php echo $this->get_field_id('list'); ?>" name="<?php echo $this->get_field_name('list'); ?>" type="text" value="<?php echo $list; ?>" />
- </label>
-</p>
-<p>
- <label for="<?php echo $this->get_field_id('postcount'); ?>">
- <?php _e('How many posts will be displayed in the sidebar:', $acc_language_file); ?>
- <input size="4" id="<?php echo $this->get_field_id('postcount'); ?>" name="<?php echo $this->get_field_name('postcount'); ?>" type="text" value="<?php echo $postcount; ?>" />
- </label>
-</p>
-<p>
- <label for="<?php echo $this->get_field_id('offset'); ?>">
- <?php _e('Offset (how many posts are spared out in the beginning):', $acc_language_file); ?>
- <input size="4" id="<?php echo $this->get_field_id('offset'); ?>" name="<?php echo $this->get_field_name('offset'); ?>" type="text" value="<?php echo $offset; ?>" />
- </label>
-</p>
-<p>
- <label for="<?php echo $this->get_field_id('home'); ?>">
- <input id="<?php echo $this->get_field_id('home'); ?>" name="<?php echo $this->get_field_name('home'); ?>" <?php if($home) echo 'checked="checked"'; ?> type="checkbox" />&nbsp;<?php _e('Check to have the offset only on your homepage.', $acc_language_file); ?>
- </label>
-</p>
-<p>
- <label for="<?php echo $this->get_field_id('wordcount'); ?>">
- <?php _e('In case there is no excerpt defined, how many sentences are displayed:', $acc_language_file); ?>
- <input size="4" id="<?php echo $this->get_field_id('wordcount'); ?>" name="<?php echo $this->get_field_name('wordcount'); ?>" type="text" value="<?php echo $wordcount; ?>" />
- </label>
-</p>
-<p>
- <label for="<?php echo $this->get_field_id('linespace'); ?>">
- <input id="<?php echo $this->get_field_id('linespace'); ?>" name="<?php echo $this->get_field_name('linespace'); ?>" <?php if($linespace) echo 'checked="checked"'; ?> type="checkbox" />&nbsp;<?php _e('Check to have each sentense in a new line.', $acc_language_file); ?>
- </label>
-</p>
-<p>
- <label for="<?php echo $this->get_field_id('words'); ?>">
- <input id="<?php echo $this->get_field_id('words'); ?>" name="<?php echo $this->get_field_name('words'); ?>" <?php if($words) echo 'checked="checked"'; ?> type="checkbox" />&nbsp;<?php _e('Check to display words instead of sentenses.', $acc_language_file); ?>
- </label>
-</p>
-<p>
- <label for="<?php echo $this->get_field_id('line'); ?>">
- <?php _e('If you want a line between the posts, this is the height in px (if not wanting a line, leave emtpy):', $acc_language_file); ?>
- <input size="4" id="<?php echo $this->get_field_id('line'); ?>" name="<?php echo $this->get_field_name('line'); ?>" type="text" value="<?php echo $line; ?>" />
- </label>
-</p>
-<p>
- <label for="<?php echo $this->get_field_id('line_color'); ?>">
- <?php _e('The color of the line (e.g. #cccccc):', $acc_language_file); ?>
- <input size="13" id="<?php echo $this->get_field_id('line_color'); ?>" name="<?php echo $this->get_field_name('line_color'); ?>" type="text" value="<?php echo $line_color; ?>" />
- </label>
-</p>
-<?php
-if (defined('AE_AD_TAGS') && AE_AD_TAGS==1) :
-?>
-<p>
- <label for="<?php echo $this->get_field_id('adsense'); ?>">
- <input id="<?php echo $this->get_field_id('adsense'); ?>" name="<?php echo $this->get_field_name('adsense'); ?>" <?php if($adsense) echo 'checked="checked"'; ?> type="checkbox" />&nbsp;<?php _e('Check if you want to invert the Google AdSense Tags that are defined with the Ads Easy Plugin. E.g. when they are turned off for the sidebar, they will appear in the widget.', $acc_language_file); ?>
- </label>
-</p>
-<?php
-endif;
-?>
-<p>
-  <?php _e('Check, where you want to show the widget. By default, it is showing on the homepage and the category pages:', $acc_language_file); ?>
-</p>
-<fieldset>
-<p>
-  <label for="<?php echo $this->get_field_id('homepage'); ?>">
-    <input id="<?php echo $this->get_field_id('homepage'); ?>" name="<?php echo $this->get_field_name('homepage'); ?>" <?php if($homepage) echo 'checked="checked"'; ?> type="checkbox" />&nbsp;<?php _e('Homepage', $acc_language_file); ?>
-  </label><br />
-  <label for="<?php echo $this->get_field_id('frontpage'); ?>">
-    <input id="<?php echo $this->get_field_id('frontpage'); ?>" name="<?php echo $this->get_field_name('frontpage'); ?>" <?php if($frontpage) echo 'checked="checked"'; ?> type="checkbox" />&nbsp;<?php _e('Frontpage (e.g. a static page as homepage)', $acc_language_file); ?>
-  </label><br />
-  <label for="<?php echo $this->get_field_id('page'); ?>">
-    <input id="<?php echo $this->get_field_id('page'); ?>" name="<?php echo $this->get_field_name('page'); ?>" <?php if($page) echo 'checked="checked"'; ?> type="checkbox" />&nbsp;<?php _e('&#34;Page&#34; pages', $acc_language_file); ?>
-  </label><br />
-  <label for="<?php echo $this->get_field_id('category'); ?>">
-    <input id="<?php echo $this->get_field_id('category'); ?>" name="<?php echo $this->get_field_name('category'); ?>" <?php if($category) echo 'checked="checked"'; ?> type="checkbox" />&nbsp;<?php _e('Category pages', $acc_language_file); ?>
-  </label><br />
-  <label for="<?php echo $this->get_field_id('single'); ?>">
-    <input id="<?php echo $this->get_field_id('single'); ?>" name="<?php echo $this->get_field_name('single'); ?>" <?php if($single) echo 'checked="checked"'; ?> type="checkbox" />&nbsp;<?php _e('Single post pages', $acc_language_file); ?>
-  </label><br />
-  <label for="<?php echo $this->get_field_id('date'); ?>">
-    <input id="<?php echo $this->get_field_id('date'); ?>" name="<?php echo $this->get_field_name('date'); ?>" <?php if($date) echo 'checked="checked"'; ?> type="checkbox" />&nbsp;<?php _e('Archive pages', $acc_language_file); ?>
-  </label><br />
-  <label for="<?php echo $this->get_field_id('tag'); ?>">
-    <input id="<?php echo $this->get_field_id('tag'); ?>" name="<?php echo $this->get_field_name('tag'); ?>" <?php if($tag) echo 'checked="checked"'; ?> type="checkbox" />&nbsp;<?php _e('Tag pages', $acc_language_file); ?>
-  </label><br />
-  <label for="<?php echo $this->get_field_id('attachment'); ?>">
-    <input id="<?php echo $this->get_field_id('attachment'); ?>" name="<?php echo $this->get_field_name('attachment'); ?>" <?php if($attachment) echo 'checked="checked"'; ?> type="checkbox" />&nbsp;<?php _e('Attachments', $acc_language_file); ?>
-  </label><br />
-  <label for="<?php echo $this->get_field_id('taxonomy'); ?>">
-    <input id="<?php echo $this->get_field_id('taxonomy'); ?>" name="<?php echo $this->get_field_name('taxonomy'); ?>" <?php if($taxonomy) echo 'checked="checked"'; ?> type="checkbox" />&nbsp;<?php _e('Custom Taxonomy pages (only available, if having a plugin)', $acc_language_file); ?>
-  </label><br />
-  <label for="<?php echo $this->get_field_id('author'); ?>">
-    <input id="<?php echo $this->get_field_id('author'); ?>" name="<?php echo $this->get_field_name('author'); ?>" <?php if($author) echo 'checked="checked"'; ?> type="checkbox" />&nbsp;<?php _e('Author pages', $acc_language_file); ?>
-  </label><br />
-  <label for="<?php echo $this->get_field_id('search'); ?>">
-    <input id="<?php echo $this->get_field_id('search'); ?>" name="<?php echo $this->get_field_name('search'); ?>" <?php if($search) echo 'checked="checked"'; ?> type="checkbox" />&nbsp;<?php _e('Search Results', $acc_language_file); ?>
-  </label><br />
-  <label for="<?php echo $this->get_field_id('not_found'); ?>">
-    <input id="<?php echo $this->get_field_id('not_found'); ?>" name="<?php echo $this->get_field_name('not_found'); ?>" <?php if($not_found) echo 'checked="checked"'; ?> type="checkbox" />&nbsp;<?php _e('&#34;Not Found&#34;', $acc_language_file); ?>
-  </label>
-</p>
-<p>
-  <label for="<?php echo $this->get_field_id('checkall'); ?>">
-    <input id="<?php echo $this->get_field_id('checkall'); ?>" name="checkall" type="checkbox" />&nbsp;<?php _e('Check all', $acc_language_file); ?>
-  </label>
-</p>    
-</fieldset>
-<p>
- <label for="<?php echo $this->get_field_id('style'); ?>">
- <?php _e('Here you can finally style the widget. Simply type something like<br /><strong>border-left: 1px dashed;<br />border-color: #000000;</strong><br />to get just a dashed black line on the left. If you leave that section empty, your theme will style the widget.', $acc_language_file); ?>
- <textarea class="widefat expand<?php echo $style_height; ?>-1000" id="<?php echo $this->get_field_id('style'); ?>" name="<?php echo $this->get_field_name('style'); ?>"><?php echo $style; ?></textarea>
- </label>
-</p>
-<script type="text/javascript"><!--
-jQuery(document).ready(function() {
-	jQuery("#<?php echo $this->get_field_id('style'); ?>").autoResize();
-});
---></script>
-<?php
+	foreach ($field as $args) $menu_item = new A5_WidgetControlClass($args);
+
 } // form
  
 
 function update($new_instance, $old_instance) {
 	 
-	 $instance = $old_instance;
-	 
-	 $instance['title'] = strip_tags($new_instance['title']);
-	 $instance['postcount'] = strip_tags($new_instance['postcount']);
-	 $instance['offset'] = strip_tags($new_instance['offset']);
-	 $instance['home'] = strip_tags($new_instance['home']);
-	 $instance['list'] = strip_tags($new_instance['list']); 
-	 $instance['wordcount'] = strip_tags($new_instance['wordcount']);
-	 $instance['words'] = strip_tags($new_instance['words']);
-	 $instance['adsense'] = strip_tags($new_instance['adsense']);
-	 $instance['linespace'] = strip_tags($new_instance['linespace']);
-	 $instance['line'] = strip_tags($new_instance['line']);
-	 $instance['line_color'] = strip_tags($new_instance['line_color']);
-	 $instance['style'] = strip_tags($new_instance['style']);
-	 $instance['homepage'] = strip_tags($new_instance['homepage']);
-	 $instance['frontpage'] = strip_tags($new_instance['frontpage']);
-	 $instance['page'] = strip_tags($new_instance['page']);
-	 $instance['category'] = strip_tags($new_instance['category']);
-	 $instance['single'] = strip_tags($new_instance['single']);
-	 $instance['date'] = strip_tags($new_instance['date']); 
-	 $instance['tag'] = strip_tags($new_instance['tag']);
-	 $instance['attachment'] = strip_tags($new_instance['attachment']);
-	 $instance['taxonomy'] = strip_tags($new_instance['taxonomy']);
-	 $instance['author'] = strip_tags($new_instance['author']);
-	 $instance['search'] = strip_tags($new_instance['search']);
-	 $instance['not_found'] = strip_tags($new_instance['not_found']);
-	 
-	 return $instance;
+	$instance = $old_instance;
+	
+	$instance['title'] = strip_tags($new_instance['title']);
+	$instance['postcount'] = strip_tags($new_instance['postcount']);
+	$instance['offset'] = strip_tags($new_instance['offset']);
+	$instance['home'] = strip_tags($new_instance['home']);
+	$instance['list'] = strip_tags($new_instance['list']); 
+	$instance['wordcount'] = strip_tags($new_instance['wordcount']);
+	$instance['words'] = strip_tags($new_instance['words']);
+	$instance['adsense'] = strip_tags($new_instance['adsense']);
+	$instance['linespace'] = strip_tags($new_instance['linespace']);
+	$instance['line'] = strip_tags($new_instance['line']);
+	$instance['line_color'] = strip_tags($new_instance['line_color']);
+	$instance['style'] = strip_tags($new_instance['style']);
+	$instance['homepage'] = strip_tags($new_instance['homepage']);
+	$instance['frontpage'] = strip_tags($new_instance['frontpage']);
+	$instance['page'] = strip_tags($new_instance['page']);
+	$instance['category'] = strip_tags($new_instance['category']);
+	$instance['single'] = strip_tags($new_instance['single']);
+	$instance['date'] = strip_tags($new_instance['date']); 
+	$instance['tag'] = strip_tags($new_instance['tag']);
+	$instance['attachment'] = strip_tags($new_instance['attachment']);
+	$instance['taxonomy'] = strip_tags($new_instance['taxonomy']);
+	$instance['author'] = strip_tags($new_instance['author']);
+	$instance['search'] = strip_tags($new_instance['search']);
+	$instance['not_found'] = strip_tags($new_instance['not_found']);
+	
+	return $instance;
+	
 } // update
  
 function widget($args, $instance) {
-	
-global $acc_language_file;
 	
 // get the type of page, we're actually on
 
@@ -328,7 +223,7 @@ foreach($acc_posts as $post) :
  
  	$imagetags = new A5_ImageTags;
 	
-	$acc_tags = $imagetags->get_tags($post, $acc_language_file);
+	$acc_tags = $imagetags->get_tags($post, 'acc_options', self::$language_file);
 	
 	$acc_image_alt = $acc_tags['image_alt'];
 	$acc_image_title = $acc_tags['image_title'];
@@ -348,7 +243,8 @@ foreach($acc_posts as $post) :
 		$args = array (
 		'content' => $post->post_content,
 		'width' => get_option('thumbnail_size_w'),
-		'height' => get_option('thumbnail_size_h')
+		'height' => get_option('thumbnail_size_h'),
+		'option' => 'acc_options'
 		);
 		   
 		$acc_image = new A5_Thumbnail;
@@ -381,7 +277,7 @@ foreach($acc_posts as $post) :
 			
 			/* in case the excerpt is not definded by theme or anything else, the first x sentences of the content are given */
 			
-			$type = (empty($instance['words'])) ? 'sentenses' : 'words';
+			$type = (empty($instance['words'])) ? 'sentences' : 'words';
 				
 			$args = array(
 			'excerpt' => $post->post_excerpt,
@@ -391,9 +287,7 @@ foreach($acc_posts as $post) :
 			'linespace' => $instance['linespace']
 			);
 	
-			$acc_excerpt = new A5_Excerpt;
-			
-			$acc_text = $acc_excerpt->get_excerpt($args);
+			$acc_text = A5_Excerpt::get_excerpt($args);
 
 			echo '<p>'.$acc_text.'</p>';
 		
