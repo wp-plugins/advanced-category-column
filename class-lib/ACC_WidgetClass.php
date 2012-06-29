@@ -185,7 +185,7 @@ $i=1;
 
 $acc_options = get_option('acc_options');
 
-if (count ($acc_options)!=0 && !empty ($acc_options)) $acc_class=' class="acclink"';
+if (!empty ($acc_options['link']) || !empty ($acc_options['hover'])) $acc_class=' class="acclink"';
 
 $acc_setup='numberposts='.$instance['postcount'];
 

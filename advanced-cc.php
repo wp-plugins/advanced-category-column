@@ -3,7 +3,7 @@
 Plugin Name: Advanced Category Column
 Plugin URI: http://wasistlos.waldemarstoffel.com/plugins-fur-wordpress/advanced-category-column-plugin
 Description: The Advanced Category Column does, what my Category Column Plugin does; it creates a widget, which you can drag to your sidebar and it will show excerpts of the posts of other categories than showed in the center-column. It just has more options than the the Category Column Plugin. It is tested with WP up to version 3.4 and it might work with versions down to 2.7, but that will never be explicitly supported for those. The 'Advanced' means, that you have a couple of more options than in the 'Category Column Plugin'.
-Version: 2.5
+Version: 2.5.1
 Author: Waldemar Stoffel
 Author URI: http://www.waldemarstoffel.com
 License: GPL3
@@ -58,7 +58,7 @@ class AdvancedCCPlugin {
 		add_action('admin_menu', array ($this, 'acc_admin_menu'));
 		add_action('init', array ($this, 'acc_add_rewrite'));
 		add_action('template_redirect', array ($this, 'acc_css_template'));
-		add_action ('wp_print_styles', array ($this, 'acc_css'));
+		add_action ('wp_enqueue_scripts', array ($this, 'acc_css'));
 		
 	}
 	
@@ -201,8 +201,12 @@ class AdvancedCCPlugin {
 	
 	function acc_validate($input) {
 		
+		$acc_options = get_option('acc_options');
+		
 		$newinput['link']=trim($input['link']);
 		$newinput['hover']=trim($input['hover']);
+		$newinput['tags']=$acc_options['tags'];
+		$newinput['sizes']=$acc_options['sizes'];
 		
 		return $newinput;
 	
@@ -217,7 +221,7 @@ class AdvancedCCPlugin {
 		   if (get_query_var('accfile') == 'css') {
 				   
 				   header('Content-type: text/css');
-				   echo acc_write_css();
+				   echo $this->acc_write_css();
 				   
 				   exit;
 		   }
@@ -227,11 +231,11 @@ class AdvancedCCPlugin {
 		
 		$acc_options = get_option('acc_options');
 		
-		if (count ($acc_options)!=0 && !empty ($acc_options)) {
+		if (!empty ($acc_options['link']) || !empty ($acc_options['hover'])) {
 			
 			$acc_css_file=get_bloginfo('url').'/?accfile=css';
 			
-			wp_register_style('advanced-cc', $acc_css_file, false, '2.4', 'all');
+			wp_register_style('advanced-cc', $acc_css_file, false, '2.5.1', 'all');
 			wp_enqueue_style( 'advanced-cc');
 				
 		}
