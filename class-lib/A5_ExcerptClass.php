@@ -12,11 +12,15 @@
 
 class A5_Excerpt {
 	
+	const version = '1.0';
+	
 	var $output;
 	
 	function get_excerpt($args) {
 		
 		extract($args);
+		
+		if (!$offset) $offset = 0;
 		
 		if ($usertext) :
 		
@@ -40,7 +44,7 @@ class A5_Excerpt {
 				
 				if ($style == 'words') :
 					
-					$short=array_slice(explode(' ', $text), 0, $length);
+					$short=array_slice(explode(' ', $text), $offset, $length);
 					
 					$this->output=trim(implode(' ', $short));
 					
@@ -48,13 +52,13 @@ class A5_Excerpt {
 				
 					if ($style == 'sentences') :
 					
-						$short=array_slice(preg_split("/([\t.!?]+)/", $text, -1, PREG_SPLIT_DELIM_CAPTURE), 0, $length*2);
+						$short=array_slice(preg_split("/([\t.!?]+)/", $text, -1, PREG_SPLIT_DELIM_CAPTURE), $offset*2, $length*2);
 						
 						$this->output=trim(implode($short));
 						
 					else :
 						
-						$this->output=substr($text, 0, $length);
+						$this->output=substr($text, $offset, $length);
 						
 					endif;
 					
@@ -86,7 +90,9 @@ class A5_Excerpt {
 		
 		if ($readmore) $this->output.=' <a href="'.$link.'" title="'.$title.'">'.$rmtext.'</a>';
 		
-		return apply_filters('the_excerpt', $this->output);
+		$return = ($filter) ? $this->output : apply_filters('the_excerpt', $this->output);
+		
+		return $return;
 	
 	} // get_excerpt
 	

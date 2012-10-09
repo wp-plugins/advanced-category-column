@@ -12,6 +12,8 @@
 
 class A5_ImageTags {
 	
+	const version = '1.0';
+	
 	public $tags;
 	
 	function get_tags($post, $image_cache, $language_file) {
@@ -97,16 +99,20 @@ class A5_Thumbnail {
 	function get_thumbnail($args) {
 		
 		extract($args);
+		
+		if (!$thumb) : 
 	
-		$image = preg_match_all('/<\s*img[^>]+src\s*=\s*["\']?([^\s"\']+)["\']?[\s\/>]+/', do_shortcode($content), $matches);
-		
-		if (!$number) $number = 1;
-		
-		if ($number == 'last' || $number > count($matches [1])) $number = count($matches [1]);
-		
-		$number -= 1;
-		
-		$thumb = $matches [1] [$number];
+			$image = preg_match_all('/<\s*img[^>]+src\s*=\s*["\']?([^\s"\']+)["\']?[\s\/>]+/', do_shortcode($content), $matches);
+			
+			if (!$number) $number = 1;
+			
+			if ($number == 'last' || $number > count($matches [1])) $number = count($matches [1]);
+			
+			$number -= 1;
+			
+			$thumb = $matches [1] [$number];
+			
+		endif;
 		
 		if (empty($thumb)) return false;
 		

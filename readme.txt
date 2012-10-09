@@ -2,7 +2,7 @@
 Contributors: tepelstreel
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=BC9QUKBEZFZFY
 Tags: column, sidebar, widget, category, newspaper, image, multi widget
-Requires at least: 2.7
+Requires at least: 2.9
 Tested up to: 3.5
 Stable tag: 2.5.1
 
@@ -16,7 +16,7 @@ If there is a post thumbnail, it will be displayed above the headline of the pos
 
 So far that is the same as my Category Column Plugin does also. Not every theme has the possibility to hide certain sidebars on different pages. That's where the advanced of our plugin comes in. In the ACC you can determine, where exactly the widget is showing and in the settings you can customize the links of your widget(s).
 
-The ACC was tested up to WP 3.5. It should work with versions down to 2.7 but was never tested on those.
+The ACC was tested up to WP 3.5. It should work with versions down to 2.9 but was never tested on those.
 
 == Installation ==
 
@@ -75,6 +75,11 @@ Since some other stylesheets can have a higher priority, you will have to make y
 3. The plugin's settings section
 
 == Changelog ==
+
+= 2.6 =
+
+* added a possible post byline to the widget
+* some code streamlined
 
 = 2.5.1 =
 
@@ -177,3 +182,7 @@ Great reduction of the payload by adding a cache to the plugin
 = 2.5.1 =
 
 small bugfix
+
+= 2.6 =
+
+added a possible post byline to the widget
