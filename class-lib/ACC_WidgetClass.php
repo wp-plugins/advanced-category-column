@@ -73,8 +73,8 @@ function form($instance) {
 	a5_checkbox($base_id.'home', $base_name.'[home]', $home, __('Check to have the offset only on your homepage.', self::language_file), false, false, true, true);
 	a5_number_field($base_id.'width', $base_name.'[width]', $width, __('Width of the thumbnail (in px):', self::language_file), 4, 1, false, false, false, false, true, true);
 	a5_number_field($base_id.'wordcount', $base_name.'[wordcount]', $wordcount, __('In case there is no excerpt defined, how many sentences are displayed:', self::language_file), 4, 1, false, false, false, false, true, true);
-	a5_checkbox($base_id.'linespace', $base_name.'[linespace]', $linespace, __('Check to have the offset only on your homepage.', self::language_file), false, false, true, true);
 	a5_checkbox($base_id.'words', $base_name.'[words]', $words, __('Check to display words instead of sentences.', self::language_file), false, false, true, true);
+	a5_checkbox($base_id.'linespace', $base_name.'[linespace]', $linespace, __('Check to have each sentense in a new line.', self::language_file), false, false, true, true);
 	a5_number_field($base_id.'line', $base_name.'[line]', $line, __('If you want a line between the posts, this is the height in px (if not wanting a line, leave emtpy):', self::language_file), 4, 1, false, false, false, false, true, true);
 	a5_color_field($base_id.'line_color', $base_name.'[line_color]', $line_color, __('The color of the line (e.g. #cccccc):', self::language_file), 13, false, false, true, true);
 
