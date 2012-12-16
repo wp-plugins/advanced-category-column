@@ -84,6 +84,11 @@ Since some other stylesheets can have a higher priority, you will have to make y
 
 == Changelog ==
 
+= 2.7 =
+
+* small changes in the framework
+* possibility to adjust the title heading
+
 = 2.6 =
 
 * added a possible post byline to the widget
@@ -194,3 +199,7 @@ small bugfix
 = 2.6 =
 
 added a possible post byline to the widget
+
+= 2.7 = 
+
+possibility to change post heading
