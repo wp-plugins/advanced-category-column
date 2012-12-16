@@ -2,21 +2,19 @@
 
 /**
  *
- * Class A5 Image Tags
+ * Class A5 Images
  *
  * @ A5 Plugin Framework
  *
  * Gets the alt and title tag for attachments
  *
+ * Gets all thumbnail related stuff
+ *
  */
 
-class A5_ImageTags {
+class A5_Image {
 	
-	const version = '1.0';
-	
-	public $tags;
-	
-	function get_tags($post, $image_cache, $language_file) {
+	public static function tags($post, $image_cache, $language_file) {
 		
 		$options = get_option($image_cache);
 		
@@ -66,37 +64,20 @@ class A5_ImageTags {
 		
 		endif;
 		
-		$this->tags = array(
+		$tags = array(
 		'image_alt' => $image_alt,
 		'image_title' => $image_title,
 		'title_tag' => $title_tag
 		);
 		
-		return $this->tags;
+		return $tags;
 	
-	}
-	
-}
-
-
-/**
- *
- * Class A5 Thumbnail
- *
- * @ A5 Plugin Framework
- *
- * Gets all thumbnail related stuff
- *
- */
-
-class A5_Thumbnail {
-	
-	public $image_info;
+	} // tags
 	
 	// getting one image of a post with available sizes as the post thumbnail if there is no number specified, the first image is taken by default
 	// the last image will be taken, if the number is bigger than the amount of images in the post
 	
-	function get_thumbnail($args) {
+	public static function thumbnail($args) {
 		
 		extract($args);
 		
@@ -135,7 +116,7 @@ class A5_Thumbnail {
 			
 			if (!$thumb_width) : 
 			
-				$size=$this->get_size($thumb);
+				$size = self::get_size($thumb);
 				
 				$thumb_width = $size['width'];
 				
@@ -182,19 +163,19 @@ class A5_Thumbnail {
 			
 		endif;
 	
-		$this->image_info = array (
+		$image_info = array (
 		'thumb' => $thumb,
 		'thumb_width' => $thumb_width,
 		'thumb_height' => $thumb_height
 		);
 		
-		return $this->image_info;
+		return $image_info;
 	
 	}
 	
 	// getting the image size if having no tags in the image string
 	
-	function get_size($img) {
+	private static function get_size($img) {
 	
 		$uploaddir = wp_upload_dir();
 		
@@ -221,6 +202,5 @@ class A5_Thumbnail {
 	}
 	
 }
-
 
 ?>
