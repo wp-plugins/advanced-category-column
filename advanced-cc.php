@@ -2,8 +2,8 @@
 /*
 Plugin Name: Advanced Category Column
 Plugin URI: http://wasistlos.waldemarstoffel.com/plugins-fur-wordpress/advanced-category-column-plugin
-Description: The Advanced Category Column does, what the Category Column Plugin does; it creates a widget, which you can drag to your sidebar and it will show excerpts of the posts of other categories than showed in the center-column. It just has more options than the the Category Column Plugin. It is tested with WP up to version 3.5 and it might work with versions down to 2.9, but will never be explicitly supported for those. The 'Advanced' means, that you have a couple of more options than in the 'Category Column Plugin'.
-Version: 2.6
+Description: The Advanced Category Column does, what the Category Column Plugin does; it creates a widget, which you can drag to your sidebar and it will show excerpts of the posts of other categories than showed in the center-column. It just has more options than the the Category Column Plugin. It is tested with WP up to version 3.6 and it might work with versions down to 2.9, but will never be explicitly supported for those. The 'Advanced' means, that you have a couple of more options than in the 'Category Column Plugin'.
+Version: 2.7
 Author: Waldemar Stoffel
 Author URI: http://www.waldemarstoffel.com
 License: GPL3
@@ -30,15 +30,15 @@ Text Domain: advanced-cc
 
 /* Stop direct call */
 
-if(preg_match('#' . basename(__FILE__) . '#', $_SERVER['PHP_SELF'])) die('Sorry, you don&#39;t have direct access to this page.');
+if(preg_match('#' . basename(__FILE__) . '#', $_SERVER['PHP_SELF'])) die('Sorry, you don\'t have direct access to this page.');
 
 define( 'ACC_PATH', plugin_dir_path(__FILE__) );
 
-if (!class_exists('A5_Thumbnail')) require_once ACC_PATH.'class-lib/A5_ImageClasses.php';
+if (!class_exists('A5_Image')) require_once ACC_PATH.'class-lib/A5_ImageClass.php';
 if (!class_exists('A5_Excerpt')) require_once ACC_PATH.'class-lib/A5_ExcerptClass.php';
 if (!class_exists('Advanced_Category_Column_Widget')) require_once ACC_PATH.'class-lib/ACC_WidgetClass.php';
-if (!class_exists('A5_OptionPage')) require_once ACC_PATH.'class-lib/A5_OptionPageClass.php';
-if (!function_exists('a5_option_page_version')) require_once ACC_PATH.'includes/admin-pages.php';
+if (!class_exists('A5_FormField')) require_once ACC_PATH.'class-lib/A5_FormFieldClass.php';
+if (!function_exists('a5_textarea')) require_once ACC_PATH.'includes/A5_field-functions.php';
 
 class AdvancedCCPlugin {
 	
@@ -129,13 +129,13 @@ class AdvancedCCPlugin {
 	
 	function acc_link_field() {
 		
-		a5_textarea('link', 'acc_options[link]', self::$options['link'], false, 40, false, false, false, true, true);
+		a5_textarea('link', 'acc_options[link]', self::$options['link'], false, array('cols' => 35, 'rows' => 3));
 		
 	}
 	
 	function acc_hover_field() {
 		
-		a5_textarea('hover', 'acc_options[hover]', self::$options['hover'], false, 40, false, false, false, true, true);
+		a5_textarea('hover', 'acc_options[hover]', self::$options['hover'], false, array('cols' => 35, 'rows' => 3));
 		
 	}
 	
