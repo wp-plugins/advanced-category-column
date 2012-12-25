@@ -19,9 +19,9 @@ class A5_Excerpt {
 		
 		extract($args);
 		
-		$offset = (!$offset) ? $offset : 0;
+		$offset = ($offset) ? $offset : 0;
 		
-		$class = (!$class) ? ' class ="'.$class.'"' : '';
+		$class = ($class) ? ' class ="'.$class.'"' : '';
 		
 		if ($usertext) :
 		
