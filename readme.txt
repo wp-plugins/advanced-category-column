@@ -33,7 +33,7 @@ Look at the source code of your site. If it says at one point,
 
 'Advanced Category Column Widget is not setup for this view.'
 
-you can change the visibilty of the widget in the widget's settings according to your choices.
+you can change the visibility of the widget in the widget's settings according to your choices.
 
 = I styled the widget container myself and it looks bad. What do I do? =
 
