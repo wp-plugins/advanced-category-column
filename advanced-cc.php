@@ -3,7 +3,7 @@
 Plugin Name: Advanced Category Column
 Plugin URI: http://wasistlos.waldemarstoffel.com/plugins-fur-wordpress/advanced-category-column-plugin
 Description: The Advanced Category Column does, what the Category Column Plugin does; it creates a widget, which you can drag to your sidebar and it will show excerpts of the posts of other categories than showed in the center-column. It just has more options than the the Category Column Plugin. It is tested with WP up to version 3.6 and it might work with versions down to 2.9, but will never be explicitly supported for those. The 'Advanced' means, that you have a couple of more options than in the 'Category Column Plugin'.
-Version: 2.7.1
+Version: 2.7.2
 Author: Waldemar Stoffel
 Author URI: http://www.waldemarstoffel.com
 License: GPL3
@@ -40,13 +40,13 @@ if (!class_exists('Advanced_Category_Column_Widget')) require_once ACC_PATH.'cla
 if (!class_exists('A5_FormField')) require_once ACC_PATH.'class-lib/A5_FormFieldClass.php';
 if (!function_exists('a5_textarea')) require_once ACC_PATH.'includes/A5_field-functions.php';
 
-class AdvancedCCPlugin {
+class AdvancedCategoryColumn {
 	
 	const language_file = 'advanced-cc';
 	
 	private static $options;
 	
-	function AdvancedCCPlugin() {
+	function __construct() {
 		
 		self::$options = get_option('acc_options');
 		
@@ -240,7 +240,7 @@ class AdvancedCCPlugin {
 		
 		$acc_css_file=get_bloginfo('url').'/?accfile=css';
 			
-		wp_register_style('advanced-cc', $acc_css_file, false, '2.6', 'all');
+		wp_register_style('advanced-cc', $acc_css_file, false, '2.7.2', 'all');
 		wp_enqueue_style('advanced-cc');
 		
 	}
@@ -248,8 +248,6 @@ class AdvancedCCPlugin {
 	// writing dss file
 		
 	function acc_dss() {
-		
-		self::$options = get_option('acc_options');
 		
 		$eol = "\r\n";
 		$tab = "\t";
@@ -274,6 +272,6 @@ class AdvancedCCPlugin {
 	}
 }
 
-$advanced_cc_plugin = new AdvancedCCPlugin;
+$advanced_cc_plugin = new AdvancedCategoryColumn;
 
 ?>

@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_i
 Tags: column, sidebar, widget, category, newspaper, image, multi widget
 Requires at least: 2.9
 Tested up to: 3.6
-Stable tag: 2.7.1
+Stable tag: 2.7.2
 
 The Advanced Category Column is a very customizable multiwidget for your sidebar.
 
@@ -83,6 +83,10 @@ Since some other stylesheets can have a higher priority, you will have to make y
 3. The plugin's settings section
 
 == Changelog ==
+
+= 2.7.2 =
+
+* bug with title heading fixed
 
 = 2.7.1 =
 
@@ -211,3 +215,7 @@ possibility to change post heading
 = 2.7.1 =
 
 bug fixed in framework
+
+= 2.7.2 =
+
+bug with title heading fixed

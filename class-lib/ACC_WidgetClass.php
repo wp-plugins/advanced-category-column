@@ -26,7 +26,7 @@ class Advanced_Category_Column_Widget extends WP_Widget {
 		
 		// setup some default settings
 		
-		$defaults = array( 'postcount' => 5, 'offset' => 3, 'home' => 1, 'wordcount' => 3, 'line' => 1, 'line_color' => '#dddddd', 'homepage' => 1, 'category' => 1);
+		$defaults = array( 'postcount' => 5, 'offset' => 3, 'home' => 1, 'wordcount' => 3, 'line' => 1, 'line_color' => '#dddddd', 'homepage' => 1, 'category' => 1, 'h' => 3);
 		
 		$instance = wp_parse_args( (array) $instance, $defaults );
 		
@@ -89,7 +89,7 @@ class Advanced_Category_Column_Widget extends WP_Widget {
 		a5_number_field($base_id.'offset', $base_name.'[offset]', $offset, __('Offset (how many posts are spared out in the beginning):', self::language_file), array('space' => true, 'size' => 4, 'step' => 1));
 		a5_checkbox($base_id.'home', $base_name.'[home]', $home, __('Check to have the offset only on your homepage.', self::language_file), array('space' => true));
 		a5_number_field($base_id.'width', $base_name.'[width]', $width, __('Width of the thumbnail (in px):', self::language_file), array('space' => true, 'size' => 4, 'step' => 1));
-		a5_select($base_id.'h', $base_name.'[h]', $headings, $h, __('Weight of the Post Title:', self::language_file), __('none', self::language_file), array('space' => true));
+		a5_select($base_id.'h', $base_name.'[h]', $headings, $h, __('Weight of the Post Title:', self::language_file), false, array('space' => true));
 		a5_number_field($base_id.'wordcount', $base_name.'[wordcount]', $wordcount, __('In case there is no excerpt defined, how many sentences are displayed:', self::language_file), array('space' => true, 'size' => 4, 'step' => 1));
 		a5_checkbox($base_id.'words', $base_name.'[words]', $words, __('Check to display words instead of sentences.', self::language_file), array('space' => true));
 		a5_checkbox($base_id.'linespace', $base_name.'[linespace]', $linespace, __('Check to have each sentense in a new line.', self::language_file), array('space' => true));
@@ -227,7 +227,7 @@ class Advanced_Category_Column_Widget extends WP_Widget {
 		
 		while($acc_posts->have_posts()) :
 		
-		$acc_posts->the_post();
+			$acc_posts->the_post();
 		
 			if ($instance['showcat']) :
 			
@@ -260,9 +260,7 @@ class Advanced_Category_Column_Widget extends WP_Widget {
 			$acc_title_tag = $acc_tags['title_tag'];
 			
 			$eol = "\r\n";
-			$acc_headline = '<p>'.$eol.'<a href="'.get_permalink().'" title="'.$acc_title_tag.'">'.get_the_title().'</a>'.$eol.'</p>';
-			
-			$acc_headline = ($instance['h']) ? '<h'.$instance['h'].'>'.$acc_headline.'</h'.$instance['h'].'>' : '';
+			$acc_headline = '<h'.$instance['h'].'>'.$eol.'<a href="'.get_permalink().'" title="'.$acc_title_tag.'">'.get_the_title().'</a>'.$eol.'</h'.$instance['h'].'>';
 			
 			// get thumbnail
 			
@@ -350,7 +348,7 @@ class Advanced_Category_Column_Widget extends WP_Widget {
 				'linespace' => $instance['linespace'],
 				'filter' => true
 				);
-		
+				
 				echo A5_Excerpt::text($args);
 				
 			endif;
