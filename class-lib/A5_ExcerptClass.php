@@ -8,29 +8,30 @@
  *
  * Gets the excerpt of a post according to some parameters
  *
+ * standard parameters: offset(=0), usertext, excerpt, excerpt_length
+ * additional parameters: class(classname), filter(true/false), shortcode(true/false), readmore_link, readmore_text
+ *
  */
 
 class A5_Excerpt {
 	
-	const version = '1.0';
-	
-	var $output;
-	
-	function get_excerpt($args) {
+	public static function text($args) {
 		
 		extract($args);
 		
-		if (!$offset) $offset = 0;
+		$offset = ($offset) ? $offset : 0;
+		
+		$class = ($class) ? ' class ="'.$class.'"' : '';
 		
 		if ($usertext) :
 		
-			$this->output = $usertext;
+			$output = $usertext;
 		
 		else: 
 		
 			if ($excerpt) :
 			
-				$this->output = $excerpt;
+				$output = $excerpt;
 				
 			else :
 			
@@ -46,7 +47,7 @@ class A5_Excerpt {
 					
 					$short=array_slice(explode(' ', $text), $offset, $length);
 					
-					$this->output=trim(implode(' ', $short));
+					$output=trim(implode(' ', $short));
 					
 				else :
 				
@@ -54,11 +55,11 @@ class A5_Excerpt {
 					
 						$short=array_slice(preg_split("/([\t.!?]+)/", $text, -1, PREG_SPLIT_DELIM_CAPTURE), $offset*2, $length*2);
 						
-						$this->output=trim(implode($short));
+						$output=trim(implode($short));
 						
 					else :
 						
-						$this->output=substr($text, $offset, $length);
+						$output=substr($text, $offset, $length);
 						
 					endif;
 					
@@ -70,7 +71,7 @@ class A5_Excerpt {
 		
 		if ($linespace) :
 		
-			$short=preg_split("/([\t.!?]+)/", $this->output, -1, PREG_SPLIT_DELIM_CAPTURE);
+			$short=preg_split("/([\t.!?]+)/", $output, -1, PREG_SPLIT_DELIM_CAPTURE);
 			
 			foreach ($short as $key => $pieces) :
 			
@@ -84,17 +85,17 @@ class A5_Excerpt {
 			
 			endforeach;
 			
-			$this->output=trim(implode('<br /><br />', $tmpex));
+			$output=trim(implode('<br /><br />', $tmpex));
 		
 		endif;
 		
-		if ($readmore) $this->output.=' <a href="'.$link.'" title="'.$title.'">'.$rmtext.'</a>';
+		if ($readmore) $output.=' <a href="'.$link.'" title="'.$title.'"'.$class.'>'.$rmtext.'</a>';
 		
-		$return = ($filter) ? $this->output : apply_filters('the_excerpt', $this->output);
+		$output = ($filter) ? apply_filters('the_excerpt', $output) : $output;
 		
-		return $return;
+		return $output;
 	
-	} // get_excerpt
+	}
 	
 } // A5_Excerpt
 
