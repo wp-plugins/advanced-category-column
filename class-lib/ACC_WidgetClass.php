@@ -265,10 +265,10 @@ class Advanced_Category_Column_Widget extends WP_Widget {
 			$acc_headline = '<h'.$instance['h'].'>'.$eol.'<a href="'.get_permalink().'" title="'.$acc_title_tag.'">'.get_the_title().'</a>'.$eol.'</h'.$instance['h'].'>';
 			
 			// get thumbnail
+			
+			$default = A5_Image::get_default($instance['width']);
 				
 			if (!has_post_thumbnail()) :
-			
-				$default = A5_Image::get_default($instance['width']);
 			
 				$args = array (
 					'content' => $post->post_content,
