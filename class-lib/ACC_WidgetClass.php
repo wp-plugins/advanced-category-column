@@ -41,7 +41,6 @@ class Advanced_Category_Column_Widget extends WP_Widget {
 		$linespace = esc_attr($instance['linespace']);
 		$width = esc_attr($instance['width']);
 		$words = esc_attr($instance['words']);
-		$adsense = esc_attr($instance['adsense']);
 		$line=esc_attr($instance['line']);
 		$line_color=esc_attr($instance['line_color']);
 		$style=esc_attr($instance['style']);
@@ -58,6 +57,7 @@ class Advanced_Category_Column_Widget extends WP_Widget {
 		$search=esc_attr($instance['search']);
 		$not_found=esc_attr($instance['not_found']);
 		$h = esc_attr($instance['h']);
+		$filter = esc_attr($instance['filter']);
 		
 		$base_id = 'widget-'.$this->id_base.'-'.$this->number.'-';
 		$base_name = 'widget-'.$this->id_base.'['.$this->number.']';
@@ -93,6 +93,7 @@ class Advanced_Category_Column_Widget extends WP_Widget {
 		a5_number_field($base_id.'wordcount', $base_name.'[wordcount]', $wordcount, __('In case there is no excerpt defined, how many sentences are displayed:', self::language_file), array('space' => true, 'size' => 4, 'step' => 1));
 		a5_checkbox($base_id.'words', $base_name.'[words]', $words, __('Check to display words instead of sentences.', self::language_file), array('space' => true));
 		a5_checkbox($base_id.'linespace', $base_name.'[linespace]', $linespace, __('Check to have each sentense in a new line.', self::language_file), array('space' => true));
+		a5_checkbox($base_id.'filter', $base_name.'[filter]', $filter, __('Check to return the excerpt unfiltered (might avoid interferences with other plugins).', self::language_file), array('space' => true));
 		a5_number_field($base_id.'line', $base_name.'[line]', $line, __('If you want a line between the posts, this is the height in px (if not wanting a line, leave emtpy):', self::language_file), array('space' => true, 'size' => 4, 'step' => 1));
 		a5_color_field($base_id.'line_color', $base_name.'[line_color]', $line_color, __('The color of the line (e.g. #cccccc):', self::language_file), array('space' => true, 'size' => 13));
 		a5_checkgroup(false, false, $options, __('Check, where you want to show the widget. By default, it is showing on the homepage and the category pages:', self::language_file), $checkall);
@@ -134,6 +135,7 @@ class Advanced_Category_Column_Widget extends WP_Widget {
 		$instance['search'] = strip_tags($new_instance['search']);
 		$instance['not_found'] = strip_tags($new_instance['not_found']);
 		$instance['h'] = strip_tags($new_instance['h']);
+		$instance['filter'] = strip_tags($new_instance['filter']);
 		
 		return $instance;
 		
@@ -263,49 +265,16 @@ class Advanced_Category_Column_Widget extends WP_Widget {
 			$acc_headline = '<h'.$instance['h'].'>'.$eol.'<a href="'.get_permalink().'" title="'.$acc_title_tag.'">'.get_the_title().'</a>'.$eol.'</h'.$instance['h'].'>';
 			
 			// get thumbnail
+				
+			if (!has_post_thumbnail()) :
 			
-			if (!$instance['width']) :
-			
-				$width = get_option('thumbnail_size_w');
-				
-				if (!empty($width)) $width = 150;
-				
-				$height = get_option('thumbnail_size_h');
-				
-				if (!empty($height)) :
-				
-					$height = 150;
-					
-				endif;
-				
-			else : 
-			
-				$width = $instance['width'];
-				
-				$height = false;
-				
-				if (has_post_thumbnail()) :
-				
-					$img_url = wp_get_attachment_image_src( get_post_thumbnail_id($post->ID), 'large');
-						
-					$source = $img_url[0];
-					
-				endif;
-			
-			endif;
-			
-			if (has_post_thumbnail() && !$instance['width']) :
-			
-				$acc_img = get_the_post_thumbnail($post->ID, 'thumbnail');
-				
-			else :
+				$default = A5_Image::get_default($instance['width']);
 			
 				$args = array (
-				'thumb' => $source,
-				'content' => $post->post_content,
-				'width' => $width,
-				'height' => $height, 
-				'option' => 'acc_options'
+					'content' => $post->post_content,
+					'width' => $default[0],
+					'height' => $default[1], 
+					'option' => 'acc_options'
 				);	
 			   
 				$acc_image_info = A5_Image::thumbnail($args);
@@ -324,6 +293,42 @@ class Advanced_Category_Column_Widget extends WP_Widget {
 					
 				endif;
 				
+			else :
+			
+				$img_info = wp_get_attachment_image_src( get_post_thumbnail_id($post->ID), 'large');
+					
+				if (!$img_info):
+				
+					$src = get_the_post_thumbnail();
+				
+					$img = preg_match_all('/<\s*img[^>]+src\s*=\s*["\']?([^\s"\']+)["\']?[\s\/>]+/', $src, $matches);
+					
+					$img_info[0] = $matches[1][0];
+					
+					$img_size = A5_Image::get_size($img_info[0]);
+					
+					$img_info[1] = $img_size['width'];
+					
+					$img_info[2] = $img_size['height'];
+					
+				endif;
+				
+				$args = array (
+					'ratio' => $img_info[1]/$img_info[2],
+					'thumb_width' => $img_info[1],
+					'thumb_height' => $img_info[2],
+					'width' => $default[0],
+					'height' => $default[1]
+				);
+				
+				$img_size = A5_Image::count_size($args);
+				
+				$atts = array('title' => $acc_image_title, 'alt' => $acc_image_alt);
+				
+				$size = array($img_size['width'], $img_size['height']);
+			
+				$acc_img = get_the_post_thumbnail($post->ID, $size, $atts);
+				
 			endif;
 			   
 			if ($acc_img) :
@@ -339,6 +344,7 @@ class Advanced_Category_Column_Widget extends WP_Widget {
 				/* in case the excerpt is not definded by theme or anything else, the first x sentences of the content are given */
 				
 				$type = (empty($instance['words'])) ? 'sentences' : 'words';
+				$filter = ($instance['filter']) ? false : true;
 					
 				$args = array(
 				'excerpt' => $post->post_excerpt,
@@ -346,7 +352,7 @@ class Advanced_Category_Column_Widget extends WP_Widget {
 				'type' => $type,
 				'count' => $instance['wordcount'],
 				'linespace' => $instance['linespace'],
-				'filter' => true
+				'filter' => $filter
 				);
 				
 				echo A5_Excerpt::text($args);
