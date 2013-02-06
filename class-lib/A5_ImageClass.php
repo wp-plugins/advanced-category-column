@@ -31,10 +31,10 @@ class A5_Image {
 			setup_postdata($post);
 			
 			$args = array(
-			'post_type' => 'attachment',
-			'numberposts' => 1,
-			'post_status' => null,
-			'post_parent' => $post->ID
+				'post_type' => 'attachment',
+				'numberposts' => 1,
+				'post_status' => null,
+				'post_parent' => $post->ID
 			);
 			
 			$title_tag = __('Permalink to', $language_file).' '.esc_attr($post->post_title);
@@ -81,17 +81,17 @@ class A5_Image {
 		
 		extract($args);
 		
-		if (!$thumb) : 
+		if (!isset($thumb)) : 
 	
 			$image = preg_match_all('/<\s*img[^>]+src\s*=\s*["\']?([^\s"\']+)["\']?[\s\/>]+/', do_shortcode($content), $matches);
 			
-			$number = ($number) ? $number : 1;
+			$number = (isset($number)) ? $number : 1;
 			
 			if ($number == 'last' || $number > count($matches [1])) $number = count($matches [1]);
 			
 			$number -= 1;
 			
-			$thumb = $matches [1] [$number];
+			if ($number >= 0) $thumb = $matches [1] [$number];
 			
 		endif;
 		
@@ -106,27 +106,17 @@ class A5_Image {
 			$thumb_width = $cache[$thumb]['width'];
 			$thumb_height = $cache[$thumb]['height'];
 		
-		else :
-		
-			$thumb_width = preg_match_all('/width\s*=\s*["\']?([^\s"\']+)["\']/', $matches [0] [$number], $size);
-			$thumb_width = $size[1] [0];
+		else : 
 			
-			$thumb_height = preg_match_all('/height\s*=\s*["\']?([^\s"\']+)["\']/', $matches [0] [$number], $size);
-			$thumb_height = $size[1] [0];
-			
-			if (!$thumb_width) : 
-			
-				$size = self::get_size($thumb);
+			$size = self::get_size($thumb);
 				
-				$thumb_width = $size['width'];
+			$thumb_width = $size['width'];
 				
-				$thumb_height = $size['height'];
+			$thumb_height = $size['height'];
 				
-				if (!$thumb_width) return false;
+			if (!$thumb_width) return false;
 				
-				$ratio = $thumb_width/$thumb_height;
-				
-			endif;
+			$ratio = $thumb_width/$thumb_height;
 			
 			$args = array(
 				'ratio' => $ratio,

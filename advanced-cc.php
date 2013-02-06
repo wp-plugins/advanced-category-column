@@ -3,7 +3,7 @@
 Plugin Name: Advanced Category Column
 Plugin URI: http://wasistlos.waldemarstoffel.com/plugins-fur-wordpress/advanced-category-column-plugin
 Description: The Advanced Category Column does, what the Category Column Plugin does; it creates a widget, which you can drag to your sidebar and it will show excerpts of the posts of other categories than showed in the center-column. It just has more options than the the Category Column Plugin. It is tested with WP up to version 3.6 and it might work with versions down to 2.9, but will never be explicitly supported for those. The 'Advanced' means, that you have a couple of more options than in the 'Category Column Plugin'.
-Version: 2.7.3
+Version: 2.7.4
 Author: Waldemar Stoffel
 Author URI: http://www.waldemarstoffel.com
 License: GPL3
@@ -30,7 +30,7 @@ Text Domain: advanced-cc
 
 /* Stop direct call */
 
-if(preg_match('#' . basename(__FILE__) . '#', $_SERVER['PHP_SELF'])) die('Sorry, you don\'t have direct access to this page.');
+if(preg_match('#' . basename(__FILE__) . '#', $_SERVER['PHP_SELF'])) die('Sorry, you don&#39;t have direct access to this page.');
 
 define( 'ACC_PATH', plugin_dir_path(__FILE__) );
 
@@ -129,13 +129,13 @@ class AdvancedCategoryColumn {
 	
 	function acc_link_field() {
 		
-		a5_textarea('link', 'acc_options[link]', self::$options['link'], false, array('cols' => 35, 'rows' => 3));
+		a5_textarea('link', 'acc_options[link]', @self::$options['link'], false, array('cols' => 35, 'rows' => 3));
 		
 	}
 	
 	function acc_hover_field() {
 		
-		a5_textarea('hover', 'acc_options[hover]', self::$options['hover'], false, array('cols' => 35, 'rows' => 3));
+		a5_textarea('hover', 'acc_options[hover]', @self::$options['hover'], false, array('cols' => 35, 'rows' => 3));
 		
 	}
 	

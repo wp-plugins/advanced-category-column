@@ -211,7 +211,7 @@ class Advanced_Category_Column_Widget extends WP_Widget {
 		
 		if (is_category() && !$instance['list']) $acc_cat=get_query_var('cat');
 		
-		if ($instance['list'] || $acc_cat) $acc_setup.='&cat='.$instance['list'].',-'.$acc_cat;
+		if ($instance['list'] || isset($acc_cat)) $acc_setup.='&cat='.$instance['list'].',-'.$acc_cat;
 		
 		if (is_single()) :
 			
@@ -331,7 +331,7 @@ class Advanced_Category_Column_Widget extends WP_Widget {
 				
 			endif;
 			   
-			if ($acc_img) :
+			if (isset($acc_img)) :
 			
 				echo '<a href="'.get_permalink().'">'.$acc_img.'</a>'.$eol.'<div style="clear: both;"></div>'.$eol.$acc_headline;
 		
@@ -345,13 +345,14 @@ class Advanced_Category_Column_Widget extends WP_Widget {
 				
 				$type = (empty($instance['words'])) ? 'sentences' : 'words';
 				$filter = ($instance['filter']) ? false : true;
+				$linespace = ($instance['linespace']) ? true : false;
 					
 				$args = array(
 				'excerpt' => $post->post_excerpt,
 				'content' => $post->post_content,
 				'type' => $type,
 				'count' => $instance['wordcount'],
-				'linespace' => $instance['linespace'],
+				'linespace' => $linespace,
 				'filter' => $filter
 				);
 				
