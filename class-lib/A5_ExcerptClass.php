@@ -23,19 +23,19 @@ class A5_Excerpt {
 		
 		$class = (isset($class)) ? ' class ="'.$class.'"' : '';
 		
-		if (isset($usertext)) :
+		if (!empty($usertext)) :
 		
 			$output = $usertext;
 		
 		else: 
 		
-			if (isset($excerpt)) :
+			if (!empty($excerpt)) :
 			
 				$output = $excerpt;
 				
 			else :
 			
-				$excerpt_base = ($shortcode) ? strip_tags(preg_replace('/\[caption(.*?)\[\/caption\]/', '', $content)) : strip_tags(strip_shortcodes($content));
+				$excerpt_base = (!empty($shortcode)) ? strip_tags(preg_replace('/\[caption(.*?)\[\/caption\]/', '', $content)) : strip_tags(strip_shortcodes($content));
 			
 				$text = trim(preg_replace('/\s\s+/', ' ', str_replace(array("\r\n", "\n", "\r", "&nbsp;"), ' ', $excerpt_base)));
 				
@@ -69,7 +69,7 @@ class A5_Excerpt {
 			
 		endif;
 		
-		if ($linespace === true) :
+		if (!empty($linespace)) :
 		
 			$short=preg_split("/([\t.!?]+)/", $output, -1, PREG_SPLIT_DELIM_CAPTURE);
 			
@@ -89,7 +89,7 @@ class A5_Excerpt {
 		
 		endif;
 		
-		if (isset($readmore)) $output.=' <a href="'.$link.'" title="'.$title.'"'.$class.'>'.$rmtext.'</a>';
+		if (!empty($readmore)) $output.=' <a href="'.$link.'" title="'.$title.'"'.$class.'>'.$rmtext.'</a>';
 		
 		$output = ($filter === true) ? apply_filters('the_excerpt', $output) : $output;
 		
@@ -98,6 +98,5 @@ class A5_Excerpt {
 	}
 	
 } // A5_Excerpt
-
 
 ?>

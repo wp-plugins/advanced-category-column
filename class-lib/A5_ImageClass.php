@@ -65,9 +65,9 @@ class A5_Image {
 		endif;
 		
 		$tags = array(
-		'image_alt' => $image_alt,
-		'image_title' => $image_title,
-		'title_tag' => $title_tag
+			'image_alt' => $image_alt,
+			'image_title' => $image_title,
+			'title_tag' => $title_tag
 		);
 		
 		return $tags;
@@ -85,13 +85,13 @@ class A5_Image {
 	
 			$image = preg_match_all('/<\s*img[^>]+src\s*=\s*["\']?([^\s"\']+)["\']?[\s\/>]+/', do_shortcode($content), $matches);
 			
-			$number = (isset($number)) ? $number : 1;
+			$number = (!empty($number)) ? $number : 1;
 			
 			if ($number == 'last' || $number > count($matches [1])) $number = count($matches [1]);
 			
-			$number -= 1;
+			if ($number > 0) $number -= 1;
 			
-			if ($number >= 0) $thumb = $matches [1] [$number];
+			if ($image != 0) $thumb = $matches [1] [$number];
 			
 		endif;
 		
@@ -106,16 +106,16 @@ class A5_Image {
 			$thumb_width = $cache[$thumb]['width'];
 			$thumb_height = $cache[$thumb]['height'];
 		
-		else : 
+		else :
 			
 			$size = self::get_size($thumb);
-				
+			
 			$thumb_width = $size['width'];
-				
+			
 			$thumb_height = $size['height'];
-				
+			
 			if (!$thumb_width) return false;
-				
+			
 			$ratio = $thumb_width/$thumb_height;
 			
 			$args = array(
