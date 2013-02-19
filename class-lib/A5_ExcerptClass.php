@@ -19,29 +19,29 @@ class A5_Excerpt {
 		
 		extract($args);
 		
-		$offset = ($offset) ? $offset : 0;
+		$offset = (isset($offset)) ? $offset : 0;
 		
-		$class = ($class) ? ' class ="'.$class.'"' : '';
+		$class = (isset($class)) ? ' class ="'.$class.'"' : '';
 		
-		if ($usertext) :
+		if (!empty($usertext)) :
 		
 			$output = $usertext;
 		
 		else: 
 		
-			if ($excerpt) :
+			if (!empty($excerpt)) :
 			
 				$output = $excerpt;
 				
 			else :
 			
-				$excerpt_base = ($shortcode) ? strip_tags(preg_replace('/\[caption(.*?)\[\/caption\]/', '', $content)) : strip_tags(strip_shortcodes($content));
+				$excerpt_base = (!empty($shortcode)) ? strip_tags(preg_replace('/\[caption(.*?)\[\/caption\]/', '', $content)) : strip_tags(strip_shortcodes($content));
 			
 				$text = trim(preg_replace('/\s\s+/', ' ', str_replace(array("\r\n", "\n", "\r", "&nbsp;"), ' ', $excerpt_base)));
 				
-				$length = ($count) ? $count : 3;
+				$length = (isset($count)) ? $count : 3;
 				
-				$style = ($type) ? $type : 'sentences';
+				$style = (isset($type)) ? $type : 'sentences';
 				
 				if ($style == 'words') :
 					
@@ -69,7 +69,7 @@ class A5_Excerpt {
 			
 		endif;
 		
-		if ($linespace) :
+		if (!empty($linespace)) :
 		
 			$short=preg_split("/([\t.!?]+)/", $output, -1, PREG_SPLIT_DELIM_CAPTURE);
 			
@@ -77,7 +77,7 @@ class A5_Excerpt {
 			
 				if (!($key % 2)) :
 				
-					$key2 = $key+1;
+					$key2 = ($key < (count($short)-1)) ? $key+1 : $key;
 												  
 					$tmpex[] = implode(array($short[$key], $short[$key2]));
 					
@@ -89,15 +89,14 @@ class A5_Excerpt {
 		
 		endif;
 		
-		if ($readmore) $output.=' <a href="'.$link.'" title="'.$title.'"'.$class.'>'.$rmtext.'</a>';
+		if (!empty($readmore)) $output.=' <a href="'.$link.'" title="'.$title.'"'.$class.'>'.$rmtext.'</a>';
 		
-		$output = ($filter) ? apply_filters('the_excerpt', $output) : $output;
+		$output = ($filter === true) ? apply_filters('the_excerpt', $output) : $output;
 		
 		return $output;
 	
 	}
 	
 } // A5_Excerpt
-
 
 ?>
