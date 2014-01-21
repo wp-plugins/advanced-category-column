@@ -2,15 +2,15 @@
 /*
 Plugin Name: Advanced Category Column
 Plugin URI: http://wasistlos.waldemarstoffel.com/plugins-fur-wordpress/advanced-category-column-plugin
-Description: The Advanced Category Column does, what the Category Column Plugin does; it creates a widget, which you can drag to your sidebar and it will show excerpts of the posts of other categories than showed in the center-column. It just has more options than the the Category Column Plugin. It is tested with WP up to version 3.6 and it might work with versions down to 2.9, but will never be explicitly supported for those. The 'Advanced' means, that you have a couple of more options than in the 'Category Column Plugin'.
-Version: 2.7.5
+Description: The Advanced Category Column does, what the Category Column Plugin does; it creates a widget, which you can drag to your sidebar and it will show excerpts of the posts of other categories than showed in the center-column. It just has more options than the the Category Column Plugin. It is tested with WP up to version 3.9 and it might work with versions down to 2.9, but will never be explicitly supported for those. The 'Advanced' means, that you have a couple of more options than in the 'Category Column Plugin'.
+Version: 2.8
 Author: Waldemar Stoffel
 Author URI: http://www.waldemarstoffel.com
 License: GPL3
 Text Domain: advanced-cc 
 */
 
-/*  Copyright 2011  Waldemar Stoffel  (email : w-stoffel@gmx.net)
+/*  Copyright 2011 - 2014 Waldemar Stoffel  (email : w-stoffel@gmx.net)
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -38,7 +38,6 @@ if (!class_exists('A5_Image')) require_once ACC_PATH.'class-lib/A5_ImageClass.ph
 if (!class_exists('A5_Excerpt')) require_once ACC_PATH.'class-lib/A5_ExcerptClass.php';
 if (!class_exists('Advanced_Category_Column_Widget')) require_once ACC_PATH.'class-lib/ACC_WidgetClass.php';
 if (!class_exists('A5_FormField')) require_once ACC_PATH.'class-lib/A5_FormFieldClass.php';
-if (!function_exists('a5_textarea')) require_once ACC_PATH.'includes/A5_field-functions.php';
 
 class AdvancedCategoryColumn {
 	
@@ -73,7 +72,7 @@ class AdvancedCategoryColumn {
 		
 		if ($hook != 'widgets.php' && $hook != 'settings_page_advanced-cc-settings') return;
 		
-		wp_register_script('ta-expander-script', plugins_url('ta-expander.js', __FILE__), array('jquery'), '2.0', true);
+		wp_register_script('ta-expander-script', plugins_url('ta-expander.js', __FILE__), array('jquery'), '3.0', true);
 		wp_enqueue_script('ta-expander-script');
 	
 	}
@@ -240,7 +239,7 @@ class AdvancedCategoryColumn {
 		
 		$acc_css_file=get_bloginfo('url').'/?accfile=css';
 			
-		wp_register_style('advanced-cc', $acc_css_file, false, '2.7.2', 'all');
+		wp_register_style('advanced-cc', $acc_css_file, false, '2.8', 'all');
 		wp_enqueue_style('advanced-cc');
 		
 	}
@@ -257,6 +256,8 @@ class AdvancedCategoryColumn {
 		$css_text.='p[id^="acc_byline"] {'.$eol.'font-size: 0.9em;'.$eol.'}'.$eol;
 		
 		$css_text.='p[id^="acc_byline"] a {'.$eol.'text-decoration: none !important;'.$eol.'font-weight: normal !important;'.$eol.'}'.$eol;
+		
+		$css_text.='div[id^="advanced_category_column_widget"].widget_advanced_category_column_widget img {'.$eol.'height: auto;'.$eol.'max-width: 100%;'.$eol.'}'.$eol;
 		
 		if (!empty (self::$options['link']) || !empty (self::$options['hover'])) :
 		

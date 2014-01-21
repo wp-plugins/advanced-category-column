@@ -3,8 +3,8 @@ Contributors: tepelstreel
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=BC9QUKBEZFZFY
 Tags: column, sidebar, widget, category, newspaper, image, multi widget
 Requires at least: 2.9
-Tested up to: 3.6
-Stable tag: 2.7.5
+Tested up to: 3.9
+Stable tag: 2.8
 
 The Advanced Category Column is a very customizable multiwidget for your sidebar.
 
@@ -16,7 +16,7 @@ If there is a post thumbnail, it will be displayed above the headline of the pos
 
 So far that is the same as my Category Column Plugin does also. Not every theme has the possibility to hide certain sidebars on different pages. That's where the advanced of our plugin comes in. In the ACC you can determine, where exactly the widget is showing and in the settings you can customize the links of your widget(s).
 
-The ACC was tested up to WP 3.6. It should work with versions down to 2.9 but was only tested since version 3.1.
+The ACC was tested up to WP 3.9. It should work with versions down to 2.9 but was only tested since version 3.1.
 
 == Installation ==
 
@@ -83,6 +83,10 @@ Since some other stylesheets can have a higher priority, you will have to make y
 3. The plugin's settings section
 
 == Changelog ==
+
+= 2.8 =
+
+* more responsive; Spanish translation added thanks to [Andrew Kurtis](http://www.webhostinghub.com/)
 
 = 2.7.5 =
 
@@ -244,3 +248,7 @@ No bugfix, but inner beauty added :)
 = 2.7.5 =
 
 Inner beauty not well working; bug fixed
+
+= 2.8 =
+
+more responsive; Spanish translation added
