@@ -10,7 +10,7 @@ License: GPL3
 Text Domain: advanced-cc 
 */
 
-/*  Copyright 2011 - 2014 Waldemar Stoffel  (email : w-stoffel@gmx.net)
+/*  Copyright 2011 - 2014 Waldemar Stoffel  (email : stoffel@atelier-fuenf.de)
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -38,6 +38,13 @@ if (!class_exists('A5_Image')) require_once ACC_PATH.'class-lib/A5_ImageClass.ph
 if (!class_exists('A5_Excerpt')) require_once ACC_PATH.'class-lib/A5_ExcerptClass.php';
 if (!class_exists('Advanced_Category_Column_Widget')) require_once ACC_PATH.'class-lib/ACC_WidgetClass.php';
 if (!class_exists('A5_FormField')) require_once ACC_PATH.'class-lib/A5_FormFieldClass.php';
+if (!class_exists('A5_DynamicCSS')) :
+
+	require_once ACC_PATH.'class-lib/A5_DynamicCSSClass.php';
+	
+	$dynamic_css = new A5_DynamicCSS;
+	
+endif;
 
 class AdvancedCategoryColumn {
 	
@@ -57,12 +64,34 @@ class AdvancedCategoryColumn {
 		add_filter('plugin_row_meta', array($this, 'acc_register_links'), 10, 2);	
 		add_filter( 'plugin_action_links', array($this, 'acc_plugin_action_links'), 10, 2 );
 		add_action('admin_init', array($this, 'acc_init'));
-		register_activation_hook(  __FILE__, array($this, 'install_acc') );
-		register_deactivation_hook(  __FILE__, array($this, 'unset_acc') );
+		register_activation_hook(  __FILE__, array($this, 'install') );
+		register_deactivation_hook(  __FILE__, array($this, 'uninstall') );
 		add_action('admin_menu', array ($this, 'acc_admin_menu'));
-		add_action('init', array ($this, 'acc_add_rewrite'));
-		add_action('template_redirect', array ($this, 'acc_css_template'));
-		add_action ('wp_enqueue_scripts', array ($this, 'acc_css'));
+		
+		$eol = "\r\n";
+		$tab = "\t";
+		
+		A5_DynamicCSS::$styles .= $eol.'/* CSS portion of Advanced Category Column */'.$eol.$eol;
+		
+		A5_DynamicCSS::$styles .= 'p[id^="acc_byline"] {'.$eol.$tab.'font-size: 0.9em;'.$eol.'}'.$eol;
+		
+		A5_DynamicCSS::$styles .= 'p[id^="acc_byline"] a {'.$eol.$tab.'text-decoration: none !important;'.$eol.$tab.'font-weight: normal !important;'.$eol.'}'.$eol;
+		
+		A5_DynamicCSS::$styles .= 'div[id^="advanced_category_column_widget"].widget_advanced_category_column_widget img {'.$eol.$tab.'height: auto;'.$eol.$tab.'max-width: 100%;'.$eol.'}'.$eol;
+		
+		A5_DynamicCSS::$styles .= 'div[id^="advanced_category_column_widget"].widget_advanced_category_column_widget {'.$eol.$tab.'-moz-hyphens: auto;'.$eol.$tab.'-o-hyphens: auto;'.$eol.$tab.'-webkit-hyphens: auto;'.$eol.$tab.'-ms-hyphens: auto;'.$eol.$tab.'hyphens: auto; '.$eol.'}'.$eol;
+		
+		if (!empty (self::$options['link']) || !empty (self::$options['hover'])) :
+		
+			$acc_link=str_replace(array("\r\n", "\n", "\r"), ' ', self::$options['link']);
+			$acc_hover=str_replace(array("\r\n", "\n", "\r"), ' ', self::$options['hover']);
+			
+			$acc_link=str_replace('; ', ';'.$eol.$tab, $acc_link);
+			$acc_hover=str_replace('; ', ';'.$eol.$tab, $acc_hover);
+			
+			A5_DynamicCSS::$styles .= 'div[id^="advanced_category_column_widget"].widget_advanced_category_column_widget a {'.$eol.$tab.$acc_link.$eol.'}'.$eol.'div[id^="advanced_category_column_widget"].widget_advanced_category_column_widget a:hover {'.$eol.$tab.$acc_hover.$eol.'}'.$eol;
+			
+		endif;
 		
 	}
 	
@@ -146,7 +175,7 @@ class AdvancedCategoryColumn {
 	
 	// Creating default options on activation
 	
-	function install_acc() {
+	function install() {
 		
 		$default = array(
 			'tags' => array(),
@@ -159,7 +188,7 @@ class AdvancedCategoryColumn {
 	
 	// Cleaning on deactivation
 	
-	function unset_acc() {
+	function uninstall() {
 		
 		delete_option('acc_options');
 		
@@ -216,61 +245,7 @@ class AdvancedCategoryColumn {
 		return self::$options;
 	
 	}
-	
-	function acc_add_rewrite() {
-		
-		   global $wp;
-		   $wp->add_query_var('accfile');
-	
-	}
-	
-	function acc_css_template() {
-		
-		   if (get_query_var('accfile') == 'css') {
-				   
-				   header('Content-type: text/css');
-				   echo $this->acc_dss();
-				   
-				   exit;
-		   }
-	}
 
-	function acc_css () {
-		
-		$acc_css_file=get_bloginfo('url').'/?accfile=css';
-			
-		wp_register_style('advanced-cc', $acc_css_file, false, '2.8', 'all');
-		wp_enqueue_style('advanced-cc');
-		
-	}
-	
-	// writing dss file
-		
-	function acc_dss() {
-		
-		$eol = "\r\n";
-		$tab = "\t";
-		
-		$css_text='@charset "UTF-8";'.$eol.'/* CSS Document */'.$eol.$eol;
-		
-		$css_text.='p[id^="acc_byline"] {'.$eol.'font-size: 0.9em;'.$eol.'}'.$eol;
-		
-		$css_text.='p[id^="acc_byline"] a {'.$eol.'text-decoration: none !important;'.$eol.'font-weight: normal !important;'.$eol.'}'.$eol;
-		
-		$css_text.='div[id^="advanced_category_column_widget"].widget_advanced_category_column_widget img {'.$eol.'height: auto;'.$eol.'max-width: 100%;'.$eol.'}'.$eol;
-		
-		if (!empty (self::$options['link']) || !empty (self::$options['hover'])) :
-		
-			$acc_link=str_replace(array("\r\n", "\n", "\r"), ' ', self::$options['link']);
-			$acc_hover=str_replace(array("\r\n", "\n", "\r"), ' ', self::$options['hover']);
-			
-			$css_text.='div[id^="advanced_category_column_widget"].widget_advanced_category_column_widget a {'.$eol.$tab.self::$options['link'].$eol.'}'.$eol.'div[id^="advanced_category_column_widget"].widget_advanced_category_column_widget a:hover {'.$eol.$tab.self::$options['hover'].$eol.'}';
-			
-		endif;
-		
-		return $css_text;
-		
-	}
 }
 
 $advanced_cc_plugin = new AdvancedCategoryColumn;
