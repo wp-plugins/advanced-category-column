@@ -217,3 +217,34 @@ msgid ""
 "dashed black line on the left. If you leave that section empty, your theme "
 "will style the widget."
 msgstr ""
+
+#: adseasy.php:205
+msgid ""
+"You can enter your own style for the widgets here. This will overwrite the "
+"styles of your theme."
+msgstr ""
+
+#: adseasy.php:205
+msgid ""
+"If you leave this empty, you can still style every instance of the widget "
+"individually."
+msgstr ""
+
+#. Description of the plugin/theme
+msgid ""
+"The Advanced Category Column does, what the Category Column Plugin does; it "
+"creates a widget, which you can drag to your sidebar and it will show "
+"excerpts of the posts of other categories than showed in the center-column. "
+"It just has more options than the the Category Column Plugin. It is tested "
+"with WP up to version 3.5 and it might work with versions down to 2.9, but "
+"will never be explicitly supported for those. The 'Advanced' means, that you "
+"have a couple of more options than in the 'Category Column Plugin'."
+msgstr ""
+
+#. Author of the plugin/theme
+msgid "Waldemar Stoffel"
+msgstr ""
+
+#. Author URI of the plugin/theme
+msgid "http://www.waldemarstoffel.com"
+msgstr ""

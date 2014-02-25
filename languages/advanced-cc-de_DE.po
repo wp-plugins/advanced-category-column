@@ -4,15 +4,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Advanced Category Column\n"
 "Report-Msgid-Bugs-To: http://wordpress.org/tag/advanced-category-column\n"
-"POT-Creation-Date: 2011-03-02 00:01:08+00:00\n"
+"POT-Creation-Date: 2014-02-18 12:49:44+00:00\n"
+"PO-Revision-Date: 2014-02-25 17:13+0200\n"
+"Last-Translator: Waldemar Stoffel <stoffel@atelier-fuenf.de>\n"
+"Language-Team: Waldemar Stoffel <stoffel@atelier-fuenf.de>\n"
+"Language: de_DE\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"PO-Revision-Date: 2014-02-18 15:03+0200\n"
-"Last-Translator: Waldemar Stoffel <stoffel@atelier-fuenf.de>\n"
-"Language-Team: Waldemar Stoffel <stoffel@atelier-fuenf.de>\n"
 "X-Poedit-SourceCharset: UTF-8\n"
-"Language: de_DE\n"
 "X-Generator: Poedit 1.6.4\n"
 
 #: advanced-cc.php:117
@@ -250,6 +250,22 @@ msgstr ""
 "left: 1px dashed;%2$sborder-color: #000000;%3$s%2$seintragen, um eine "
 "schwarze gestrichelte Linie am linken Rand zu bekommen. Wenn dieses Feld "
 "leer bleibt, übernimmt das Theme das Styling des Widgets."
+
+#: adseasy.php:205
+msgid ""
+"You can enter your own style for the widgets here. This will overwrite the "
+"styles of your theme."
+msgstr ""
+"Du kannst deinen eigenen Stil für die Widgets hier eingeben. Das wird die "
+"Stile deines Themes überschreiben."
+
+#: adseasy.php:205
+msgid ""
+"If you leave this empty, you can still style every instance of the widget "
+"individually."
+msgstr ""
+"Wenn du das Feld leer lässt, kannst du immer noch jede Instanz des Widgets "
+"individuell stylen."
 
 #. Description of the plugin/theme
 msgid ""

@@ -3,7 +3,8 @@
 /**
  *
  * Class A5 Dynamic CSS
- * * @ A5 Plugin Framework
+ *
+ * @ A5 Plugin Framework
  * Version: 0.9.8 alpha
  *
  * Presses the dynamical CSS of all plugins into one virtual stylesheet
@@ -57,7 +58,7 @@ class A5_DynamicCSS {
 		
 		$css_text .= self::$styles;
 		
-		echo $css_text;
+		echo $css_text;	
 		
 	}
 	

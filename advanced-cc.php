@@ -3,7 +3,7 @@
 Plugin Name: Advanced Category Column
 Plugin URI: http://wasistlos.waldemarstoffel.com/plugins-fur-wordpress/advanced-category-column-plugin
 Description: The Advanced Category Column does, what the Category Column Plugin does; it creates a widget, which you can drag to your sidebar and it will show excerpts of the posts of other categories than showed in the center-column. It just has more options than the the Category Column Plugin. It is tested with WP up to version 3.9 and it might work with versions down to 2.9, but will never be explicitly supported for those. The 'Advanced' means, that you have a couple of more options than in the 'Category Column Plugin'.
-Version: 2.8.1
+Version: 2.8.2
 Author: Waldemar Stoffel
 Author URI: http://www.waldemarstoffel.com
 License: GPL3
@@ -30,7 +30,7 @@ Text Domain: advanced-cc
 
 /* Stop direct call */
 
-if(preg_match('#' . basename(__FILE__) . '#', $_SERVER['PHP_SELF'])) die('Sorry, you don&#39;t have direct access to this page.');
+if(preg_match('#' . basename(__FILE__) . '#', $_SERVER['PHP_SELF'])) die('Sorry, you don\'t have direct access to this page.');
 
 define( 'ACC_PATH', plugin_dir_path(__FILE__) );
 
@@ -38,6 +38,7 @@ if (!class_exists('A5_Image')) require_once ACC_PATH.'class-lib/A5_ImageClass.ph
 if (!class_exists('A5_Excerpt')) require_once ACC_PATH.'class-lib/A5_ExcerptClass.php';
 if (!class_exists('Advanced_Category_Column_Widget')) require_once ACC_PATH.'class-lib/ACC_WidgetClass.php';
 if (!class_exists('A5_FormField')) require_once ACC_PATH.'class-lib/A5_FormFieldClass.php';
+if (!class_exists('A5_OptionPage')) require_once ACC_PATH.'class-lib/A5_OptionPageClass.php';
 if (!class_exists('A5_DynamicCSS')) :
 
 	require_once ACC_PATH.'class-lib/A5_DynamicCSSClass.php';
@@ -93,6 +94,14 @@ class AdvancedCategoryColumn {
 			
 		endif;
 		
+		if (!empty(self::$options['acc_css'])) :
+			
+			$style=str_replace('; ', ';'.$eol.$tab, str_replace(array("\r\n", "\n", "\r"), ' ', self::$options['acc_css']));
+	
+			A5_DynamicCSS::$styles.='div[id^="advanced_category_column_widget"].widget_advanced_category_column_widget {'.$eol.$tab.$style.$eol.'}'.$eol;
+		
+		endif;
+		
 	}
 	
 	// attach JavaScript file for textarea resizing
@@ -145,6 +154,8 @@ class AdvancedCategoryColumn {
 		
 		add_settings_field('acc_hover_style', __('Hover style:', self::language_file), array($this, 'acc_hover_field'), 'acc_styles', 'acc_settings');
 		
+		add_settings_field('use_own_css', __('Widget container:', self::language_file), array($this, 'acc_display_css'), 'acc_styles', 'acc_settings', array(__('You can enter your own style for the widgets here. This will overwrite the styles of your theme.', self::language_file), __('If you leave this empty, you can still style every instance of the widget individually.', self::language_file)));
+		
 		add_settings_field('acc_resize', false, array($this, 'acc_resize_field'), 'acc_styles', 'acc_settings');
 	
 	}
@@ -167,9 +178,17 @@ class AdvancedCategoryColumn {
 		
 	}
 	
+	function acc_display_css($labels) {
+		
+		echo $labels[0].'</br>'.$labels[1].'</br>';
+		
+		a5_textarea('acc_css', 'acc_options[acc_css]', @self::$options['acc_css'], false, array('rows' => 10, 'cols' => 35));
+		
+	}
+	
 	function acc_resize_field() {
 		
-		a5_resize_textarea(array('link', 'hover'), true);
+		a5_resize_textarea(array('link', 'hover', 'acc_css'), true);
 		
 	}
 	
@@ -206,12 +225,9 @@ class AdvancedCategoryColumn {
 	
 	function advanced_cc_options_page() {
 		
-		?>
-	<div class="wrap">
-    <a href="<?php _e('http://wasistlos.waldemarstoffel.com/plugins-fur-wordpress/advanced-category-column-plugin', self::language_file); ?>"><div id="a5-logo" class="icon32" style="background: url('<?php echo plugins_url('advanced-category-column/img/a5-icon-34.png');?>');"></div></a>
-	  <h2>Advanced Category Column <?php _e('Settings', self::language_file); ?></h2>
-	  <?php settings_errors(); ?>
-	  <?php _e('Style the links of the widget. If you leave this empty, your theme will style the hyperlinks.', self::language_file); ?>
+		A5_OptionPage::open_page('Advanced Category Column', __('http://wasistlos.waldemarstoffel.com/plugins-fur-wordpress/advanced-category-column-plugin', self::language_file), 'advanced-category-column', __('Plugin Support', self::language_file));
+		
+		_e('Style the links of the widget. If you leave this empty, your theme will style the hyperlinks.', self::language_file); ?>
 	  <p>
 		<?php _e('Just input something like,', self::language_file); ?>
 	  <p><strong>font-weight: bold;<br />
@@ -222,25 +238,24 @@ class AdvancedCategoryColumn {
 	  <p><strong>
 		<?php _e('You most probably have to use &#34;!important&#34; at the end of each line, to make it work.', self::language_file); ?>
 		</strong></p>
-	  <form action="options.php" method="post">
 		<?php
+		
+		A5_OptionPage::open_form('options.php');
 		
 		settings_fields('acc_options');
 		do_settings_sections('acc_styles');
 		
 		submit_button();
 		
-		?>
-	  </form>
-	</div>
-	<?php
+		A5_OptionPage::close_page();
 	
 	}
 	
 	function acc_validate($input) {
 		
-		self::$options['link']=trim($input['link']);
-		self::$options['hover']=trim($input['hover']);
+		self::$options['link'] = trim($input['link']);
+		self::$options['hover'] = trim($input['hover']);
+		self::$options['acc_css'] = trim($input['acc_css']);
 		
 		return self::$options;
 	
