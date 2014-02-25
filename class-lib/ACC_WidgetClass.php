@@ -12,13 +12,17 @@
 class Advanced_Category_Column_Widget extends WP_Widget {
 	
 	const language_file = 'advanced-cc';
+	
+	private static $options;
  
-	function Advanced_Category_Column_Widget() {
+	function __construct() {
 	
 		$widget_opts = array( 'description' => __('Configure the output and looks of the widget. Then display thumbnails and excerpts of posts in your sidebars and define, on what kind of pages they will show.', self::language_file) );
 		$control_opts = array( 'width' => 400 );
 		
 		parent::WP_Widget(false, $name = 'Advanced Category Column', $widget_opts, $control_opts);
+		
+		self::$options = get_option('acc_options');
 	
 	}
 	 
@@ -26,7 +30,37 @@ class Advanced_Category_Column_Widget extends WP_Widget {
 		
 		// setup some default settings
 		
-		$defaults = array( 'postcount' => 5, 'offset' => 3, 'home' => 1, 'wordcount' => 3, 'line' => 1, 'line_color' => '#dddddd', 'homepage' => 1, 'category' => 1, 'h' => 3);
+		$defaults = array(
+			'title' => NULL,
+			'postcount' => 5,
+			'offset' => 3,
+			'home' => 1,
+			'list' => NULL,
+			'showcat' => NULL,
+			'showcat_txt' => NULL,
+			'wordcount' => 3,
+			'linespace' => NULL,
+			'width' => NULL,
+			'words' => NULL,
+			'line' => 1,
+			'line_color' => '#dddddd',
+			'style' => NULL,
+			'homepage' => 1,
+			'frontpage' => NULL,
+			'page' => NULL,
+			'category' => 1,
+			'single' => NULL,
+			'date' => NULL,
+			'tag' => NULL,
+			'attachment' => NULL,
+			'taxonomy' => NULL,
+			'author' => NULL,
+			'search' => NULL,
+			'not_found' => NULL,
+			'h' => 3,
+			'imgborder' => NULL,
+			'filter' => NULL
+		);
 		
 		$instance = wp_parse_args( (array) $instance, $defaults );
 		
@@ -58,6 +92,7 @@ class Advanced_Category_Column_Widget extends WP_Widget {
 		$not_found=esc_attr($instance['not_found']);
 		$h = esc_attr($instance['h']);
 		$filter = esc_attr($instance['filter']);
+		$imgborder=esc_attr($instance['imgborder']);
 		
 		$base_id = 'widget-'.$this->id_base.'-'.$this->number.'-';
 		$base_name = 'widget-'.$this->id_base.'['.$this->number.']';
@@ -89,6 +124,7 @@ class Advanced_Category_Column_Widget extends WP_Widget {
 		a5_number_field($base_id.'offset', $base_name.'[offset]', $offset, __('Offset (how many posts are spared out in the beginning):', self::language_file), array('space' => true, 'size' => 4, 'step' => 1));
 		a5_checkbox($base_id.'home', $base_name.'[home]', $home, __('Check to have the offset only on your homepage.', self::language_file), array('space' => true));
 		a5_number_field($base_id.'width', $base_name.'[width]', $width, __('Width of the thumbnail (in px):', self::language_file), array('space' => true, 'size' => 4, 'step' => 1));
+		a5_text_field($base_id.'imgborder', $base_name.'[imgborder]', $imgborder, sprintf(__('If wanting a border around the image, write the style here. %s would make it a black border, 1px wide.', self::language_file), '<strong>1px solid #000000</strong>'), array('space' => true, 'class' => 'widefat'));
 		a5_select($base_id.'h', $base_name.'[h]', $headings, $h, __('Weight of the Post Title:', self::language_file), false, array('space' => true));
 		a5_number_field($base_id.'wordcount', $base_name.'[wordcount]', $wordcount, __('In case there is no excerpt defined, how many sentences are displayed:', self::language_file), array('space' => true, 'size' => 4, 'step' => 1));
 		a5_checkbox($base_id.'words', $base_name.'[words]', $words, __('Check to display words instead of sentences.', self::language_file), array('space' => true));
@@ -97,8 +133,8 @@ class Advanced_Category_Column_Widget extends WP_Widget {
 		a5_number_field($base_id.'line', $base_name.'[line]', $line, __('If you want a line between the posts, this is the height in px (if not wanting a line, leave emtpy):', self::language_file), array('space' => true, 'size' => 4, 'step' => 1));
 		a5_color_field($base_id.'line_color', $base_name.'[line_color]', $line_color, __('The color of the line (e.g. #cccccc):', self::language_file), array('space' => true, 'size' => 13));
 		a5_checkgroup(false, false, $options, __('Check, where you want to show the widget. By default, it is showing on the homepage and the category pages:', self::language_file), $checkall);
-		a5_textarea($base_id.'style', $base_name.'[style]', $style, sprintf(__('Here you can finally style the widget. Simply type something like%1$s%2$sborder-left: 1px dashed;%2$sborder-color: #000000;%3$s%2$sto get just a dashed black line on the left. If you leave that section empty, your theme will style the widget.', self::language_file), '<strong>', '<br />', '</strong>'), array('space' => true, 'class' => 'widefat', 'style' => 'height: 60px;'));
-		a5_resize_textarea(array($base_id.'style'), true);
+		if (empty(self::$options['acc_css'])) a5_textarea($base_id.'style', $base_name.'[style]', $style, sprintf(__('Here you can finally style the widget. Simply type something like%1$s%2$sborder-left: 1px dashed;%2$sborder-color: #000000;%3$s%2$sto get just a dashed black line on the left. If you leave that section empty, your theme will style the widget.', self::language_file), '<strong>', '<br />', '</strong>'), array('space' => true, 'class' => 'widefat', 'style' => 'height: 60px;'));
+		a5_resize_textarea(array($base_id.'style'));
 	
 	} // form
 	 
@@ -136,12 +172,15 @@ class Advanced_Category_Column_Widget extends WP_Widget {
 		$instance['not_found'] = strip_tags($new_instance['not_found']);
 		$instance['h'] = strip_tags($new_instance['h']);
 		$instance['filter'] = strip_tags($new_instance['filter']);
+		$instance['imgborder'] = strip_tags($new_instance['imgborder']);
 		
 		return $instance;
 		
 	} // update
 	 
 	function widget($args, $instance) {
+		
+	$eol = "\r\n";
 		
 	// get the type of page, we're actually on
 	
@@ -191,11 +230,9 @@ class Advanced_Category_Column_Widget extends WP_Widget {
 		
 		$i=1;
 		
-		$acc_options = get_option('acc_options');
+		$acc_setup['posts_per_page'] = $instance['postcount'];
 		
-		$acc_setup='posts_per_page='.$instance['postcount'];
-		
-		if (is_home() || empty($instance['home'])) :
+		if (is_category() || is_home() || empty($instance['home'])) :
 			
 			global $wp_query;
 			
@@ -205,19 +242,19 @@ class Advanced_Category_Column_Widget extends WP_Widget {
 			
 			$acc_offset = (empty($acc_page)) ? $acc_offset=$instance['offset'] : $acc_offset=(($acc_page-1)*$acc_numberposts)+$instance['offset'];
 			
-			$acc_setup.='&offset='.$acc_offset;
+			$acc_setup['offset'] = $acc_offset;
 		
 		endif;
 		
-		if (is_category() && !$instance['list']) $acc_cat=get_query_var('cat');
+		$acc_cat = (is_category()) ? ',-'.get_query_var('cat') : '';
 		
-		if ($instance['list'] || isset($acc_cat)) $acc_setup.='&cat='.$instance['list'].',-'.$acc_cat;
+		if ($instance['list'] || !empty($acc_cat)) $acc_setup['cat'] = $instance['list'].$acc_cat;
 		
 		if (is_single()) :
 			
 			global $wp_query;
 			
-			$acc_setup.='&exclude='.$wp_query->get_queried_object_id(); 
+			$acc_setup['post__not_in'] = array($wp_query->get_queried_object_id()); 
 		
 		endif;
 		
@@ -233,25 +270,13 @@ class Advanced_Category_Column_Widget extends WP_Widget {
 		
 			if ($instance['showcat']) :
 			
-				$post_categories = wp_get_post_categories( $post->ID);
-				
-				$cats = array();
-			
-				foreach($post_categories as $c) :
-				
-					$cat = get_category( $c );
-				
-					$cats[] = $eol.'<a href="'.get_category_link( $c ).'" title="'.$cat->name.'">'.$cat->name.'</a>';
-				
-				endforeach;
-				
 				$post_byline = ($instance['showcat_txt']) ? $eol.'<p id="acc_byline-'.$widget_id.'-'.$count.'">'.$eol.$instance['showcat_txt'].' ' : $eol.'<p id="acc_byline-'.$widget_id.'-'.$count.'">';
 				
-				$post_byline .= implode(', ', $cats);
-			
-				$post_byline .= $eol.'</p>'.$eol;
-			
 				echo $post_byline;
+			
+				the_category(', ');
+				
+				echo $eol.'</p>'.$eol;
 			
 			endif;
 		 
@@ -261,12 +286,13 @@ class Advanced_Category_Column_Widget extends WP_Widget {
 			$acc_image_title = $acc_tags['image_title'];
 			$acc_title_tag = $acc_tags['title_tag'];
 			
-			$eol = "\r\n";
 			$acc_headline = '<h'.$instance['h'].'>'.$eol.'<a href="'.get_permalink().'" title="'.$acc_title_tag.'">'.get_the_title().'</a>'.$eol.'</h'.$instance['h'].'>';
 			
 			// get thumbnail
 			
 			$default = A5_Image::get_default($instance['width']);
+			
+			$acc_imgborder = (isset($instance['imgborder'])) ? ' border: '.$instance['imgborder'].';' : '';
 				
 			if (!has_post_thumbnail()) :
 			
@@ -287,47 +313,55 @@ class Advanced_Category_Column_Widget extends WP_Widget {
 				
 				if ($acc_thumb) :
 				
-					if ($acc_width) $acc_img = '<img title="'.$acc_image_title.'" src="'.$acc_thumb.'" alt="'.$acc_image_alt.'" class="wp-post-image" width="'.$acc_width.'" height="'.$acc_height.'" />';
+					if ($acc_width) $acc_img = '<img title="'.$acc_image_title.'" src="'.$acc_thumb.'" alt="'.$acc_image_alt.'" class="wp-post-image" width="'.$acc_width.'" height="'.$acc_height.'" style="'.$acc_imgborder.'" />';
 						
-					else $acc_img = '<img title="'.$acc_image_title.'" src="'.$acc_thumb.'" alt="'.$acc_image_alt.'" class="wp-post-image" style="maxwidth: '.$width.'; maxheight: '.$height.';" />';
+					else $acc_img = '<img title="'.$acc_image_title.'" src="'.$acc_thumb.'" alt="'.$acc_image_alt.'" class="wp-post-image" style="maxwidth: '.$width.'; maxheight: '.$height.';'.$acc_imgborder.'" />';
 					
 				endif;
 				
 			else :
 			
 				$img_info = wp_get_attachment_image_src( get_post_thumbnail_id($post->ID), 'large');
+						
+					if (!$img_info):
 					
-				if (!$img_info):
-				
-					$src = get_the_post_thumbnail();
-				
-					$img = preg_match_all('/<\s*img[^>]+src\s*=\s*["\']?([^\s"\']+)["\']?[\s\/>]+/', $src, $matches);
+						$src = get_the_post_thumbnail();
+						
+						$img = preg_match_all('/<\s*img[^>]+src\s*=\s*["\']?([^\s"\']+)["\']?[\s\/>]+/', $src, $matches);
+						
+						if ($img): 
+						
+							$img_info[0] = $matches[1][0];
+							
+							$img_size = A5_Image::get_size($img_info[0]);
+							
+							$img_info[1] = $img_size['width'];
+							
+							$img_info[2] = $img_size['height'];
+							
+						endif;
+						
+					endif;
 					
-					$img_info[0] = $matches[1][0];
+					if ($img_info) :
 					
-					$img_size = A5_Image::get_size($img_info[0]);
+						$args = array (
+							'ratio' => $img_info[1]/$img_info[2],
+							'thumb_width' => $img_info[1],
+							'thumb_height' => $img_info[2],
+							'width' => $default[0],
+							'height' => $default[1]
+						);
+						
+						$img_size = A5_Image::count_size($args);
+						
+						$atts = array('title' => $acc_image_title, 'alt' => $acc_image_alt, 'style' => $acc_imgborder);
+						
+						$size = array($img_size['width'], $img_size['height']);
 					
-					$img_info[1] = $img_size['width'];
-					
-					$img_info[2] = $img_size['height'];
-					
-				endif;
-				
-				$args = array (
-					'ratio' => $img_info[1]/$img_info[2],
-					'thumb_width' => $img_info[1],
-					'thumb_height' => $img_info[2],
-					'width' => $default[0],
-					'height' => $default[1]
-				);
-				
-				$img_size = A5_Image::count_size($args);
-				
-				$atts = array('title' => $acc_image_title, 'alt' => $acc_image_alt);
-				
-				$size = array($img_size['width'], $img_size['height']);
-			
-				$acc_img = get_the_post_thumbnail($post->ID, $size, $atts);
+						$acc_img = get_the_post_thumbnail($post->ID, $size, $atts);
+						
+					endif;
 				
 			endif;
 			   
