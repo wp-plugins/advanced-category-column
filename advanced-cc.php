@@ -3,7 +3,7 @@
 Plugin Name: Advanced Category Column
 Plugin URI: http://wasistlos.waldemarstoffel.com/plugins-fur-wordpress/advanced-category-column-plugin
 Description: The Advanced Category Column does, what the Category Column Plugin does; it creates a widget, which you can drag to your sidebar and it will show excerpts of the posts of other categories than showed in the center-column. It just has more options than the the Category Column Plugin. It is tested with WP up to version 3.9 and it might work with versions down to 2.9, but will never be explicitly supported for those. The 'Advanced' means, that you have a couple of more options than in the 'Category Column Plugin'.
-Version: 2.9
+Version: 3.0
 Author: Waldemar Stoffel
 Author URI: http://www.waldemarstoffel.com
 License: GPL3
@@ -63,7 +63,7 @@ class AdvancedCategoryColumn {
 	
 		load_plugin_textdomain(self::language_file, false , basename(dirname(__FILE__)).'/languages');
 		
-		add_action('admin_enqueue_scripts', array(&$this, 'register_js_sheet'));
+		add_action('admin_enqueue_scripts', array(&$this, 'enqueue_scripts'));
 		
 		add_filter('plugin_row_meta', array(&$this, 'register_links'), 10, 2);	
 		add_filter( 'plugin_action_links', array(&$this, 'plugin_action_links'), 10, 2 );
@@ -78,7 +78,7 @@ class AdvancedCategoryColumn {
 	
 	// attach JavaScript file for textarea resizing
 	
-	function register_js_sheet($hook) {
+	function enqueue_scripts($hook) {
 		
 		if ($hook != 'widgets.php' && $hook != 'settings_page_advanced-cc-settings') return;
 		
@@ -116,7 +116,7 @@ class AdvancedCategoryColumn {
 		
 		$default = array(
 			'cache' => array(), 
-			'inline' => NULL
+			'inline' => false
 		);
 		
 		add_option('acc_options', $default);
@@ -139,7 +139,7 @@ class AdvancedCategoryColumn {
 			
 			self::$options['cache'] = array();
 			
-			self::$options['inline'] = NULL;
+			self::$options['inline'] = false;
 			
 			unset(self::$options['tags'], self::$options['sizes'], self::$options['acc_css']);
 			

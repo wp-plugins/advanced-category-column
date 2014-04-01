@@ -149,7 +149,7 @@ class ACC_Admin extends A5_OptionPage {
 		self::$options['link']=trim($input['link']);
 		self::$options['hover']=trim($input['hover']);
 		self::$options['css']=trim($input['css']);
-		self::$options['inline'] = isset($input['inline']) ? true : NULL;
+		self::$options['inline'] = isset($input['inline']) ? true : false;
 		
 		return self::$options;
 	

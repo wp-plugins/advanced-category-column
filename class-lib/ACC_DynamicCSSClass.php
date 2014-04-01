@@ -6,7 +6,7 @@
  *
  * Extending A5 Dynamic Files
  *
- * Presses the dynamical CSS A5 Recent Post Widget into a virtual style sheet
+ * Presses the dynamical CSS of the Advanceed Category Column Widget into a virtual style sheet
  *
  */
 
@@ -17,6 +17,8 @@ class ACC_DynamicCSS extends A5_DynamicFiles {
 	function __construct() {
 		
 		self::$options =  get_option('acc_options');
+		
+		if (!isset(self::$options['inline'])) self::$options['inline'] = false;
 		
 		parent::A5_DynamicFiles('wp', 'css', false, self::$options['inline']);
 		

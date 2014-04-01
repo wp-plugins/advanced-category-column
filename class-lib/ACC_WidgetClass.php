@@ -40,7 +40,7 @@ class Advanced_Category_Column_Widget extends WP_Widget {
 			'showcat_txt' => NULL,
 			'wordcount' => 3,
 			'linespace' => NULL,
-			'width' => NULL,
+			'width' => get_option('thumbnail_size_w'),
 			'words' => NULL,
 			'line' => 1,
 			'line_color' => '#dddddd',
