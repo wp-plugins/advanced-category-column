@@ -4,8 +4,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Advanced Category Column\n"
 "Report-Msgid-Bugs-To: http://wordpress.org/tag/advanced-category-column\n"
-"POT-Creation-Date: 2014-03-27 13:44+0200\n"
-"PO-Revision-Date: 2014-03-27 13:44+0200\n"
+"POT-Creation-Date: 2014-04-10 12:43+0200\n"
+"PO-Revision-Date: 2014-04-10 12:43+0200\n"
 "Last-Translator: Waldemar Stoffel <stoffel@atelier-fuenf.de>\n"
 "Language-Team: Waldemar Stoffel <stoffel@atelier-fuenf.de>\n"
 "Language: de_DE\n"
@@ -128,9 +128,30 @@ msgstr ""
 "Ablegen des CSS im Quellcode hilft dann. Hier klicken, um CSS inline zu "
 "schreiben."
 
-#: class-lib/ACC_AdminClass.php:111
+#: class-lib/ACC_AdminClass.php:107
+msgid "entries"
+msgstr "Einträge"
+
+#: class-lib/ACC_AdminClass.php:107
+msgid "entry"
+msgstr "Eintrag"
+
+#: class-lib/ACC_AdminClass.php:109
+#, php-format
+msgid "Empty cache (%d %s):"
+msgstr "Cache leeren (%d %s):"
+
+#: class-lib/ACC_AdminClass.php:109
+msgid "You can empty the plugin&#39;s cache here, if necessary."
+msgstr "Falls nötig, kannst du hier den Cache des Plugins leeren."
+
+#: class-lib/ACC_AdminClass.php:117
 msgid "Just put some css code here."
 msgstr "Einfach css Code hier eingeben."
+
+#: class-lib/ACC_AdminClass.php:170
+msgid "Cache emptied."
+msgstr "Cache geleert."
 
 #: class-lib/ACC_WidgetClass.php:20
 msgid ""

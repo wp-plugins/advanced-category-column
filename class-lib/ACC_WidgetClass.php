@@ -207,7 +207,7 @@ class Advanced_Category_Column_Widget extends WP_Widget {
 		
 		$title = apply_filters('widget_title', $instance['title']);	
 		
-		if (empty($instance['style'])) :
+		if (!empty($instance['style'])) :
 			
 			$style=str_replace(array("\r\n", "\n", "\r"), '', $instance['style']);
 			
@@ -223,11 +223,11 @@ class Advanced_Category_Column_Widget extends WP_Widget {
 		
 		$i=1;
 		
+		global $wp_query;
+		
 		$acc_setup['posts_per_page'] = $instance['postcount'];
 		
 		if (is_category() || is_home() || empty($instance['home'])) :
-			
-			global $wp_query;
 			
 			$acc_page = $wp_query->get( 'paged' );
 			
@@ -244,8 +244,6 @@ class Advanced_Category_Column_Widget extends WP_Widget {
 		if ($instance['list'] || !empty($acc_cat)) $acc_setup['cat'] = $instance['list'].$acc_cat;
 		
 		if (is_single()) :
-			
-			global $wp_query;
 			
 			$acc_setup['post__not_in'] = array($wp_query->get_queried_object_id()); 
 		
@@ -283,7 +281,7 @@ class Advanced_Category_Column_Widget extends WP_Widget {
 			
 			// get thumbnail
 			
-			$acc_imgborder = (isset($instance['imgborder'])) ? ' border: '.$instance['imgborder'].';' : '';
+			$acc_imgborder = (!empty($instance['imgborder'])) ? ' style="border: '.$instance['imgborder'].';"' : '';
 				
 			$id = get_the_ID();
 					
@@ -299,16 +297,10 @@ class Advanced_Category_Column_Widget extends WP_Widget {
 			
 			$acc_width = $acc_image_info[1];
 	
-			$acc_height = $acc_image_info[2];
+			$acc_height = ($acc_image_info[2]) ? ' height="'.$acc_image_info[2].'"' : '';
 			
-			if ($acc_thumb) :
+			if ($acc_thumb) if ($acc_width) $acc_img = '<img title="'.$acc_image_title.'" src="'.$acc_thumb.'" alt="'.$acc_image_alt.'" class="wp-post-image" width="'.$acc_width.'"'.$acc_height.$acc_imgborder.' />';
 			
-				if ($acc_width) $acc_img = '<img title="'.$acc_image_title.'" src="'.$acc_thumb.'" alt="'.$acc_image_alt.'" class="wp-post-image" width="'.$acc_width.'" height="'.$acc_height.'" style="'.$acc_imgborder.'" />';
-					
-				else $acc_img = '<img title="'.$acc_image_title.'" src="'.$acc_thumb.'" alt="'.$acc_image_alt.'" class="wp-post-image" style="maxwidth: '.$width.'; maxheight: '.$height.';'.$acc_imgborder.'" />';
-				
-			endif;
-			   
 			if (isset($acc_img)) :
 			
 				echo '<a href="'.get_permalink().'">'.$acc_img.'</a>'.$eol.'<div style="clear: both;"></div>'.$eol.$acc_headline;

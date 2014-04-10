@@ -4,8 +4,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Advanced Category Column\n"
 "Report-Msgid-Bugs-To: http://wordpress.org/tag/advanced-category-column\n"
-"POT-Creation-Date: 2014-03-27 13:44+0200\n"
-"PO-Revision-Date: 2014-03-27 13:44+0200\n"
+"POT-Creation-Date: 2014-04-10 12:40+0200\n"
+"PO-Revision-Date: 2014-04-10 12:42+0200\n"
 "Last-Translator: Waldemar Stoffel <stoffel@atelier-fuenf.de>\n"
 "Language-Team: Waldemar Stoffel <stoffel@atelier-fuenf.de>\n"
 "Language: nl_NL\n"
@@ -120,7 +120,6 @@ msgid "Debug:"
 msgstr "Debug:"
 
 #: class-lib/ACC_AdminClass.php:103
-#, fuzzy
 msgid ""
 "If you can&#39;t reach the dynamical style sheet, you&#39;ll have to diplay "
 "the styles inline. By clicking here you can do so."
@@ -128,9 +127,30 @@ msgstr ""
 "In sommige gevallen kan de dynamische style sheet niet worden geladen. Als "
 "je hier klickt, wordt de CSS inline in de HTML"
 
-#: class-lib/ACC_AdminClass.php:111
+#: class-lib/ACC_AdminClass.php:107
+msgid "entries"
+msgstr "objecten"
+
+#: class-lib/ACC_AdminClass.php:107
+msgid "entry"
+msgstr "object"
+
+#: class-lib/ACC_AdminClass.php:109
+#, php-format
+msgid "Empty cache (%d %s):"
+msgstr "Cache ledigen (%d %s):"
+
+#: class-lib/ACC_AdminClass.php:109
+msgid "You can empty the plugin&#39;s cache here, if necessary."
+msgstr "Hier kun je de cache ledigen, als je wilt."
+
+#: class-lib/ACC_AdminClass.php:117
 msgid "Just put some css code here."
 msgstr "Vul hier jouw css code in."
+
+#: class-lib/ACC_AdminClass.php:170
+msgid "Cache emptied."
+msgstr "Cache geledigd."
 
 #: class-lib/ACC_WidgetClass.php:20
 msgid ""

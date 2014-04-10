@@ -44,7 +44,7 @@ class ACC_Admin extends A5_OptionPage {
 		
 		$eol = "\r\n";
 		
-		parent::open_page('Advanced Category Column', __('http://wasistlos.waldemarstoffel.com/plugins-fur-wordpress/advanced-category-column-plugin', self::language_file), 'advanced-category-column', __('Plugin Support', self::language_file));
+		self::open_page('Advanced Category Column', __('http://wasistlos.waldemarstoffel.com/plugins-fur-wordpress/advanced-category-column-plugin', self::language_file), 'advanced-category-column', __('Plugin Support', self::language_file));
 		
 		_e('Style the links of the widget. If you leave this empty, your theme will style the hyperlinks.', self::language_file);
 		
@@ -54,7 +54,7 @@ class ACC_Admin extends A5_OptionPage {
 		
 		echo '<p><strong>'.__('You most probably have to use &#34;!important&#34; at the end of each line, to make it work.', self::language_file).'</strong></p>'.$eol;
 		
-		parent::open_form('options.php');
+		self::open_form('options.php');
 		
 		settings_fields('acc_options');
 		do_settings_sections('acc_styles');
@@ -65,7 +65,7 @@ class ACC_Admin extends A5_OptionPage {
 			
 			echo '<div id="poststuff">';
 			
-			parent::open_draggable(__('Debug Info', self::language_file), 'debug-info');
+			self::open_draggable(__('Debug Info', self::language_file), 'debug-info');
 			
 			echo '<pre>';
 			
@@ -73,13 +73,13 @@ class ACC_Admin extends A5_OptionPage {
 			
 			echo '</pre>';
 			
-			parent::close_draggable();
+			self::close_draggable();
 			
 			echo '</div>';
 		
 		endif;
 		
-		parent::close_page();
+		self::close_page();
 		
 	}
 	
@@ -101,6 +101,12 @@ class ACC_Admin extends A5_OptionPage {
 		add_settings_field('use_own_css', __('Widget container:', self::language_file), array(&$this, 'acc_display_css'), 'acc_styles', 'acc_settings', array(__('You can enter your own style for the widgets here. This will overwrite the styles of your theme.', self::language_file), __('If you leave this empty, you can still style every instance of the widget individually.', self::language_file)));
 		
 		add_settings_field('acc_inline', __('Debug:', self::language_file), array(&$this, 'inline_field'), 'acc_styles', 'acc_settings', array(__('If you can&#39;t reach the dynamical style sheet, you&#39;ll have to diplay the styles inline. By clicking here you can do so.', self::language_file)));
+		
+		$cachesize = count(self::$options['cache']);
+		
+		$entry = ($cachesize > 1) ? __('entries', self::language_file) : __('entry', self::language_file);
+		
+		if ($cachesize > 0) add_settings_field('acc_reset', sprintf(__('Empty cache (%d %s):', self::language_file), $cachesize, $entry), array(&$this, 'reset_field'), 'acc_styles', 'acc_settings', array(__('You can empty the plugin&#39;s cache here, if necessary.', self::language_file)));
 		
 		add_settings_field('acc_resize', false, array($this, 'resize_field'), 'acc_styles', 'acc_settings');
 	
@@ -138,6 +144,12 @@ class ACC_Admin extends A5_OptionPage {
 		
 	}
 	
+	function reset_field($labels) {
+		
+		a5_checkbox('reset_options', 'acc_options[reset_options]', @self::$options['reset_options'], $labels[0]);
+		
+	}
+	
 	function resize_field() {
 		
 		a5_resize_textarea(array('link', 'hover', 'css'), true);
@@ -150,6 +162,14 @@ class ACC_Admin extends A5_OptionPage {
 		self::$options['hover']=trim($input['hover']);
 		self::$options['css']=trim($input['css']);
 		self::$options['inline'] = isset($input['inline']) ? true : false;
+		
+		if (isset($input['reset_options'])) :
+		
+			self::$options['cache'] = array();
+			
+			add_settings_error('acc_options', 'empty-cache', __('Cache emptied.', self::language_file), 'updated');
+			
+		endif;
 		
 		return self::$options;
 	
