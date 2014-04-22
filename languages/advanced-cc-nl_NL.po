@@ -4,8 +4,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Advanced Category Column\n"
 "Report-Msgid-Bugs-To: http://wordpress.org/tag/advanced-category-column\n"
-"POT-Creation-Date: 2014-04-10 12:40+0200\n"
-"PO-Revision-Date: 2014-04-10 12:42+0200\n"
+"POT-Creation-Date: 2014-04-22 20:17+0200\n"
+"PO-Revision-Date: 2014-04-22 20:17+0200\n"
 "Last-Translator: Waldemar Stoffel <stoffel@atelier-fuenf.de>\n"
 "Language-Team: Waldemar Stoffel <stoffel@atelier-fuenf.de>\n"
 "Language: nl_NL\n"
@@ -31,7 +31,7 @@ msgid "Donate"
 msgstr "Donatie"
 
 #: advanced-cc.php:107 class-lib/A5_OptionPageClass.php:31
-#: class-lib/ACC_AdminClass.php:34
+#: class-lib/ACC_AdminClass.php:35
 msgid "Settings"
 msgstr "Instellingen"
 
@@ -43,7 +43,7 @@ msgstr "Link naar"
 msgid "Click to toggle"
 msgstr "Klicken, om om te schakelen."
 
-#: class-lib/ACC_AdminClass.php:47
+#: class-lib/ACC_AdminClass.php:61
 msgid ""
 "http://wasistlos.waldemarstoffel.com/plugins-fur-wordpress/advanced-category-"
 "column-plugin"
@@ -51,11 +51,11 @@ msgstr ""
 "http://wasistlos.waldemarstoffel.com/plugins-fur-wordpress/advanced-category-"
 "column-plugin"
 
-#: class-lib/ACC_AdminClass.php:47
+#: class-lib/ACC_AdminClass.php:61
 msgid "Plugin Support"
 msgstr "Plugin Support"
 
-#: class-lib/ACC_AdminClass.php:49
+#: class-lib/ACC_AdminClass.php:63
 msgid ""
 "Style the links of the widget. If you leave this empty, your theme will "
 "style the hyperlinks."
@@ -63,15 +63,15 @@ msgstr ""
 "Stijl de links van de widget. Als dit leeg blijft, zal je theme de styling "
 "van de hyperlinks overnemen."
 
-#: class-lib/ACC_AdminClass.php:51
+#: class-lib/ACC_AdminClass.php:65
 msgid "Just input something like,"
 msgstr "Geef gewoon iets als,"
 
-#: class-lib/ACC_AdminClass.php:53
+#: class-lib/ACC_AdminClass.php:67
 msgid "to get fat, blue, underlined links."
 msgstr "aan, om vette, blauwe, onderstrepen links te krijgen."
 
-#: class-lib/ACC_AdminClass.php:55
+#: class-lib/ACC_AdminClass.php:69
 msgid ""
 "You most probably have to use &#34;!important&#34; at the end of each line, "
 "to make it work."
@@ -79,27 +79,27 @@ msgstr ""
 "Hoogstwaarschijnlijk moet je &#34;!important&#34; op het eind van de lijn "
 "gebruiken, om de styling aan het werk te zetten."
 
-#: class-lib/ACC_AdminClass.php:68
+#: class-lib/ACC_AdminClass.php:82
 msgid "Debug Info"
 msgstr "Debug info"
 
-#: class-lib/ACC_AdminClass.php:95
+#: class-lib/ACC_AdminClass.php:109
 msgid "Styling of the links"
 msgstr "Styling van de Links"
 
-#: class-lib/ACC_AdminClass.php:97
+#: class-lib/ACC_AdminClass.php:111
 msgid "Link style:"
 msgstr "Link stijl:"
 
-#: class-lib/ACC_AdminClass.php:99
+#: class-lib/ACC_AdminClass.php:113
 msgid "Hover style:"
 msgstr "Hover stijl:"
 
-#: class-lib/ACC_AdminClass.php:101
+#: class-lib/ACC_AdminClass.php:115
 msgid "Widget container:"
 msgstr "Widget container:"
 
-#: class-lib/ACC_AdminClass.php:101
+#: class-lib/ACC_AdminClass.php:115
 msgid ""
 "You can enter your own style for the widgets here. This will overwrite the "
 "styles of your theme."
@@ -107,7 +107,7 @@ msgstr ""
 "Je kunt hier je eigen stijl voor de widgets invoegen. Dat gaat de stijlen "
 "van je theme overschrijven."
 
-#: class-lib/ACC_AdminClass.php:101
+#: class-lib/ACC_AdminClass.php:115
 msgid ""
 "If you leave this empty, you can still style every instance of the widget "
 "individually."
@@ -115,40 +115,48 @@ msgstr ""
 "Als je dit veld leeg laat, kun je noch steeds elke instantie van de widget "
 "individueel aanpassen."
 
-#: class-lib/ACC_AdminClass.php:103
+#: class-lib/ACC_AdminClass.php:117
+msgid "Compress Style Sheet:"
+msgstr "Comprimeer Style Sheet:"
+
+#: class-lib/ACC_AdminClass.php:117
+msgid "Click here to compress the style sheet."
+msgstr "Hier klikken, om het style sheet te comprimeren."
+
+#: class-lib/ACC_AdminClass.php:119
 msgid "Debug:"
 msgstr "Debug:"
 
-#: class-lib/ACC_AdminClass.php:103
+#: class-lib/ACC_AdminClass.php:119
 msgid ""
-"If you can&#39;t reach the dynamical style sheet, you&#39;ll have to diplay "
+"If you can&#39;t reach the dynamical style sheet, you&#39;ll have to display "
 "the styles inline. By clicking here you can do so."
 msgstr ""
 "In sommige gevallen kan de dynamische style sheet niet worden geladen. Als "
-"je hier klickt, wordt de CSS inline in de HTML"
+"je hier klickt, wordt de CSS inline in de HTML geschreven."
 
-#: class-lib/ACC_AdminClass.php:107
+#: class-lib/ACC_AdminClass.php:123
 msgid "entries"
 msgstr "objecten"
 
-#: class-lib/ACC_AdminClass.php:107
+#: class-lib/ACC_AdminClass.php:123
 msgid "entry"
 msgstr "object"
 
-#: class-lib/ACC_AdminClass.php:109
+#: class-lib/ACC_AdminClass.php:125
 #, php-format
 msgid "Empty cache (%d %s):"
 msgstr "Cache ledigen (%d %s):"
 
-#: class-lib/ACC_AdminClass.php:109
+#: class-lib/ACC_AdminClass.php:125
 msgid "You can empty the plugin&#39;s cache here, if necessary."
 msgstr "Hier kun je de cache ledigen, als je wilt."
 
-#: class-lib/ACC_AdminClass.php:117
+#: class-lib/ACC_AdminClass.php:133
 msgid "Just put some css code here."
 msgstr "Vul hier jouw css code in."
 
-#: class-lib/ACC_AdminClass.php:170
+#: class-lib/ACC_AdminClass.php:193
 msgid "Cache emptied."
 msgstr "Cache geledigd."
 

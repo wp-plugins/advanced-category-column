@@ -4,8 +4,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Advanced Category Column\n"
 "Report-Msgid-Bugs-To: http://wordpress.org/tag/advanced-category-column\n"
-"POT-Creation-Date: 2014-03-27 13:44+0200\n"
-"PO-Revision-Date: 2014-03-27 13:44+0200\n"
+"POT-Creation-Date: 2014-04-22 20:19+0200\n"
+"PO-Revision-Date: 2014-04-22 20:19+0200\n"
 "Last-Translator: Waldemar Stoffel <stoffel@atelier-fuenf.de>\n"
 "Language-Team: Waldemar Stoffel <stoffel@atelier-fuenf.de>\n"
 "Language: es_ES\n"
@@ -31,7 +31,7 @@ msgid "Donate"
 msgstr "Donar"
 
 #: advanced-cc.php:107 class-lib/A5_OptionPageClass.php:31
-#: class-lib/ACC_AdminClass.php:34
+#: class-lib/ACC_AdminClass.php:35
 msgid "Settings"
 msgstr "Ajustes"
 
@@ -43,7 +43,7 @@ msgstr "enlace permanente a"
 msgid "Click to toggle"
 msgstr ""
 
-#: class-lib/ACC_AdminClass.php:47
+#: class-lib/ACC_AdminClass.php:61
 msgid ""
 "http://wasistlos.waldemarstoffel.com/plugins-fur-wordpress/advanced-category-"
 "column-plugin"
@@ -51,11 +51,11 @@ msgstr ""
 "http://wasistlos.waldemarstoffel.com/plugins-fur-wordpress/advanced-category-"
 "column-plugin"
 
-#: class-lib/ACC_AdminClass.php:47
+#: class-lib/ACC_AdminClass.php:61
 msgid "Plugin Support"
 msgstr ""
 
-#: class-lib/ACC_AdminClass.php:49
+#: class-lib/ACC_AdminClass.php:63
 msgid ""
 "Style the links of the widget. If you leave this empty, your theme will "
 "style the hyperlinks."
@@ -63,15 +63,15 @@ msgstr ""
 "El estilo de los enlaces del widget. Si deja el campo vacío, el tema será el "
 "mismo estilo de los hipervínculos."
 
-#: class-lib/ACC_AdminClass.php:51
+#: class-lib/ACC_AdminClass.php:65
 msgid "Just input something like,"
 msgstr "Sólo algo de entrada como,"
 
-#: class-lib/ACC_AdminClass.php:53
+#: class-lib/ACC_AdminClass.php:67
 msgid "to get fat, blue, underlined links."
 msgstr "Los enlaces serán, azul subrayado."
 
-#: class-lib/ACC_AdminClass.php:55
+#: class-lib/ACC_AdminClass.php:69
 msgid ""
 "You most probably have to use &#34;!important&#34; at the end of each line, "
 "to make it work."
@@ -79,51 +79,80 @@ msgstr ""
 "Lo más probable es usar &#34;!important&#34; al final de cada línea, para "
 "hacer que funcione."
 
-#: class-lib/ACC_AdminClass.php:68
+#: class-lib/ACC_AdminClass.php:82
 msgid "Debug Info"
 msgstr ""
 
-#: class-lib/ACC_AdminClass.php:95
+#: class-lib/ACC_AdminClass.php:109
 msgid "Styling of the links"
 msgstr "Estilo de los enlaces"
 
-#: class-lib/ACC_AdminClass.php:97
+#: class-lib/ACC_AdminClass.php:111
 msgid "Link style:"
 msgstr "Estílo enlace:"
 
-#: class-lib/ACC_AdminClass.php:99
+#: class-lib/ACC_AdminClass.php:113
 msgid "Hover style:"
 msgstr "Estilo hover:"
 
-#: class-lib/ACC_AdminClass.php:101
+#: class-lib/ACC_AdminClass.php:115
 msgid "Widget container:"
 msgstr ""
 
-#: class-lib/ACC_AdminClass.php:101
+#: class-lib/ACC_AdminClass.php:115
 msgid ""
 "You can enter your own style for the widgets here. This will overwrite the "
 "styles of your theme."
 msgstr ""
 
-#: class-lib/ACC_AdminClass.php:101
+#: class-lib/ACC_AdminClass.php:115
 msgid ""
 "If you leave this empty, you can still style every instance of the widget "
 "individually."
 msgstr ""
 
-#: class-lib/ACC_AdminClass.php:103
+#: class-lib/ACC_AdminClass.php:117
+msgid "Compress Style Sheet:"
+msgstr ""
+
+#: class-lib/ACC_AdminClass.php:117
+msgid "Click here to compress the style sheet."
+msgstr ""
+
+#: class-lib/ACC_AdminClass.php:119
 msgid "Debug:"
 msgstr ""
 
-#: class-lib/ACC_AdminClass.php:103
+#: class-lib/ACC_AdminClass.php:119
 msgid ""
-"If you can&#39;t reach the dynamical style sheet, you&#39;ll have to diplay "
+"If you can&#39;t reach the dynamical style sheet, you&#39;ll have to display "
 "the styles inline. By clicking here you can do so."
 msgstr ""
 
-#: class-lib/ACC_AdminClass.php:111
+#: class-lib/ACC_AdminClass.php:123
+msgid "entries"
+msgstr ""
+
+#: class-lib/ACC_AdminClass.php:123
+msgid "entry"
+msgstr ""
+
+#: class-lib/ACC_AdminClass.php:125
+#, php-format
+msgid "Empty cache (%d %s):"
+msgstr ""
+
+#: class-lib/ACC_AdminClass.php:125
+msgid "You can empty the plugin&#39;s cache here, if necessary."
+msgstr ""
+
+#: class-lib/ACC_AdminClass.php:133
 msgid "Just put some css code here."
 msgstr "Sólo hay que poner algo de código CSS aquí."
+
+#: class-lib/ACC_AdminClass.php:193
+msgid "Cache emptied."
+msgstr ""
 
 #: class-lib/ACC_WidgetClass.php:20
 msgid ""
