@@ -40,7 +40,7 @@ class Advanced_Category_Column_Widget extends WP_Widget {
 			'showcat_txt' => NULL,
 			'wordcount' => 3,
 			'linespace' => NULL,
-			'width' => NULL,
+			'width' => get_option('thumbnail_size_w'),
 			'words' => NULL,
 			'line' => 1,
 			'line_color' => '#dddddd',
@@ -98,19 +98,19 @@ class Advanced_Category_Column_Widget extends WP_Widget {
 		$base_name = 'widget-'.$this->id_base.'['.$this->number.']';
 		
 		$options = array (
-						array($base_id.'homepage', $base_name.'[homepage]', $homepage, __('Homepage', self::language_file)),
-						array($base_id.'frontpage', $base_name.'[frontpage]', $frontpage, __('Frontpage (e.g. a static page as homepage)', self::language_file)),
-						array($base_id.'page', $base_name.'[page]', $page, __('&#34;Page&#34; pages', self::language_file)),
-						array($base_id.'category', $base_name.'[category]', $category, __('Category pages', self::language_file)),
-						array($base_id.'single', $base_name.'[single]', $single, __('Single post pages', self::language_file)),
-						array($base_id.'date', $base_name.'[date]', $date, __('Archive pages', self::language_file)),
-						array($base_id.'tag', $base_name.'[tag]', $tag, __('Tag pages', self::language_file)),
-						array($base_id.'attachment', $base_name.'[attachment]', $attachment, __('Attachments', self::language_file)),
-						array($base_id.'taxonomy', $base_name.'[taxonomy]', $taxonomy, __('Custom Taxonomy pages (only available, if having a plugin)', self::language_file)),
-						array($base_id.'author', $base_name.'[author]', $author, __('Author pages', self::language_file)),
-						array($base_id.'search', $base_name.'[search]', $search, __('Search Results', self::language_file)),
-						array($base_id.'not_found', $base_name.'[not_found]', $not_found, __('&#34;Not Found&#34;', self::language_file))
-				);
+			array($base_id.'homepage', $base_name.'[homepage]', $homepage, __('Homepage', self::language_file)),
+			array($base_id.'frontpage', $base_name.'[frontpage]', $frontpage, __('Frontpage (e.g. a static page as homepage)', self::language_file)),
+			array($base_id.'page', $base_name.'[page]', $page, __('&#34;Page&#34; pages', self::language_file)),
+			array($base_id.'category', $base_name.'[category]', $category, __('Category pages', self::language_file)),
+			array($base_id.'single', $base_name.'[single]', $single, __('Single post pages', self::language_file)),
+			array($base_id.'date', $base_name.'[date]', $date, __('Archive pages', self::language_file)),
+			array($base_id.'tag', $base_name.'[tag]', $tag, __('Tag pages', self::language_file)),
+			array($base_id.'attachment', $base_name.'[attachment]', $attachment, __('Attachments', self::language_file)),
+			array($base_id.'taxonomy', $base_name.'[taxonomy]', $taxonomy, __('Custom Taxonomy pages (only available, if having a plugin)', self::language_file)),
+			array($base_id.'author', $base_name.'[author]', $author, __('Author pages', self::language_file)),
+			array($base_id.'search', $base_name.'[search]', $search, __('Search Results', self::language_file)),
+			array($base_id.'not_found', $base_name.'[not_found]', $not_found, __('&#34;Not Found&#34;', self::language_file))
+		);
 			
 		$checkall = array($base_id.'checkall', $base_name.'[checkall]', __('Check all', self::language_file));
 		
@@ -207,22 +207,15 @@ class Advanced_Category_Column_Widget extends WP_Widget {
 		
 		$title = apply_filters('widget_title', $instance['title']);	
 		
-		
-		if (empty($instance['style'])) :
+		if (!empty($instance['style'])) :
 			
-			$acc_before_widget=$before_widget;
-			$acc_after_widget=$after_widget;
-		
-		else :
+			$style=str_replace(array("\r\n", "\n", "\r"), '', $instance['style']);
 			
-			$acc_style=str_replace(array("\r\n", "\n", "\r"), '', $instance['style']);
-			
-			$acc_before_widget='<div id="'.$widget_id.'" class="widget_advanced_category_column_widget" style="'.$acc_style.'">';
-			$acc_after_widget='</div>';
+			$before_widget = str_replace('>', 'style="'.$style.'">', $before_widget);
 			
 		endif;
 		
-		echo $acc_before_widget;
+		echo $before_widget;
 		
 		if ( $title ) echo $before_title . $title . $after_title;
 	 
@@ -230,11 +223,11 @@ class Advanced_Category_Column_Widget extends WP_Widget {
 		
 		$i=1;
 		
+		global $wp_query;
+		
 		$acc_setup['posts_per_page'] = $instance['postcount'];
 		
 		if (is_category() || is_home() || empty($instance['home'])) :
-			
-			global $wp_query;
 			
 			$acc_page = $wp_query->get( 'paged' );
 			
@@ -251,8 +244,6 @@ class Advanced_Category_Column_Widget extends WP_Widget {
 		if ($instance['list'] || !empty($acc_cat)) $acc_setup['cat'] = $instance['list'].$acc_cat;
 		
 		if (is_single()) :
-			
-			global $wp_query;
 			
 			$acc_setup['post__not_in'] = array($wp_query->get_queried_object_id()); 
 		
@@ -280,7 +271,7 @@ class Advanced_Category_Column_Widget extends WP_Widget {
 			
 			endif;
 		 
-			$acc_tags = A5_Image::tags($post, 'acc_options', self::language_file);
+			$acc_tags = A5_Image::tags(self::language_file);
 			
 			$acc_image_alt = $acc_tags['image_alt'];
 			$acc_image_title = $acc_tags['image_title'];
@@ -290,81 +281,26 @@ class Advanced_Category_Column_Widget extends WP_Widget {
 			
 			// get thumbnail
 			
-			$default = A5_Image::get_default($instance['width']);
-			
-			$acc_imgborder = (isset($instance['imgborder'])) ? ' border: '.$instance['imgborder'].';' : '';
+			$acc_imgborder = (!empty($instance['imgborder'])) ? ' style="border: '.$instance['imgborder'].';"' : '';
 				
-			if (!has_post_thumbnail()) :
-			
-				$args = array (
-					'content' => $post->post_content,
-					'width' => $default[0],
-					'height' => $default[1], 
-					'option' => 'acc_options'
-				);	
+			$id = get_the_ID();
+					
+			$args = array (
+				'id' => $id,
+				'option' => 'acc_options',
+				'width' => $instance['width']
+			);
 			   
-				$acc_image_info = A5_Image::thumbnail($args);
-				
-				$acc_thumb = $acc_image_info['thumb'];
-				
-				$acc_width = $acc_image_info['thumb_width'];
-		
-				$acc_height = $acc_image_info['thumb_height'];
-				
-				if ($acc_thumb) :
-				
-					if ($acc_width) $acc_img = '<img title="'.$acc_image_title.'" src="'.$acc_thumb.'" alt="'.$acc_image_alt.'" class="wp-post-image" width="'.$acc_width.'" height="'.$acc_height.'" style="'.$acc_imgborder.'" />';
-						
-					else $acc_img = '<img title="'.$acc_image_title.'" src="'.$acc_thumb.'" alt="'.$acc_image_alt.'" class="wp-post-image" style="maxwidth: '.$width.'; maxheight: '.$height.';'.$acc_imgborder.'" />';
-					
-				endif;
-				
-			else :
+			$acc_image_info = A5_Image::thumbnail($args);
 			
-				$img_info = wp_get_attachment_image_src( get_post_thumbnail_id($post->ID), 'large');
-						
-					if (!$img_info):
-					
-						$src = get_the_post_thumbnail();
-						
-						$img = preg_match_all('/<\s*img[^>]+src\s*=\s*["\']?([^\s"\']+)["\']?[\s\/>]+/', $src, $matches);
-						
-						if ($img): 
-						
-							$img_info[0] = $matches[1][0];
-							
-							$img_size = A5_Image::get_size($img_info[0]);
-							
-							$img_info[1] = $img_size['width'];
-							
-							$img_info[2] = $img_size['height'];
-							
-						endif;
-						
-					endif;
-					
-					if ($img_info) :
-					
-						$args = array (
-							'ratio' => $img_info[1]/$img_info[2],
-							'thumb_width' => $img_info[1],
-							'thumb_height' => $img_info[2],
-							'width' => $default[0],
-							'height' => $default[1]
-						);
-						
-						$img_size = A5_Image::count_size($args);
-						
-						$atts = array('title' => $acc_image_title, 'alt' => $acc_image_alt, 'style' => $acc_imgborder);
-						
-						$size = array($img_size['width'], $img_size['height']);
-					
-						$acc_img = get_the_post_thumbnail($post->ID, $size, $atts);
-						
-					endif;
-				
-			endif;
-			   
+			$acc_thumb = $acc_image_info[0];
+			
+			$acc_width = $acc_image_info[1];
+	
+			$acc_height = ($acc_image_info[2]) ? ' height="'.$acc_image_info[2].'"' : '';
+			
+			if ($acc_thumb) if ($acc_width) $acc_img = '<img title="'.$acc_image_title.'" src="'.$acc_thumb.'" alt="'.$acc_image_alt.'" class="wp-post-image" width="'.$acc_width.'"'.$acc_height.$acc_imgborder.' />';
+			
 			if (isset($acc_img)) :
 			
 				echo '<a href="'.get_permalink().'">'.$acc_img.'</a>'.$eol.'<div style="clear: both;"></div>'.$eol.$acc_headline;
@@ -382,12 +318,12 @@ class Advanced_Category_Column_Widget extends WP_Widget {
 				$linespace = ($instance['linespace']) ? true : false;
 					
 				$args = array(
-				'excerpt' => $post->post_excerpt,
-				'content' => $post->post_content,
-				'type' => $type,
-				'count' => $instance['wordcount'],
-				'linespace' => $linespace,
-				'filter' => $filter
+					'excerpt' => $post->post_excerpt,
+					'content' => $post->post_content,
+					'type' => $type,
+					'count' => $instance['wordcount'],
+					'linespace' => $linespace,
+					'filter' => $filter
 				);
 				
 				echo A5_Excerpt::text($args);
@@ -412,7 +348,7 @@ class Advanced_Category_Column_Widget extends WP_Widget {
 		wp_reset_query();
 		wp_reset_postdata();
 		
-		echo $acc_after_widget;
+		echo $after_widget;
 		
 	else:
 	
