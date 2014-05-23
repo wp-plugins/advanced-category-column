@@ -4,8 +4,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Advanced Category Column\n"
 "Report-Msgid-Bugs-To: http://wordpress.org/tag/advanced-category-column\n"
-"POT-Creation-Date: 2014-02-18 12:49:44+00:00\n"
-"PO-Revision-Date: 2014-02-25 17:13+0200\n"
+"POT-Creation-Date: 2014-04-22 20:19+0200\n"
+"PO-Revision-Date: 2014-04-22 20:20+0200\n"
 "Last-Translator: Waldemar Stoffel <stoffel@atelier-fuenf.de>\n"
 "Language-Team: Waldemar Stoffel <stoffel@atelier-fuenf.de>\n"
 "Language: de_DE\n"
@@ -14,36 +14,36 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 "X-Generator: Poedit 1.6.4\n"
+"X-Poedit-Basepath: ..\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-KeywordsList: __;_e;_n:1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;esc_attr__;"
+"esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c;_n_noop:1,2;"
+"_nx_noop:3c,1,2;__ngettext_noop:1,2\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-SearchPath-0: .\n"
 
-#: advanced-cc.php:117
+#: advanced-cc.php:96
 msgid "FAQ"
 msgstr "FAQ"
 
-#: advanced-cc.php:118
+#: advanced-cc.php:97
 msgid "Donate"
 msgstr "Spenden"
 
-#: advanced-cc.php:130 advanced-cc.php:201 advanced-cc.php:212
+#: advanced-cc.php:107 class-lib/A5_OptionPageClass.php:31
+#: class-lib/ACC_AdminClass.php:35
 msgid "Settings"
 msgstr "Einstellungen"
 
-#: advanced-cc.php:142
-msgid "Styling of the links"
-msgstr "Styling der Links"
+#: class-lib/A5_ImageClass.php:47
+msgid "Permalink to"
+msgstr "Link zu: "
 
-#: advanced-cc.php:144
-msgid "Link style:"
-msgstr "Link-Stil:"
+#: class-lib/A5_OptionPageClass.php:112
+msgid "Click to toggle"
+msgstr "Zum Umschalten klicken"
 
-#: advanced-cc.php:146
-msgid "Hover style:"
-msgstr "Hover-Stil:"
-
-#: advanced-cc.php:154
-msgid "Just put some css code here."
-msgstr "Einfach css Code hier eingeben."
-
-#: advanced-cc.php:211
+#: class-lib/ACC_AdminClass.php:61
 msgid ""
 "http://wasistlos.waldemarstoffel.com/plugins-fur-wordpress/advanced-category-"
 "column-plugin"
@@ -51,7 +51,11 @@ msgstr ""
 "http://blog.atelier-fuenf.de/wordpress-plugins/advanced-category-column-"
 "plugin"
 
-#: advanced-cc.php:214
+#: class-lib/ACC_AdminClass.php:61
+msgid "Plugin Support"
+msgstr "Plugin Support"
+
+#: class-lib/ACC_AdminClass.php:63
 msgid ""
 "Style the links of the widget. If you leave this empty, your theme will "
 "style the hyperlinks."
@@ -59,15 +63,15 @@ msgstr ""
 "Style die Links im Widget. Wenn diese Felder leer bleiben, übernimmt das "
 "Theme das Styling der Hyperlinks."
 
-#: advanced-cc.php:216
+#: class-lib/ACC_AdminClass.php:65
 msgid "Just input something like,"
 msgstr "Einfach etwas wie,"
 
-#: advanced-cc.php:220
+#: class-lib/ACC_AdminClass.php:67
 msgid "to get fat, blue, underlined links."
 msgstr "eingeben, um fette, blaue, unterstrichene Links zu bekommen."
 
-#: advanced-cc.php:223
+#: class-lib/ACC_AdminClass.php:69
 msgid ""
 "You most probably have to use &#34;!important&#34; at the end of each line, "
 "to make it work."
@@ -75,11 +79,89 @@ msgstr ""
 "Höchstwahrscheinlich musst du &#34;!important&#34; am Ende jeder Zeile "
 "eingeben, um die Styles zu übernehmen."
 
-#: class-lib/A5_ImageClass.php:40
-msgid "Permalink to"
-msgstr "Link zu: "
+#: class-lib/ACC_AdminClass.php:82
+msgid "Debug Info"
+msgstr "Info zur Fehlersuche"
 
-#: class-lib/ACC_WidgetClass.php:18
+#: class-lib/ACC_AdminClass.php:109
+msgid "Styling of the links"
+msgstr "Styling der Links"
+
+#: class-lib/ACC_AdminClass.php:111
+msgid "Link style:"
+msgstr "Link-Stil:"
+
+#: class-lib/ACC_AdminClass.php:113
+msgid "Hover style:"
+msgstr "Hover-Stil:"
+
+#: class-lib/ACC_AdminClass.php:115
+msgid "Widget container:"
+msgstr "Widget Container:"
+
+#: class-lib/ACC_AdminClass.php:115
+msgid ""
+"You can enter your own style for the widgets here. This will overwrite the "
+"styles of your theme."
+msgstr ""
+"Du kannst deinen eigenen Stil für die Widgets hier eingeben. Das wird die "
+"Stile deines Themes überschreiben."
+
+#: class-lib/ACC_AdminClass.php:115
+msgid ""
+"If you leave this empty, you can still style every instance of the widget "
+"individually."
+msgstr ""
+"Wenn du das Feld leer lässt, kannst du immer noch jede Instanz des Widgets "
+"individuell stylen."
+
+#: class-lib/ACC_AdminClass.php:117
+msgid "Compress Style Sheet:"
+msgstr "Stylesheet Komprimieren:"
+
+#: class-lib/ACC_AdminClass.php:117
+msgid "Click here to compress the style sheet."
+msgstr "Anklicken, um das Stylesheet zu komprimieren."
+
+#: class-lib/ACC_AdminClass.php:119
+msgid "Debug:"
+msgstr "Debug:"
+
+#: class-lib/ACC_AdminClass.php:119
+msgid ""
+"If you can&#39;t reach the dynamical style sheet, you&#39;ll have to display "
+"the styles inline. By clicking here you can do so."
+msgstr ""
+"In manchen Fällen kann das virtuelle Style Sheet nicht erreicht werden. Ein "
+"Ablegen des CSS im Quellcode hilft dann. Hier klicken, um CSS inline zu "
+"schreiben."
+
+#: class-lib/ACC_AdminClass.php:123
+msgid "entries"
+msgstr "Einträge"
+
+#: class-lib/ACC_AdminClass.php:123
+msgid "entry"
+msgstr "Eintrag"
+
+#: class-lib/ACC_AdminClass.php:125
+#, php-format
+msgid "Empty cache (%d %s):"
+msgstr "Cache leeren (%d %s):"
+
+#: class-lib/ACC_AdminClass.php:125
+msgid "You can empty the plugin&#39;s cache here, if necessary."
+msgstr "Falls nötig, kannst du hier den Cache des Plugins leeren."
+
+#: class-lib/ACC_AdminClass.php:133
+msgid "Just put some css code here."
+msgstr "Einfach css Code hier eingeben."
+
+#: class-lib/ACC_AdminClass.php:193
+msgid "Cache emptied."
+msgstr "Cache geleert."
+
+#: class-lib/ACC_WidgetClass.php:20
 msgid ""
 "Configure the output and looks of the widget. Then display thumbnails and "
 "excerpts of posts in your sidebars and define, on what kind of pages they "
@@ -89,63 +171,64 @@ msgstr ""
 "Auszüge von Posts in deiner Sidebar und bestimme, auf welchen Seitentypen "
 "sie angezeigt werden."
 
-#: class-lib/ACC_WidgetClass.php:97
+#: class-lib/ACC_WidgetClass.php:101
 msgid "Homepage"
 msgstr "Homepage"
 
-#: class-lib/ACC_WidgetClass.php:98
+#: class-lib/ACC_WidgetClass.php:102
 msgid "Frontpage (e.g. a static page as homepage)"
 msgstr "Frontpage (z.B. eine statische Seite als Homepage)"
 
-#: class-lib/ACC_WidgetClass.php:99
+#: class-lib/ACC_WidgetClass.php:103
 msgid "&#34;Page&#34; pages"
 msgstr "&#34;Seite&#34; Seiten"
 
-#: class-lib/ACC_WidgetClass.php:100
+#: class-lib/ACC_WidgetClass.php:104
 msgid "Category pages"
 msgstr "Kategorieseiten"
 
-#: class-lib/ACC_WidgetClass.php:101
+#: class-lib/ACC_WidgetClass.php:105
 msgid "Single post pages"
 msgstr "Artikelseiten"
 
-#: class-lib/ACC_WidgetClass.php:102
+#: class-lib/ACC_WidgetClass.php:106
 msgid "Archive pages"
 msgstr "Archivseiten"
 
-#: class-lib/ACC_WidgetClass.php:103
+#: class-lib/ACC_WidgetClass.php:107
 msgid "Tag pages"
 msgstr "Schlagwortseiten"
 
-#: class-lib/ACC_WidgetClass.php:104
+#: class-lib/ACC_WidgetClass.php:108
 msgid "Attachments"
 msgstr "Attachments"
 
-#: class-lib/ACC_WidgetClass.php:105
+#: class-lib/ACC_WidgetClass.php:109
 msgid "Custom Taxonomy pages (only available, if having a plugin)"
 msgstr "Custom Taxonomy Seiten (gibt es nur mit entspr. Plugin)"
 
-#: class-lib/ACC_WidgetClass.php:106
+#: class-lib/ACC_WidgetClass.php:110
 msgid "Author pages"
 msgstr "Autorenseiten"
 
-#: class-lib/ACC_WidgetClass.php:107
+#: class-lib/ACC_WidgetClass.php:111
 msgid "Search Results"
 msgstr "Suchergebnisseiten"
 
-#: class-lib/ACC_WidgetClass.php:108
+#: class-lib/ACC_WidgetClass.php:112
 msgid "&#34;Not Found&#34;"
 msgstr "&#34;Nicht gefunden&#34;"
 
-#: class-lib/ACC_WidgetClass.php:111
+#: class-lib/ACC_WidgetClass.php:115
 msgid "Check all"
 msgstr "Alles auswählen"
 
-#: class-lib/ACC_WidgetClass.php:115
+#: class-lib/ACC_WidgetClass.php:119
 msgid "Title:"
 msgstr "Titel:"
 
-#: class-lib/ACC_WidgetClass.php:116
+#: class-lib/ACC_WidgetClass.php:120
+#, php-format
 msgid ""
 "To exclude certain categories or to show just a special category, simply "
 "write their ID&#39;s separated by comma (e.g. %s-5, 2, 4%s will show "
@@ -155,13 +238,13 @@ msgstr ""
 "anzuzeigen, einfach die ID&#39;s in eine kommagetrennte Liste schreiben (z."
 "B. %s-5,2,4%s wird Kategorie 2 und 4 anzeigen und Kategorie 5 ausschließen):"
 
-#: class-lib/ACC_WidgetClass.php:117
+#: class-lib/ACC_WidgetClass.php:121
 msgid "Check to show the categories in which the post is filed."
 msgstr ""
 "Anklicken, um die Kategorien, in denen der Artikel publiziert ist, "
 "anzuzeigen."
 
-#: class-lib/ACC_WidgetClass.php:118
+#: class-lib/ACC_WidgetClass.php:122
 msgid ""
 "Give some text that you want in front of the post&#39;s categtories (i.e "
 "&#39;filed under&#39;:"
@@ -169,23 +252,24 @@ msgstr ""
 "Gib hier den Text ein, den du vor den Artikelkategorien haben willst (z.B. "
 "&#39;abgelegt in&#39;):"
 
-#: class-lib/ACC_WidgetClass.php:119
+#: class-lib/ACC_WidgetClass.php:123
 msgid "How many posts will be displayed in the sidebar:"
 msgstr "Wie viele Posts sollen in der Sidebar angezeigt werden:"
 
-#: class-lib/ACC_WidgetClass.php:120
+#: class-lib/ACC_WidgetClass.php:124
 msgid "Offset (how many posts are spared out in the beginning):"
 msgstr "Offset (wie viele Posts werden am Anfang übersprungen):"
 
-#: class-lib/ACC_WidgetClass.php:121
+#: class-lib/ACC_WidgetClass.php:125
 msgid "Check to have the offset only on your homepage."
 msgstr "Anklicken, um den Offset nur auf der Homepage zu haben."
 
-#: class-lib/ACC_WidgetClass.php:122
+#: class-lib/ACC_WidgetClass.php:126
 msgid "Width of the thumbnail (in px):"
 msgstr "Breite des Thumbnails (in px):"
 
-#: class-lib/ACC_WidgetClass.php:123
+#: class-lib/ACC_WidgetClass.php:127
+#, php-format
 msgid ""
 "If wanting a border around the image, write the style here. %s would make it "
 "a black border, 1px wide."
@@ -193,25 +277,25 @@ msgstr ""
 "Wenn du einen Rahmen um das Bild willst, style es hier. %s sorgt für einen "
 "schwarzen, 1px weiten Rahmen."
 
-#: class-lib/ACC_WidgetClass.php:124
+#: class-lib/ACC_WidgetClass.php:128
 msgid "Weight of the Post Title:"
 msgstr "Gewicht der Überschrift:"
 
-#: class-lib/ACC_WidgetClass.php:125
+#: class-lib/ACC_WidgetClass.php:129
 msgid "In case there is no excerpt defined, how many sentences are displayed:"
 msgstr ""
 "Wie viele Sätze des Posts sollen angezeigt werden, falls kein Auszug "
 "definiert ist:"
 
-#: class-lib/ACC_WidgetClass.php:126
+#: class-lib/ACC_WidgetClass.php:130
 msgid "Check to display words instead of sentences."
 msgstr "Anklicken, wenn Wörter statt Sätze angezeigt werden sollen."
 
-#: class-lib/ACC_WidgetClass.php:127
+#: class-lib/ACC_WidgetClass.php:131
 msgid "Check to have each sentense in a new line."
 msgstr "Anklicken, um jeden Satz in einer neuen Zeile zu haben."
 
-#: class-lib/ACC_WidgetClass.php:128
+#: class-lib/ACC_WidgetClass.php:132
 msgid ""
 "Check to return the excerpt unfiltered (might avoid interferences with other "
 "plugins)."
@@ -219,7 +303,7 @@ msgstr ""
 "Anklicken, um den Auszug ungefiltert zu bekommen (das könnte Interferenzen "
 "mit anderen Plugins vermeiden)."
 
-#: class-lib/ACC_WidgetClass.php:129
+#: class-lib/ACC_WidgetClass.php:133
 msgid ""
 "If you want a line between the posts, this is the height in px (if not "
 "wanting a line, leave emtpy):"
@@ -227,11 +311,11 @@ msgstr ""
 "Wenn eine Trennlinie zwischen den Posts sein soll, ist dies die Höhe der "
 "Linie in px (einfach leer lassen, wenn keine Linie gewünscht wird):"
 
-#: class-lib/ACC_WidgetClass.php:130
+#: class-lib/ACC_WidgetClass.php:134
 msgid "The color of the line (e.g. #cccccc):"
 msgstr "Die Farbe der Trennlinie (z.B. #cccccc):"
 
-#: class-lib/ACC_WidgetClass.php:131
+#: class-lib/ACC_WidgetClass.php:135
 msgid ""
 "Check, where you want to show the widget. By default, it is showing on the "
 "homepage and the category pages:"
@@ -239,7 +323,8 @@ msgstr ""
 "Klicke an, wo das Widget gezeigt werden soll. Standardmäßig erscheint es auf "
 "der Homepage und in den Kategorien."
 
-#: class-lib/ACC_WidgetClass.php:132
+#: class-lib/ACC_WidgetClass.php:136
+#, php-format
 msgid ""
 "Here you can finally style the widget. Simply type something like%1$s"
 "%2$sborder-left: 1px dashed;%2$sborder-color: #000000;%3$s%2$sto get just a "
@@ -251,45 +336,27 @@ msgstr ""
 "schwarze gestrichelte Linie am linken Rand zu bekommen. Wenn dieses Feld "
 "leer bleibt, übernimmt das Theme das Styling des Widgets."
 
-#: adseasy.php:205
-msgid ""
-"You can enter your own style for the widgets here. This will overwrite the "
-"styles of your theme."
-msgstr ""
-"Du kannst deinen eigenen Stil für die Widgets hier eingeben. Das wird die "
-"Stile deines Themes überschreiben."
+#~ msgid ""
+#~ "The Advanced Category Column does, what the Category Column Plugin does; "
+#~ "it creates a widget, which you can drag to your sidebar and it will show "
+#~ "excerpts of the posts of other categories than showed in the center-"
+#~ "column. It just has more options than the the Category Column Plugin. It "
+#~ "is tested with WP up to version 3.5 and it might work with versions down "
+#~ "to 2.9, but will never be explicitly supported for those. The 'Advanced' "
+#~ "means, that you have a couple of more options than in the 'Category "
+#~ "Column Plugin'."
+#~ msgstr ""
+#~ "Die Advanced Category Column macht, was die Category Column auch macht; "
+#~ "sie kreiert ein Widget, was in der Sidebar plaziert werden kann, und dort "
+#~ "Artikel aus anderen Kategorien, als der in der Hauptspalte gezeigten, "
+#~ "anzeigt. Es hat einfach ein paar mehr Optionen als die Category Column. "
+#~ "Das Plugin wurde mit WP-Versionen bis 3.5 gestesten und sollte mit "
+#~ "Versionen ab 2.9 funktionieren, wird aber für diese nicht explizit "
+#~ "unterstützt. 'Advanced' heißt, das su ein paar mehr "
+#~ "Anpassungsmöglichkeiten hast als im 'Category Column Plugin'."
 
-#: adseasy.php:205
-msgid ""
-"If you leave this empty, you can still style every instance of the widget "
-"individually."
-msgstr ""
-"Wenn du das Feld leer lässt, kannst du immer noch jede Instanz des Widgets "
-"individuell stylen."
+#~ msgid "Waldemar Stoffel"
+#~ msgstr "Waldemar Stoffel"
 
-#. Description of the plugin/theme
-msgid ""
-"The Advanced Category Column does, what the Category Column Plugin does; it "
-"creates a widget, which you can drag to your sidebar and it will show "
-"excerpts of the posts of other categories than showed in the center-column. "
-"It just has more options than the the Category Column Plugin. It is tested "
-"with WP up to version 3.5 and it might work with versions down to 2.9, but "
-"will never be explicitly supported for those. The 'Advanced' means, that you "
-"have a couple of more options than in the 'Category Column Plugin'."
-msgstr ""
-"Die Advanced Category Column macht, was die Category Column auch macht; sie "
-"kreiert ein Widget, was in der Sidebar plaziert werden kann, und dort "
-"Artikel aus anderen Kategorien, als der in der Hauptspalte gezeigten, "
-"anzeigt. Es hat einfach ein paar mehr Optionen als die Category Column. Das "
-"Plugin wurde mit WP-Versionen bis 3.5 gestesten und sollte mit Versionen ab "
-"2.9 funktionieren, wird aber für diese nicht explizit unterstützt. "
-"'Advanced' heißt, das su ein paar mehr Anpassungsmöglichkeiten hast als im "
-"'Category Column Plugin'."
-
-#. Author of the plugin/theme
-msgid "Waldemar Stoffel"
-msgstr "Waldemar Stoffel"
-
-#. Author URI of the plugin/theme
-msgid "http://www.waldemarstoffel.com"
-msgstr "http://www.waldemarstoffel.com"
+#~ msgid "http://www.waldemarstoffel.com"
+#~ msgstr "http://www.waldemarstoffel.com"
