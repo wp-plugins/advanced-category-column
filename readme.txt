@@ -4,9 +4,9 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_i
 Tags: column, sidebar, widget, category, newspaper, image, multi widget
 Requires at least: 2.9
 Tested up to: 3.9.1
-Stable tag: 3.2
+Stable tag: 3.2.1
 
-The Advanced Category Column is a very customizable multiwidget for your sidebar.
+The Advanced Category Column is a very customizable multi-widget for your sidebar.
 
 == Description ==
 
@@ -84,13 +84,17 @@ Since some other stylesheets can have a higher priority, you will have to make y
 
 == Changelog ==
 
+= 3.2.1 =
+
+* Interference with Wordpress Page Widgets eliminated
+
 = 3.2 =
 
-* DSS is now compressable
+* DSS is now compressible
 
 = 3.1 =
 
-* All 'Devided by Zero' errors should be eliminated
+* All 'Divided by Zero' errors should be eliminated
 
 = 3.0 =
 
@@ -123,7 +127,7 @@ Since some other stylesheets can have a higher priority, you will have to make y
 = 2.7.3 =
 
 * more accurate and easy thumbnails in the widget
-* added the possibility to get unfilterd excerpt to avoid possible interferences with other plugins
+* added the possibility to get unfiltered excerpt to avoid possible interferences with other plugins
 
 = 2.7.2 =
 
@@ -153,7 +157,7 @@ Since some other stylesheets can have a higher priority, you will have to make y
 
 = 2.4 =
 
-* Adjusting the classes to be more like alrounders
+* Adjusting the classes to be more like allrounders
 
 = 2.3 =
 
@@ -175,7 +179,7 @@ Since some other stylesheets can have a higher priority, you will have to make y
 
 = 1.5 =
 
-* The textareas are now resizable and the input fields got smaller
+* The text-areas are now resizable and the input fields got smaller
 
 = 1.2 =
 
@@ -213,7 +217,7 @@ Bug with empty stylesheet on update fixed
 
 = 1.5 =
 
-The textareas are now resizable and the input fields got smaller
+The text-areas are now resizable and the input fields got smaller
 
 = 2.0 =
 
@@ -235,7 +239,7 @@ Complete overhaul of the code; it should be cleaner, some typos should have disa
 
 = 2.4 =
 
-Adjusting the classes to be more like alrounders
+Adjusting the classes to be more like allrounders
 
 = 2.5 =
 
@@ -263,7 +267,7 @@ bug with title heading fixed
 
 = 2.7.3 =
 
-more accurate and easy thumbnails in the widget; added the possibility to get unfilterd excerpt to avoid possible interferences with other plugins
+more accurate and easy thumbnails in the widget; added the possibility to get unfiltered excerpt to avoid possible interferences with other plugins
 
 = 2.7.4 =
 
@@ -295,8 +299,12 @@ More foolproof
 
 = 3.1 =
 
-All 'Devided by Zero' errors should be eliminated
+All 'Divided by Zero' errors should be eliminated
 
 = 3.2 =
 
-DSS is now compressable
+DSS is now compressible
+
+= 3.2.1 =
+
+Interference with Wordpress Page Widgets eliminated
