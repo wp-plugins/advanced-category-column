@@ -3,8 +3,8 @@ Contributors: tepelstreel
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=BC9QUKBEZFZFY
 Tags: column, sidebar, widget, category, newspaper, image, multi widget
 Requires at least: 2.9
-Tested up to: 3.9.1
-Stable tag: 3.2.2
+Tested up to: 4.1
+Stable tag: 3.3
 
 The Advanced Category Column is a very customizable multi-widget for your sidebar.
 
@@ -15,8 +15,6 @@ The Advanced Category Column is mainly designed to give your blog a bit more of 
 If there is a post thumbnail, it will be displayed above the headline of the post. No further text will appear. If there is no thumbnail, only the headline and the excerpt of the post will be shown. When the plugin can detect neither the thumbnail nor the excerpt of a post, it will display just the first couple of sentences (or words) of a post.
 
 So far that is the same as my Category Column Plugin does also. Not every theme has the possibility to hide certain sidebars on different pages. That's where the advanced of our plugin comes in. In the ACC you can determine, where exactly the widget is showing and in the settings you can customize the links of your widget(s).
-
-The ACC was tested up to WP 3.9.1. It should work with versions down to 2.9 but was only tested since version 3.1.
 
 == Installation ==
 
@@ -83,6 +81,12 @@ Since some other stylesheets can have a higher priority, you will have to make y
 3. The plugin's settings section
 
 == Changelog ==
+
+= 3.3 =
+
+* Framework adjusted
+* Made ready for Custom Login Page
+* Made rady for WP 4.1
 
 = 3.2.2 =
 
@@ -316,3 +320,7 @@ Interference with Wordpress Page Widgets eliminated
 = 3.2.2 =
 
 Mistake in image class fixed
+
+= 3.3 =
+
+Framework adjusted; made ready for Custom Login Page; made rady for WP 4.1

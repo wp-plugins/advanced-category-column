@@ -47,6 +47,8 @@ class ACC_Admin extends A5_OptionPage {
 		
 		wp_enqueue_script('dashboard');
 		
+		if (wp_is_mobile()) wp_enqueue_script('jquery-touch-punch');
+		
 	}
 	
 	/**
@@ -62,11 +64,13 @@ class ACC_Admin extends A5_OptionPage {
 		
 		_e('Style the links of the widget. If you leave this empty, your theme will style the hyperlinks.', self::language_file);
 		
-        echo '<p>'.__('Just input something like,', self::language_file).'</p>'.$eol.'<p><strong>font-weight: bold;<br />'.$eol.'color: #0000ff;<br />';
+        self::tag_it(__('Just input something like,', self::language_file), 'p', false, false, true);
 		
-		echo 'text-decoration: underline;'.$eol.'</strong></p>'.$eol.__('to get fat, blue, underlined links.', self::language_file).$eol.'</p>'.$eol;
+		self::tag_it(self::tag_it('font-weight: bold;<br />'.$eol.'color: #0000ff;<br />text-decoration: underline;', 'strong', 1), 'p', false, false, true);
 		
-		echo '<p><strong>'.__('You most probably have to use &#34;!important&#34; at the end of each line, to make it work.', self::language_file).'</strong></p>'.$eol;
+		self::tag_it(__('to get fat, blue, underlined links.', self::language_file), 'p', false, false, true);
+		
+		self::tag_it(self::tag_it(__('You most probably have to use &#34;!important&#34; at the end of each line, to make it work.', self::language_file), 'strong', 1), 'p', false, false, true);
 		
 		self::open_form('options.php');
 		
@@ -76,20 +80,12 @@ class ACC_Admin extends A5_OptionPage {
 		submit_button();
 		
 		if (WP_DEBUG === true) :
+		
+			self::open_tab();
 			
-			echo '<div id="poststuff">';
-			
-			self::open_draggable(__('Debug Info', self::language_file), 'debug-info');
-			
-			echo '<pre>';
-			
-			var_dump(self::$options);
-			
-			echo '</pre>';
-			
-			self::close_draggable();
-			
-			echo '</div>';
+			self::sortable('deep-down', self::debug_info(self::$options, __('Debug Info', self::language_file)));
+		
+			self::close_tab();
 		
 		endif;
 		

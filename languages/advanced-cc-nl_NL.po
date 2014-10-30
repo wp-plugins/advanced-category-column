@@ -4,8 +4,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Advanced Category Column\n"
 "Report-Msgid-Bugs-To: http://wordpress.org/tag/advanced-category-column\n"
-"POT-Creation-Date: 2014-04-22 20:17+0200\n"
-"PO-Revision-Date: 2014-04-22 20:17+0200\n"
+"POT-Creation-Date: 2014-10-30 13:21+0200\n"
+"PO-Revision-Date: 2014-10-30 13:22+0200\n"
 "Last-Translator: Waldemar Stoffel <stoffel@atelier-fuenf.de>\n"
 "Language-Team: Waldemar Stoffel <stoffel@atelier-fuenf.de>\n"
 "Language: nl_NL\n"
@@ -13,7 +13,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Poedit-SourceCharset: UTF-8\n"
-"X-Generator: Poedit 1.6.4\n"
+"X-Generator: Poedit 1.6.10\n"
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 "X-Poedit-KeywordsList: __;_e;_n:1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;esc_attr__;"
@@ -39,11 +39,11 @@ msgstr "Instellingen"
 msgid "Permalink to"
 msgstr "Link naar"
 
-#: class-lib/A5_OptionPageClass.php:112
+#: class-lib/A5_OptionPageClass.php:145
 msgid "Click to toggle"
 msgstr "Klicken, om om te schakelen."
 
-#: class-lib/ACC_AdminClass.php:61
+#: class-lib/ACC_AdminClass.php:63
 msgid ""
 "http://wasistlos.waldemarstoffel.com/plugins-fur-wordpress/advanced-category-"
 "column-plugin"
@@ -51,11 +51,11 @@ msgstr ""
 "http://wasistlos.waldemarstoffel.com/plugins-fur-wordpress/advanced-category-"
 "column-plugin"
 
-#: class-lib/ACC_AdminClass.php:61
+#: class-lib/ACC_AdminClass.php:63
 msgid "Plugin Support"
 msgstr "Plugin Support"
 
-#: class-lib/ACC_AdminClass.php:63
+#: class-lib/ACC_AdminClass.php:65
 msgid ""
 "Style the links of the widget. If you leave this empty, your theme will "
 "style the hyperlinks."
@@ -63,15 +63,15 @@ msgstr ""
 "Stijl de links van de widget. Als dit leeg blijft, zal je theme de styling "
 "van de hyperlinks overnemen."
 
-#: class-lib/ACC_AdminClass.php:65
+#: class-lib/ACC_AdminClass.php:67
 msgid "Just input something like,"
 msgstr "Geef gewoon iets als,"
 
-#: class-lib/ACC_AdminClass.php:67
+#: class-lib/ACC_AdminClass.php:71
 msgid "to get fat, blue, underlined links."
 msgstr "aan, om vette, blauwe, onderstrepen links te krijgen."
 
-#: class-lib/ACC_AdminClass.php:69
+#: class-lib/ACC_AdminClass.php:73
 msgid ""
 "You most probably have to use &#34;!important&#34; at the end of each line, "
 "to make it work."
@@ -79,27 +79,27 @@ msgstr ""
 "Hoogstwaarschijnlijk moet je &#34;!important&#34; op het eind van de lijn "
 "gebruiken, om de styling aan het werk te zetten."
 
-#: class-lib/ACC_AdminClass.php:82
+#: class-lib/ACC_AdminClass.php:86
 msgid "Debug Info"
 msgstr "Debug info"
 
-#: class-lib/ACC_AdminClass.php:109
+#: class-lib/ACC_AdminClass.php:105
 msgid "Styling of the links"
 msgstr "Styling van de Links"
 
-#: class-lib/ACC_AdminClass.php:111
+#: class-lib/ACC_AdminClass.php:107
 msgid "Link style:"
 msgstr "Link stijl:"
 
-#: class-lib/ACC_AdminClass.php:113
+#: class-lib/ACC_AdminClass.php:109
 msgid "Hover style:"
 msgstr "Hover stijl:"
 
-#: class-lib/ACC_AdminClass.php:115
+#: class-lib/ACC_AdminClass.php:111
 msgid "Widget container:"
 msgstr "Widget container:"
 
-#: class-lib/ACC_AdminClass.php:115
+#: class-lib/ACC_AdminClass.php:111
 msgid ""
 "You can enter your own style for the widgets here. This will overwrite the "
 "styles of your theme."
@@ -107,7 +107,7 @@ msgstr ""
 "Je kunt hier je eigen stijl voor de widgets invoegen. Dat gaat de stijlen "
 "van je theme overschrijven."
 
-#: class-lib/ACC_AdminClass.php:115
+#: class-lib/ACC_AdminClass.php:111
 msgid ""
 "If you leave this empty, you can still style every instance of the widget "
 "individually."
@@ -115,19 +115,19 @@ msgstr ""
 "Als je dit veld leeg laat, kun je noch steeds elke instantie van de widget "
 "individueel aanpassen."
 
-#: class-lib/ACC_AdminClass.php:117
+#: class-lib/ACC_AdminClass.php:113
 msgid "Compress Style Sheet:"
 msgstr "Comprimeer Style Sheet:"
 
-#: class-lib/ACC_AdminClass.php:117
+#: class-lib/ACC_AdminClass.php:113
 msgid "Click here to compress the style sheet."
 msgstr "Hier klikken, om het style sheet te comprimeren."
 
-#: class-lib/ACC_AdminClass.php:119
+#: class-lib/ACC_AdminClass.php:115
 msgid "Debug:"
 msgstr "Debug:"
 
-#: class-lib/ACC_AdminClass.php:119
+#: class-lib/ACC_AdminClass.php:115
 msgid ""
 "If you can&#39;t reach the dynamical style sheet, you&#39;ll have to display "
 "the styles inline. By clicking here you can do so."
@@ -135,28 +135,28 @@ msgstr ""
 "In sommige gevallen kan de dynamische style sheet niet worden geladen. Als "
 "je hier klickt, wordt de CSS inline in de HTML geschreven."
 
-#: class-lib/ACC_AdminClass.php:123
+#: class-lib/ACC_AdminClass.php:119
 msgid "entries"
 msgstr "objecten"
 
-#: class-lib/ACC_AdminClass.php:123
+#: class-lib/ACC_AdminClass.php:119
 msgid "entry"
 msgstr "object"
 
-#: class-lib/ACC_AdminClass.php:125
+#: class-lib/ACC_AdminClass.php:121
 #, php-format
 msgid "Empty cache (%d %s):"
 msgstr "Cache ledigen (%d %s):"
 
-#: class-lib/ACC_AdminClass.php:125
+#: class-lib/ACC_AdminClass.php:121
 msgid "You can empty the plugin&#39;s cache here, if necessary."
 msgstr "Hier kun je de cache ledigen, als je wilt."
 
-#: class-lib/ACC_AdminClass.php:133
+#: class-lib/ACC_AdminClass.php:129
 msgid "Just put some css code here."
 msgstr "Vul hier jouw css code in."
 
-#: class-lib/ACC_AdminClass.php:193
+#: class-lib/ACC_AdminClass.php:189
 msgid "Cache emptied."
 msgstr "Cache geledigd."
 
@@ -170,63 +170,72 @@ msgstr ""
 "van posts in jouw sidebars zien. Bepaal zelf, op welk type pagina&#39;s de "
 "widget te zien zal zijn."
 
-#: class-lib/ACC_WidgetClass.php:101
+#: class-lib/ACC_WidgetClass.php:105
 msgid "Homepage"
 msgstr "Homepage"
 
-#: class-lib/ACC_WidgetClass.php:102
+#: class-lib/ACC_WidgetClass.php:106
 msgid "Frontpage (e.g. a static page as homepage)"
 msgstr "Frontpage (bijv. een statische pagina als homepage)"
 
-#: class-lib/ACC_WidgetClass.php:103
+#: class-lib/ACC_WidgetClass.php:107
 msgid "&#34;Page&#34; pages"
 msgstr "&#34;Page&#34; pagina&#39;s"
 
-#: class-lib/ACC_WidgetClass.php:104
+#: class-lib/ACC_WidgetClass.php:108
 msgid "Category pages"
 msgstr "Categorieën"
 
-#: class-lib/ACC_WidgetClass.php:105
+#: class-lib/ACC_WidgetClass.php:109
 msgid "Single post pages"
 msgstr "Single post pagina&#39;s"
 
-#: class-lib/ACC_WidgetClass.php:106
+#: class-lib/ACC_WidgetClass.php:110
 msgid "Archive pages"
 msgstr "Archief pagina&#39;s"
 
-#: class-lib/ACC_WidgetClass.php:107
+#: class-lib/ACC_WidgetClass.php:111
+msgid "Post type archives"
+msgstr "Post type archieven"
+
+#: class-lib/ACC_WidgetClass.php:112
 msgid "Tag pages"
 msgstr "Tag pagina&#39;s"
 
-#: class-lib/ACC_WidgetClass.php:108
+#: class-lib/ACC_WidgetClass.php:113
 msgid "Attachments"
 msgstr "Attachments"
 
-#: class-lib/ACC_WidgetClass.php:109
+#: class-lib/ACC_WidgetClass.php:114
 msgid "Custom Taxonomy pages (only available, if having a plugin)"
 msgstr "Custom Taxonomy pagina&#39;s (alleen als er een voor plugin is)"
 
-#: class-lib/ACC_WidgetClass.php:110
+#: class-lib/ACC_WidgetClass.php:115
 msgid "Author pages"
 msgstr "Auteurs pagina&#39;s"
 
-#: class-lib/ACC_WidgetClass.php:111
+#: class-lib/ACC_WidgetClass.php:116
 msgid "Search Results"
 msgstr "Zoekresultaten"
 
-#: class-lib/ACC_WidgetClass.php:112
+#: class-lib/ACC_WidgetClass.php:117
 msgid "&#34;Not Found&#34;"
 msgstr "&#34;Niet gevonden&#34;"
 
-#: class-lib/ACC_WidgetClass.php:115
+#: class-lib/ACC_WidgetClass.php:118
+#, fuzzy
+msgid "Login page (only available, if having a plugin)"
+msgstr "Login pagina (alleen als er een voor plugin is)"
+
+#: class-lib/ACC_WidgetClass.php:121
 msgid "Check all"
 msgstr "Alles aanvinken"
 
-#: class-lib/ACC_WidgetClass.php:119
+#: class-lib/ACC_WidgetClass.php:125
 msgid "Title:"
 msgstr "Titel:"
 
-#: class-lib/ACC_WidgetClass.php:120
+#: class-lib/ACC_WidgetClass.php:126
 #, php-format
 msgid ""
 "To exclude certain categories or to show just a special category, simply "
@@ -237,13 +246,13 @@ msgstr ""
 "laten zien, typ gewoon hun ID&#39;s gescheiden door een komma (bijv. "
 "%s-5,2,4%s zal categorieën 2 en 4 tonen en categorie 5 uitsluiten):"
 
-#: class-lib/ACC_WidgetClass.php:121
+#: class-lib/ACC_WidgetClass.php:127
 msgid "Check to show the categories in which the post is filed."
 msgstr ""
 "Klik hier, om de categorieën te tonen, onder welke de artiekel is "
 "gepubliceerd."
 
-#: class-lib/ACC_WidgetClass.php:122
+#: class-lib/ACC_WidgetClass.php:128
 msgid ""
 "Give some text that you want in front of the post&#39;s categtories (i.e "
 "&#39;filed under&#39;:"
@@ -251,23 +260,23 @@ msgstr ""
 "Geef hier een zin die voor de categorieën wilt hebben staan (bv. &#39;"
 "geplaatst in&#39;:"
 
-#: class-lib/ACC_WidgetClass.php:123
+#: class-lib/ACC_WidgetClass.php:129
 msgid "How many posts will be displayed in the sidebar:"
 msgstr "Hoeveel posts zullen in de sidebar getoond worden:"
 
-#: class-lib/ACC_WidgetClass.php:124
+#: class-lib/ACC_WidgetClass.php:130
 msgid "Offset (how many posts are spared out in the beginning):"
 msgstr "Offset (hoeveel posts zullen in het begin niet te zien zijn):"
 
-#: class-lib/ACC_WidgetClass.php:125
+#: class-lib/ACC_WidgetClass.php:131
 msgid "Check to have the offset only on your homepage."
 msgstr "Klik hier, om de offset alleen maar op de startpagina te hebben."
 
-#: class-lib/ACC_WidgetClass.php:126
+#: class-lib/ACC_WidgetClass.php:132
 msgid "Width of the thumbnail (in px):"
 msgstr "Breedte van de thumbnail (in px):"
 
-#: class-lib/ACC_WidgetClass.php:127
+#: class-lib/ACC_WidgetClass.php:133
 #, php-format
 msgid ""
 "If wanting a border around the image, write the style here. %s would make it "
@@ -276,25 +285,25 @@ msgstr ""
 "Als je een rand rond de afbeelding wilt, schrijf de stijl hier. %s zou een "
 "zwarte rand van 1px breedte geven."
 
-#: class-lib/ACC_WidgetClass.php:128
+#: class-lib/ACC_WidgetClass.php:134
 msgid "Weight of the Post Title:"
 msgstr "Gewicht van Hoofdlijn:"
 
-#: class-lib/ACC_WidgetClass.php:129
+#: class-lib/ACC_WidgetClass.php:135
 msgid "In case there is no excerpt defined, how many sentences are displayed:"
 msgstr ""
 "Hoeveel zinnen van de post zullen te zien zijn, als er geen excerpt "
 "gedefinieerd is:"
 
-#: class-lib/ACC_WidgetClass.php:130
+#: class-lib/ACC_WidgetClass.php:136
 msgid "Check to display words instead of sentences."
 msgstr "Klik hier, om woorden in plaats van zinnen te tonen."
 
-#: class-lib/ACC_WidgetClass.php:131
+#: class-lib/ACC_WidgetClass.php:137
 msgid "Check to have each sentense in a new line."
 msgstr "Klik hier, om elke zin in een nieuwe lijn te hebben."
 
-#: class-lib/ACC_WidgetClass.php:132
+#: class-lib/ACC_WidgetClass.php:138
 msgid ""
 "Check to return the excerpt unfiltered (might avoid interferences with other "
 "plugins)."
@@ -302,7 +311,7 @@ msgstr ""
 "Aanvinken, om de excerpt ongefilterd te verkrijgen (dat zou interferenties "
 "met andere plugins kunnen vermeiden)."
 
-#: class-lib/ACC_WidgetClass.php:133
+#: class-lib/ACC_WidgetClass.php:139
 msgid ""
 "If you want a line between the posts, this is the height in px (if not "
 "wanting a line, leave emtpy):"
@@ -310,11 +319,11 @@ msgstr ""
 "Als je een lijn tussen de posts wilt, is dit de hoogte in px (gewoon leeg "
 "laten, om geen lijn te hebben):"
 
-#: class-lib/ACC_WidgetClass.php:134
+#: class-lib/ACC_WidgetClass.php:140
 msgid "The color of the line (e.g. #cccccc):"
 msgstr "De kleur van die lijn (bv. #cccccc):"
 
-#: class-lib/ACC_WidgetClass.php:135
+#: class-lib/ACC_WidgetClass.php:141
 msgid ""
 "Check, where you want to show the widget. By default, it is showing on the "
 "homepage and the category pages:"
@@ -322,7 +331,7 @@ msgstr ""
 "Aanvinken, waar je de widget wilt laten zien. Als standaard wordt de widget "
 "op de homepage en in de categorieën getoond."
 
-#: class-lib/ACC_WidgetClass.php:136
+#: class-lib/ACC_WidgetClass.php:142
 #, php-format
 msgid ""
 "Here you can finally style the widget. Simply type something like%1$s"
