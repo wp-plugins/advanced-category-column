@@ -3,10 +3,10 @@ Contributors: tepelstreel
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=BC9QUKBEZFZFY
 Tags: column, sidebar, widget, category, newspaper, image, multi widget
 Requires at least: 2.9
-Tested up to: 3.9
-Stable tag: 2.8.2
+Tested up to: 4.1
+Stable tag: 3.4
 
-The Advanced Category Column is a very customizable multiwidget for your sidebar.
+The Advanced Category Column is a very customizable multi-widget for your sidebar.
 
 == Description ==
 
@@ -15,8 +15,6 @@ The Advanced Category Column is mainly designed to give your blog a bit more of 
 If there is a post thumbnail, it will be displayed above the headline of the post. No further text will appear. If there is no thumbnail, only the headline and the excerpt of the post will be shown. When the plugin can detect neither the thumbnail nor the excerpt of a post, it will display just the first couple of sentences (or words) of a post.
 
 So far that is the same as my Category Column Plugin does also. Not every theme has the possibility to hide certain sidebars on different pages. That's where the advanced of our plugin comes in. In the ACC you can determine, where exactly the widget is showing and in the settings you can customize the links of your widget(s).
-
-The ACC was tested up to WP 3.9. It should work with versions down to 2.9 but was only tested since version 3.1.
 
 == Installation ==
 
@@ -84,6 +82,40 @@ Since some other stylesheets can have a higher priority, you will have to make y
 
 == Changelog ==
 
+= 3.4 =
+
+* Framework adjusted
+
+= 3.3 =
+
+* Framework adjusted
+* Made ready for Custom Login Page
+* Made rady for WP 4.1
+
+= 3.2.2 =
+
+* Mistake in image class fixed
+
+= 3.2.1 =
+
+* Interference with Wordpress Page Widgets eliminated
+
+= 3.2 =
+
+* DSS is now compressible
+
+= 3.1 =
+
+* All 'Divided by Zero' errors should be eliminated
+
+= 3.0 =
+
+* More foolproof
+
+= 2.9 =
+
+* Adjusted framework; better ability to get images
+
 = 2.8.2 =
 
 * Instead of styling each individual widget, you can style now the whole class
@@ -107,7 +139,7 @@ Since some other stylesheets can have a higher priority, you will have to make y
 = 2.7.3 =
 
 * more accurate and easy thumbnails in the widget
-* added the possibility to get unfilterd excerpt to avoid possible interferences with other plugins
+* added the possibility to get unfiltered excerpt to avoid possible interferences with other plugins
 
 = 2.7.2 =
 
@@ -137,7 +169,7 @@ Since some other stylesheets can have a higher priority, you will have to make y
 
 = 2.4 =
 
-* Adjusting the classes to be more like alrounders
+* Adjusting the classes to be more like allrounders
 
 = 2.3 =
 
@@ -159,7 +191,7 @@ Since some other stylesheets can have a higher priority, you will have to make y
 
 = 1.5 =
 
-* The textareas are now resizable and the input fields got smaller
+* The text-areas are now resizable and the input fields got smaller
 
 = 1.2 =
 
@@ -197,7 +229,7 @@ Bug with empty stylesheet on update fixed
 
 = 1.5 =
 
-The textareas are now resizable and the input fields got smaller
+The text-areas are now resizable and the input fields got smaller
 
 = 2.0 =
 
@@ -219,7 +251,7 @@ Complete overhaul of the code; it should be cleaner, some typos should have disa
 
 = 2.4 =
 
-Adjusting the classes to be more like alrounders
+Adjusting the classes to be more like allrounders
 
 = 2.5 =
 
@@ -247,7 +279,7 @@ bug with title heading fixed
 
 = 2.7.3 =
 
-more accurate and easy thumbnails in the widget; added the possibility to get unfilterd excerpt to avoid possible interferences with other plugins
+more accurate and easy thumbnails in the widget; added the possibility to get unfiltered excerpt to avoid possible interferences with other plugins
 
 = 2.7.4 =
 
@@ -268,3 +300,35 @@ minor bugfix; image border added
 = 2.8.2 =
 
 Instead of styling each individual widget, you can style now the whole class
+
+= 2.9 =
+
+Adjusted framework; better ability to get images
+
+= 3.0 =
+
+More foolproof
+
+= 3.1 =
+
+All 'Divided by Zero' errors should be eliminated
+
+= 3.2 =
+
+DSS is now compressible
+
+= 3.2.1 =
+
+Interference with Wordpress Page Widgets eliminated
+
+= 3.2.2 =
+
+Mistake in image class fixed
+
+= 3.3 =
+
+Framework adjusted; made ready for Custom Login Page; made rady for WP 4.1
+
+= 3.4 =
+
+Framework adjusted
