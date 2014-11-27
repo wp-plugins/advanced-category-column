@@ -3,7 +3,7 @@
 Plugin Name: Advanced Category Column
 Plugin URI: http://wasistlos.waldemarstoffel.com/plugins-fur-wordpress/advanced-category-column-plugin
 Description: The Advanced Category Column does, what the Category Column Plugin does; it creates a widget, which you can drag to your sidebar and it will show excerpts of the posts of other categories than showed in the center-column. It just has more options than the the Category Column Plugin. The 'Advanced' means, that you have a couple of more options than in the 'Category Column Plugin'.
-Version: 3.3
+Version: 3.4
 Author: Waldemar Stoffel
 Author URI: http://www.waldemarstoffel.com
 License: GPL3
@@ -49,7 +49,7 @@ if (!class_exists('Advanced_Category_Column_Widget')) require_once ACC_PATH.'cla
 
 class AdvancedCategoryColumn {
 	
-	const language_file = 'advanced-cc';
+	const language_file = 'advanced-cc', version = 3.4;
 	
 	private static $options;
 	
@@ -57,19 +57,19 @@ class AdvancedCategoryColumn {
 		
 		self::$options = get_option('acc_options');
 		
-		if (isset(self::$options['tags'])) $this->update_plugin_options();
+		if (self::version != self::$options['version']) $this->_update_options();
 		
 		// Load language files
 	
 		load_plugin_textdomain(self::language_file, false , basename(dirname(__FILE__)).'/languages');
 		
-		add_action('admin_enqueue_scripts', array(&$this, 'enqueue_scripts'));
+		add_action('admin_enqueue_scripts', array($this, 'enqueue_scripts'));
 		
-		add_filter('plugin_row_meta', array(&$this, 'register_links'), 10, 2);	
-		add_filter( 'plugin_action_links', array(&$this, 'plugin_action_links'), 10, 2 );
+		add_filter('plugin_row_meta', array($this, 'register_links'), 10, 2);	
+		add_filter( 'plugin_action_links', array($this, 'plugin_action_links'), 10, 2 );
 		
-		register_activation_hook(  __FILE__, array(&$this, '_install') );
-		register_deactivation_hook(  __FILE__, array(&$this, '_uninstall') );
+		register_activation_hook(  __FILE__, array($this, '_install') );
+		register_deactivation_hook(  __FILE__, array($this, '_uninstall') );
 		
 		$ACC_DynamicCSS = new ACC_DynamicCSS;
 		$ACC_Admin = new ACC_Admin;
@@ -82,7 +82,9 @@ class AdvancedCategoryColumn {
 		
 		if ($hook != 'post.php' && $hook != 'widgets.php' && $hook != 'settings_page_advanced-cc-settings') return;
 		
-		wp_register_script('ta-expander-script', plugins_url('ta-expander.js', __FILE__), array('jquery'), '3.0', true);
+		$min = (WP_DEBUG == false) ? '.min.' : '.';
+		
+		wp_register_script('ta-expander-script', plugins_url('ta-expander'.$min.'js', __FILE__), array('jquery'), '3.0', true);
 		wp_enqueue_script('ta-expander-script');
 	
 	}
@@ -115,9 +117,11 @@ class AdvancedCategoryColumn {
 	function _install() {
 		
 		$default = array(
-			'cache' => array(), 
+			'version' => self::version,
+			'cache' => array(),
 			'inline' => false,
-			'compress' => false
+			'compress' => false,
+			'css' => "-moz-hyphens: auto;\n-o-hyphens: auto;\n-webkit-hyphens: auto;\n-ms-hyphens: auto;\nhyphens: auto;"
 		);
 		
 		add_option('acc_options', $default);
@@ -134,19 +138,23 @@ class AdvancedCategoryColumn {
 	
 	// updating options in case they are outdated
 	
-	function update_plugin_options() {	
+	function _update_options() {
 		
-			if (isset(self::$options['acc_css'])) self::$options['css'] = self::$options['acc_css'];
+		self::$options['css'] = (isset(self::$options['acc_css'])) ? self::$options['acc_css'] : '';
+		
+		self::$options['cache'] = array();
+		
+		self::$options['inline'] = (isset(self::$options['inline'])) ? self::$options['inline'] : false;
+		
+		self::$options['compress'] = (isset(self::$options['compress'])) ? self::$options['compress'] : false;
+		
+		self::$options['version'] = self::version;
+		
+		self::$options['css'] .= "-moz-hyphens: auto;\n-o-hyphens: auto;\n-webkit-hyphens: auto;\n-ms-hyphens: auto;\nhyphens: auto;".self::$options['css'];
+		
+		unset(self::$options['tags'], self::$options['sizes'], self::$options['acc_css']);
 			
-			self::$options['cache'] = array();
-			
-			self::$options['inline'] = false;
-			
-			self::$options['compress'] = false;
-			
-			unset(self::$options['tags'], self::$options['sizes'], self::$options['acc_css']);
-			
-			update_option('acc_options', self::$options);
+		update_option('acc_options', self::$options);
 	
 	}
 

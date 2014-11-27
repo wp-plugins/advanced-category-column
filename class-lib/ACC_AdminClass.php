@@ -17,9 +17,9 @@ class ACC_Admin extends A5_OptionPage {
 	
 	function __construct() {
 	
-		add_action('admin_init', array(&$this, 'initialize_settings'));
-		add_action('admin_menu', array(&$this, 'add_admin_menu'));
-		if (WP_DEBUG == true) add_action('admin_enqueue_scripts', array(&$this, 'enqueue_scripts'));
+		add_action('admin_init', array($this, 'initialize_settings'));
+		add_action('admin_menu', array($this, 'add_admin_menu'));
+		if (WP_DEBUG == true) add_action('admin_enqueue_scripts', array($this, 'enqueue_scripts'));
 		
 		self::$options = get_option('acc_options');
 		
@@ -32,7 +32,7 @@ class ACC_Admin extends A5_OptionPage {
 	 */
 	function add_admin_menu() {
 		
-		add_options_page('Advanced CC '.__('Settings', self::language_file), '<img alt="" src="'.plugins_url('advanced-category-column/img/a5-icon-11.png').'"> Advanced Category Column', 'administrator', 'advanced-cc-settings', array(&$this, 'build_options_page'));
+		add_options_page('Advanced CC '.__('Settings', self::language_file), '<img alt="" src="'.plugins_url('advanced-category-column/img/a5-icon-11.png').'"> Advanced Category Column', 'administrator', 'advanced-cc-settings', array($this, 'build_options_page'));
 		
 	}
 	
@@ -100,25 +100,25 @@ class ACC_Admin extends A5_OptionPage {
 	 */
 	function initialize_settings() {
 		
-		register_setting( 'acc_options', 'acc_options', array(&$this, 'validate') );
+		register_setting( 'acc_options', 'acc_options', array($this, 'validate') );
 		
-		add_settings_section('acc_settings', __('Styling of the links', self::language_file), array(&$this, 'acc_display_section'), 'acc_styles');
+		add_settings_section('acc_settings', __('Styling of the links', self::language_file), array($this, 'acc_display_section'), 'acc_styles');
 		
-		add_settings_field('acc_link_style', __('Link style:', self::language_file), array(&$this, 'acc_link_field'), 'acc_styles', 'acc_settings');
+		add_settings_field('acc_link', __('Link style:', self::language_file), array($this, 'acc_link_input'), 'acc_styles', 'acc_settings');
 		
-		add_settings_field('acc_hover_style', __('Hover style:', self::language_file), array(&$this, 'acc_hover_field'), 'acc_styles', 'acc_settings');
+		add_settings_field('acc_hover', __('Hover style:', self::language_file), array($this, 'acc_hover_input'), 'acc_styles', 'acc_settings');
 		
-		add_settings_field('use_own_css', __('Widget container:', self::language_file), array(&$this, 'acc_display_css'), 'acc_styles', 'acc_settings', array(__('You can enter your own style for the widgets here. This will overwrite the styles of your theme.', self::language_file), __('If you leave this empty, you can still style every instance of the widget individually.', self::language_file)));
+		add_settings_field('acc_css', __('Widget container:', self::language_file), array($this, 'acc_css_input'), 'acc_styles', 'acc_settings', array(__('You can enter your own style for the widgets here. This will overwrite the styles of your theme.', self::language_file), __('If you leave this empty, you can still style every instance of the widget individually.', self::language_file)));
 		
-		add_settings_field('acc_compress', __('Compress Style Sheet:', self::language_file), array(&$this, 'compress_field'), 'acc_styles', 'acc_settings', array(__('Click here to compress the style sheet.', self::language_file)));
+		add_settings_field('acc_compress', __('Compress Style Sheet:', self::language_file), array($this, 'acc_compress_input'), 'acc_styles', 'acc_settings', array(__('Click here to compress the style sheet.', self::language_file)));
 		
-		add_settings_field('acc_inline', __('Debug:', self::language_file), array(&$this, 'inline_field'), 'acc_styles', 'acc_settings', array(__('If you can&#39;t reach the dynamical style sheet, you&#39;ll have to display the styles inline. By clicking here you can do so.', self::language_file)));
+		add_settings_field('acc_inline', __('Debug:', self::language_file), array($this, 'acc_inline_input'), 'acc_styles', 'acc_settings', array(__('If you can&#39;t reach the dynamical style sheet, you&#39;ll have to display the styles inline. By clicking here you can do so.', self::language_file)));
 		
 		$cachesize = count(self::$options['cache']);
 		
 		$entry = ($cachesize > 1) ? __('entries', self::language_file) : __('entry', self::language_file);
 		
-		if ($cachesize > 0) add_settings_field('acc_reset', sprintf(__('Empty cache (%d %s):', self::language_file), $cachesize, $entry), array(&$this, 'reset_field'), 'acc_styles', 'acc_settings', array(__('You can empty the plugin&#39;s cache here, if necessary.', self::language_file)));
+		if ($cachesize > 0) add_settings_field('acc_reset', sprintf(__('Empty cache (%d %s):', self::language_file), $cachesize, $entry), array($this, 'acc_reset_input'), 'acc_styles', 'acc_settings', array(__('You can empty the plugin&#39;s cache here, if necessary.', self::language_file)));
 		
 		add_settings_field('acc_resize', false, array($this, 'resize_field'), 'acc_styles', 'acc_settings');
 	
@@ -130,19 +130,19 @@ class ACC_Admin extends A5_OptionPage {
 	
 	}
 	
-	function acc_link_field() {
+	function acc_link_input() {
 		
 		a5_textarea('link', 'acc_options[link]', @self::$options['link'], false, array('cols' => 35, 'rows' => 3));
 		
 	}
 	
-	function acc_hover_field() {
+	function acc_hover_input() {
 		
 		a5_textarea('hover', 'acc_options[hover]', @self::$options['hover'], false, array('cols' => 35, 'rows' => 3));
 		
 	}
 	
-	function acc_display_css($labels) {
+	function acc_css_input($labels) {
 		
 		echo $labels[0].'</br>'.$labels[1].'</br>';
 		
@@ -150,19 +150,19 @@ class ACC_Admin extends A5_OptionPage {
 		
 	}
 	
-	function compress_field($labels) {
+	function acc_compress_input($labels) {
 		
 		a5_checkbox('compress', 'acc_options[compress]', @self::$options['compress'], $labels[0]);
 		
 	}
 	
-	function inline_field($labels) {
+	function acc_inline_input($labels) {
 		
 		a5_checkbox('inline', 'acc_options[inline]', @self::$options['inline'], $labels[0]);
 		
 	}
 	
-	function reset_field($labels) {
+	function acc_reset_input($labels) {
 		
 		a5_checkbox('reset_options', 'acc_options[reset_options]', @self::$options['reset_options'], $labels[0]);
 		

@@ -22,12 +22,12 @@ class ACC_DynamicCSS extends A5_DynamicFiles {
 		
 		if (!array_key_exists('compress', self::$options)) self::$options['compress'] = false;
 		
-		parent::A5_DynamicFiles('wp', 'css', false, self::$options['inline']);
+		parent::A5_DynamicFiles('wp', 'css', 'all', false, self::$options['inline']);
 		
 		$eol = (self::$options['compress']) ? '' : "\r\n";
 		$tab = (self::$options['compress']) ? '' : "\t";
 		
-		$css_selector = '.widget_advanced_category_column_widget[id^="advanced_category_column_widget"]';
+		$css_selector = 'widget_advanced_category_column_widget[id^="advanced_category_column_widget"]';
 		
 		parent::$wp_styles .= (!self::$options['compress']) ? $eol.'/* CSS portion of Advanced Category Column */'.$eol.$eol : '';
 		
