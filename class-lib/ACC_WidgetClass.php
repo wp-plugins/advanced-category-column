@@ -191,24 +191,26 @@ class Advanced_Category_Column_Widget extends WP_Widget {
 		
 	// get the type of page, we're actually on
 	
-	if (is_front_page()) $pagetype='frontpage';
-	if (is_home()) $pagetype='homepage';
-	if (is_page()) $pagetype='page';
-	if (is_category()) $pagetype='category';
-	if (is_single()) $pagetype='single';
-	if (is_date()) $pagetype='date';
-	if (is_archive()) $pagetype='archive';
-	if (is_tag()) $pagetype='tag';
-	if (is_attachment()) $pagetype='attachment';
-	if (is_tax()) $pagetype='taxonomy';
-	if (is_author()) $pagetype='author';
-	if (is_search()) $pagetype='search';
-	if (is_404()) $pagetype='not_found';
-	if (!isset($pagetype)) $pagetype='login_page';
+	if (is_front_page()) $pagetype[]='frontpage';
+	if (is_home()) $pagetype[]='homepage';
+	if (is_page()) $pagetype[]='page';
+	if (is_category()) $pagetype[]='category';
+	if (is_single()) $pagetype[]='single';
+	if (is_date()) $pagetype[]='date';
+	if (is_archive()) $pagetype[]='archive';
+	if (is_tag()) $pagetype[]='tag';
+	if (is_attachment()) $pagetype[]='attachment';
+	if (is_tax()) $pagetype[]='taxonomy';
+	if (is_author()) $pagetype[]='author';
+	if (is_search()) $pagetype[]='search';
+	if (is_404()) $pagetype[]='not_found';
+	if (!isset($pagetype)) $pagetype[]='login_page';
 	
 	// display only, if said so in the settings of the widget
 	
-	if ($instance[$pagetype]) :
+	foreach ($pagetype as $page) if ($instance[$page]) $show_widget = true;
+
+	if ($show_widget) :
 		
 		// the widget is displayed
 		
