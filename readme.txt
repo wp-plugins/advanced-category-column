@@ -3,8 +3,8 @@ Contributors: tepelstreel
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=BC9QUKBEZFZFY
 Tags: column, sidebar, widget, category, newspaper, image, multi widget
 Requires at least: 2.9
-Tested up to: 4.2
-Stable tag: 3.4.1
+Tested up to: 4.3
+Stable tag: 3.4.2
 
 The Advanced Category Column is a very customizable multi-widget for your sidebar.
 
@@ -81,6 +81,10 @@ Since some other stylesheets can have a higher priority, you will have to make y
 3. The plugin's settings section
 
 == Changelog ==
+
+= 3.4.2 =
+
+* WP 4.3 ready
 
 = 3.4.1 =
 
@@ -340,3 +344,7 @@ Framework adjusted
 = 3.4.1 =
 
 WP 4.2 ready
+
+= 3.4.2 =
+
+WP 4.3 ready
