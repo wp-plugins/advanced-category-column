@@ -3,11 +3,12 @@
 Plugin Name: Advanced Category Column
 Plugin URI: http://wasistlos.waldemarstoffel.com/plugins-fur-wordpress/advanced-category-column-plugin
 Description: The Advanced Category Column does, what the Category Column Plugin does; it creates a widget, which you can drag to your sidebar and it will show excerpts of the posts of other categories than showed in the center-column. It just has more options than the the Category Column Plugin. The 'Advanced' means, that you have a couple of more options than in the 'Category Column Plugin'.
-Version: 3.4.1
+Version: 3.4.2
 Author: Waldemar Stoffel
 Author URI: http://www.waldemarstoffel.com
 License: GPL3
-Text Domain: advanced-cc 
+Text Domain: advanced-cc
+Domain Path: /languages
 */
 
 /*  Copyright 2011 - 2015 Waldemar Stoffel  (email : stoffel@atelier-fuenf.de)
@@ -41,6 +42,7 @@ if (!class_exists('A5_Excerpt')) require_once ACC_PATH.'class-lib/A5_ExcerptClas
 if (!class_exists('A5_FormField')) require_once ACC_PATH.'class-lib/A5_FormFieldClass.php';
 if (!class_exists('A5_OptionPage')) require_once ACC_PATH.'class-lib/A5_OptionPageClass.php';
 if (!class_exists('A5_DynamicFiles')) require_once ACC_PATH.'class-lib/A5_DynamicFileClass.php';
+if (!class_exists('A5_Widget')) require_once ACC_PATH.'class-lib/A5_WidgetClass.php';
 
 #loading plugin specific classes
 if (!class_exists('ACC_Admin')) require_once ACC_PATH.'class-lib/ACC_AdminClass.php';
@@ -49,7 +51,7 @@ if (!class_exists('Advanced_Category_Column_Widget')) require_once ACC_PATH.'cla
 
 class AdvancedCategoryColumn {
 	
-	const language_file = 'advanced-cc', version = 3.4;
+	const version = 3.4;
 	
 	private static $options;
 	
@@ -61,7 +63,7 @@ class AdvancedCategoryColumn {
 		
 		// Load language files
 	
-		load_plugin_textdomain(self::language_file, false , basename(dirname(__FILE__)).'/languages');
+		load_plugin_textdomain('advanced-cc', false , basename(dirname(__FILE__)).'/languages');
 		
 		add_action('admin_enqueue_scripts', array($this, 'enqueue_scripts'));
 		
@@ -95,8 +97,8 @@ class AdvancedCategoryColumn {
 		
 		if ($file == ACC_BASE) :
 		
-			$links[] = '<a href="http://wordpress.org/extend/plugins/advanced-category-column/faq/" target="_blank">'.__('FAQ', self::language_file).'</a>';
-			$links[] = '<a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=BC9QUKBEZFZFY" target="_blank">'.__('Donate', self::language_file).'</a>';
+			$links[] = '<a href="http://wordpress.org/extend/plugins/advanced-category-column/faq/" target="_blank">'.__('FAQ', 'advanced-cc').'</a>';
+			$links[] = '<a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=BC9QUKBEZFZFY" target="_blank">'.__('Donate', 'advanced-cc').'</a>';
 		
 		endif;
 		
@@ -106,7 +108,7 @@ class AdvancedCategoryColumn {
 	
 	function plugin_action_links( $links, $file ) {
 		
-		if ($file == ACC_BASE) array_unshift($links, '<a href="'.admin_url( 'options-general.php?page=advanced-cc-settings' ).'">'.__('Settings', self::language_file).'</a>');
+		if ($file == ACC_BASE) array_unshift($links, '<a href="'.admin_url( 'options-general.php?page=advanced-cc-settings' ).'">'.__('Settings', 'advanced-cc').'</a>');
 	
 		return $links;
 	
@@ -140,21 +142,21 @@ class AdvancedCategoryColumn {
 	
 	function _update_options() {
 		
-		self::$options['css'] = (isset(self::$options['acc_css'])) ? self::$options['acc_css'] : '';
+		$options_old = get_option('acc_options');
 		
-		self::$options['cache'] = array();
+		$options_new['css'] = (isset($options_old['acc_css'])) ? $options_old['acc_css'] : @$options_old['css'];
 		
-		self::$options['inline'] = (isset(self::$options['inline'])) ? self::$options['inline'] : false;
+		$options_new['cache'] = array();
 		
-		self::$options['compress'] = (isset(self::$options['compress'])) ? self::$options['compress'] : false;
+		$options_new['inline'] = (isset($options_old['inline'])) ? $options_old['inline'] : false;
 		
-		self::$options['version'] = self::version;
+		$options_new['compress'] = (isset($options_old['compress'])) ? $options_old['compress'] : false;
 		
-		self::$options['css'] .= "-moz-hyphens: auto;\n-o-hyphens: auto;\n-webkit-hyphens: auto;\n-ms-hyphens: auto;\nhyphens: auto;".self::$options['css'];
+		$options_new['version'] = self::version;
 		
-		unset(self::$options['tags'], self::$options['sizes'], self::$options['acc_css']);
-			
-		update_option('acc_options', self::$options);
+		if (!strstr($options_new['css'], 'hyphens')) $options_new['css'] .= "-moz-hyphens: auto;\n-o-hyphens: auto;\n-webkit-hyphens: auto;\n-ms-hyphens: auto;\nhyphens: auto;".$options_old['css'];
+		
+		update_option('acc_options', $options_new);
 	
 	}
 

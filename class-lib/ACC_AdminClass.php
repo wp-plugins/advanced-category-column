@@ -32,7 +32,7 @@ class ACC_Admin extends A5_OptionPage {
 	 */
 	function add_admin_menu() {
 		
-		add_options_page('Advanced CC '.__('Settings', self::language_file), '<img alt="" src="'.plugins_url('advanced-category-column/img/a5-icon-11.png').'"> Advanced Category Column', 'administrator', 'advanced-cc-settings', array($this, 'build_options_page'));
+		add_options_page('Advanced CC '.__('Settings', 'advanced-cc'), '<img alt="" src="'.plugins_url('advanced-category-column/img/a5-icon-11.png').'"> Advanced Category Column', 'administrator', 'advanced-cc-settings', array($this, 'build_options_page'));
 		
 	}
 	
@@ -58,19 +58,19 @@ class ACC_Admin extends A5_OptionPage {
 	 */
 	function build_options_page() {
 		
-		$eol = "\r\n";
+		$eol = "\n";
 		
-		self::open_page('Advanced Category Column', __('http://wasistlos.waldemarstoffel.com/plugins-fur-wordpress/advanced-category-column-plugin', self::language_file), 'advanced-category-column', __('Plugin Support', self::language_file));
+		self::open_page('Advanced Category Column', __('http://wasistlos.waldemarstoffel.com/plugins-fur-wordpress/advanced-category-column-plugin', 'advanced-cc'), 'advanced-category-column', __('Plugin Support', 'advanced-cc'));
 		
-		_e('Style the links of the widget. If you leave this empty, your theme will style the hyperlinks.', self::language_file);
+		_e('Style the links of the widget. If you leave this empty, your theme will style the hyperlinks.', 'advanced-cc');
 		
-        self::tag_it(__('Just input something like,', self::language_file), 'p', false, false, true);
+        self::tag_it(__('Just input something like,', 'advanced-cc'), 'p', false, false, true);
 		
 		self::tag_it(self::tag_it('font-weight: bold;<br />'.$eol.'color: #0000ff;<br />text-decoration: underline;', 'strong', 1), 'p', false, false, true);
 		
-		self::tag_it(__('to get fat, blue, underlined links.', self::language_file), 'p', false, false, true);
+		self::tag_it(__('to get fat, blue, underlined links.', 'advanced-cc'), 'p', false, false, true);
 		
-		self::tag_it(self::tag_it(__('You most probably have to use &#34;!important&#34; at the end of each line, to make it work.', self::language_file), 'strong', 1), 'p', false, false, true);
+		self::tag_it(self::tag_it(__('You most probably have to use &#34;!important&#34; at the end of each line, to make it work.', 'advanced-cc'), 'strong', 1), 'p', false, false, true);
 		
 		self::open_form('options.php');
 		
@@ -83,7 +83,7 @@ class ACC_Admin extends A5_OptionPage {
 		
 			self::open_tab();
 			
-			self::sortable('deep-down', self::debug_info(self::$options, __('Debug Info', self::language_file)));
+			self::sortable('deep-down', self::debug_info(self::$options, __('Debug Info', 'advanced-cc')));
 		
 			self::close_tab();
 		
@@ -102,23 +102,23 @@ class ACC_Admin extends A5_OptionPage {
 		
 		register_setting( 'acc_options', 'acc_options', array($this, 'validate') );
 		
-		add_settings_section('acc_settings', __('Styling of the links', self::language_file), array($this, 'acc_display_section'), 'acc_styles');
+		add_settings_section('acc_settings', __('Styling of the links', 'advanced-cc'), array($this, 'acc_display_section'), 'acc_styles');
 		
-		add_settings_field('acc_link', __('Link style:', self::language_file), array($this, 'acc_link_input'), 'acc_styles', 'acc_settings');
+		add_settings_field('acc_link', __('Link style:', 'advanced-cc'), array($this, 'acc_link_input'), 'acc_styles', 'acc_settings');
 		
-		add_settings_field('acc_hover', __('Hover style:', self::language_file), array($this, 'acc_hover_input'), 'acc_styles', 'acc_settings');
+		add_settings_field('acc_hover', __('Hover style:', 'advanced-cc'), array($this, 'acc_hover_input'), 'acc_styles', 'acc_settings');
 		
-		add_settings_field('acc_css', __('Widget container:', self::language_file), array($this, 'acc_css_input'), 'acc_styles', 'acc_settings', array(__('You can enter your own style for the widgets here. This will overwrite the styles of your theme.', self::language_file), __('If you leave this empty, you can still style every instance of the widget individually.', self::language_file)));
+		add_settings_field('acc_css', __('Widget container:', 'advanced-cc'), array($this, 'acc_css_input'), 'acc_styles', 'acc_settings', array(__('You can enter your own style for the widgets here. This will overwrite the styles of your theme.', 'advanced-cc'), __('If you leave this empty, you can still style every instance of the widget individually.', 'advanced-cc')));
 		
-		add_settings_field('acc_compress', __('Compress Style Sheet:', self::language_file), array($this, 'acc_compress_input'), 'acc_styles', 'acc_settings', array(__('Click here to compress the style sheet.', self::language_file)));
+		add_settings_field('acc_compress', __('Compress Style Sheet:', 'advanced-cc'), array($this, 'acc_compress_input'), 'acc_styles', 'acc_settings', array(__('Click here to compress the style sheet.', 'advanced-cc')));
 		
-		add_settings_field('acc_inline', __('Debug:', self::language_file), array($this, 'acc_inline_input'), 'acc_styles', 'acc_settings', array(__('If you can&#39;t reach the dynamical style sheet, you&#39;ll have to display the styles inline. By clicking here you can do so.', self::language_file)));
+		add_settings_field('acc_inline', __('Debug:', 'advanced-cc'), array($this, 'acc_inline_input'), 'acc_styles', 'acc_settings', array(__('If you can&#39;t reach the dynamical style sheet, you&#39;ll have to display the styles inline. By clicking here you can do so.', 'advanced-cc')));
 		
 		$cachesize = count(self::$options['cache']);
 		
-		$entry = ($cachesize > 1) ? __('entries', self::language_file) : __('entry', self::language_file);
+		$entry = ($cachesize > 1) ? __('entries', 'advanced-cc') : __('entry', 'advanced-cc');
 		
-		if ($cachesize > 0) add_settings_field('acc_reset', sprintf(__('Empty cache (%d %s):', self::language_file), $cachesize, $entry), array($this, 'acc_reset_input'), 'acc_styles', 'acc_settings', array(__('You can empty the plugin&#39;s cache here, if necessary.', self::language_file)));
+		if ($cachesize > 0) add_settings_field('acc_reset', sprintf(__('Empty cache (%d %s):', 'advanced-cc'), $cachesize, $entry), array($this, 'acc_reset_input'), 'acc_styles', 'acc_settings', array(__('You can empty the plugin&#39;s cache here, if necessary.', 'advanced-cc')));
 		
 		add_settings_field('acc_resize', false, array($this, 'resize_field'), 'acc_styles', 'acc_settings');
 	
@@ -126,7 +126,7 @@ class ACC_Admin extends A5_OptionPage {
 	
 	function acc_display_section() {
 		
-		echo '<p>'.__('Just put some css code here.', self::language_file).'</p>';
+		echo '<p>'.__('Just put some css code here.', 'advanced-cc').'</p>';
 	
 	}
 	
@@ -186,7 +186,7 @@ class ACC_Admin extends A5_OptionPage {
 		
 			self::$options['cache'] = array();
 			
-			add_settings_error('acc_options', 'empty-cache', __('Cache emptied.', self::language_file), 'updated');
+			add_settings_error('acc_options', 'empty-cache', __('Cache emptied.', 'advanced-cc'), 'updated');
 			
 		endif;
 		
